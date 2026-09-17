@@ -33,11 +33,12 @@ jobs:
       - run: pnpm codegen
       - run: pnpm build
 
-      # enablement turns Pages on for the repository the first time this runs, so the workflow does
-      # not need a manual visit to the settings page before its first deploy.
+      # Pages has to be switched on once by hand, at Settings, Pages, Source: GitHub Actions. The
+      # workflow token cannot do it: passing enablement: true was tried and the API answered
+      # "Resource not accessible by integration". Until that switch is flipped this job fails at
+      # this step with "Get Pages site failed", and every step before it still runs, so a failure
+      # here says nothing about the build.
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs

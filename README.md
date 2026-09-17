@@ -62,6 +62,14 @@ dinyatakan sebagai belum diukur, bukan dikosongkan.
 | Bundel web JavaScript       | belum ditetapkan   | 612 KB, 134 KB setelah gzip   |
 | Bundel web CSS              | belum ditetapkan   | 12 KB                         |
 
+## Penerbitan web
+
+Aplikasi web diterbitkan melalui GitHub Pages oleh alur kerja `.github/workflows/pages.yml`.
+Sebelum penerbitan pertama, Pages harus dinyalakan sekali secara manual pada Settings, Pages,
+Source: GitHub Actions. Token alur kerja tidak dapat menyalakannya sendiri. Selama sakelar itu
+belum dinyalakan, pekerjaan Pages gagal pada langkah `configure-pages`, sedangkan seluruh langkah
+sebelumnya, termasuk pembangunan, tetap berhasil.
+
 ## Lisensi
 
 MIT. Lihat `LICENSE`.
