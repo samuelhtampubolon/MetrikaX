@@ -23,6 +23,7 @@ export const clv: Relation = Object.freeze({
   inputs: Object.freeze(["aov", "purchase_frequency", "gross_margin", "retention_rate", "discount_rate", "horizon_t"]),
   output: "clv",
   structuralClass: "C6",
+  resultBounds: null,
   expressionSource: "aov * purchase_frequency * gross_margin * series_sum(retention_rate, discount_rate, horizon_t)",
   latex: "CLV = AOV \\times F \\times GM \\times \\sum_{t=1}^{T} \\dfrac{RetentionRate^{t}}{(1 + DiscountRate)^{t}}",
   resultShape: "scalar",

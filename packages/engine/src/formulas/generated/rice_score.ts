@@ -22,6 +22,7 @@ export const rice_score: Relation = Object.freeze({
   inputs: Object.freeze(["rice_reach", "rice_impact", "rice_confidence", "rice_effort"]),
   output: "rice_score",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "(rice_reach * rice_impact * (rice_confidence / 100)) / rice_effort",
   latex: "RICE = \\dfrac{Reach \\times Impact \\times Confidence}{Effort}",
   resultShape: "scalar",

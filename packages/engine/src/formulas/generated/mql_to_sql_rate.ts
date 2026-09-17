@@ -22,6 +22,7 @@ export const mql_to_sql_rate: Relation = Object.freeze({
   inputs: Object.freeze(["sql", "mql"]),
   output: "mql_to_sql_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "sql / mql",
   latex: "M2S = \\dfrac{SQL}{MQL}",
   resultShape: "scalar",

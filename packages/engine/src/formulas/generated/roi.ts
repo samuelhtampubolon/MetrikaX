@@ -22,6 +22,7 @@ export const roi: Relation = Object.freeze({
   inputs: Object.freeze(["gain", "cost"]),
   output: "roi",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "(gain - cost) / cost",
   latex: "ROI = \\dfrac{Gain - Cost}{Cost}",
   resultShape: "scalar",

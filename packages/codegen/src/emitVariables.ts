@@ -78,7 +78,8 @@ function renderVariable(variable: SpecVariable, producedBy: string | null): stri
 
 function renderSynthesised(output: ResolvedOutput, spec: Spec): string {
   const formula = spec.formula_registry.find((entry) => entry.id === output.formulaId);
-  if (!formula) throw new Error(`No formula ${output.formulaId} while emitting its result variable`);
+  if (!formula)
+    throw new Error(`No formula ${output.formulaId} while emitting its result variable`);
 
   const decimals = decimalsFor(output.unitClass);
   const bounded = formula.validation.structural_class === 'C1';

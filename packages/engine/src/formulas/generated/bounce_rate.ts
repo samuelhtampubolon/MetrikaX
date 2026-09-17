@@ -22,6 +22,7 @@ export const bounce_rate: Relation = Object.freeze({
   inputs: Object.freeze(["single_page_sessions", "sessions"]),
   output: "bounce_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "single_page_sessions / sessions",
   latex: "BR = \\dfrac{SinglePageSessions}{TotalSessions}",
   resultShape: "scalar",

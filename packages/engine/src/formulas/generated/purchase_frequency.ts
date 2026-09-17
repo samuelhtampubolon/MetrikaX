@@ -22,6 +22,7 @@ export const purchase_frequency: Relation = Object.freeze({
   inputs: Object.freeze(["orders", "unique_customers"]),
   output: "purchase_frequency",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "orders / unique_customers",
   latex: "PF = \\dfrac{Orders}{UniqueCustomers}",
   resultShape: "scalar",

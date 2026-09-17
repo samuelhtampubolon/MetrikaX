@@ -22,6 +22,7 @@ export const roas: Relation = Object.freeze({
   inputs: Object.freeze(["ad_revenue", "ad_cost"]),
   output: "roas",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "ad_revenue / ad_cost",
   latex: "ROAS = \\dfrac{AdRevenue}{AdCost}",
   resultShape: "scalar",

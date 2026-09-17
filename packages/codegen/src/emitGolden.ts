@@ -80,13 +80,12 @@ function renderGolden(
       throw new Error(`Worked example for ${formula.id} produced a non-finite result: ${value}`);
     }
     blocks.push(`  it('computes the worked example', () => {
-    const result = ${formula.id}.forward(WORKED) as number;
+    const result = compute(${formula.id}, WORKED) as number;
     expectRelative(result, ${literal(value)});
-    checkResult(${formula.id}, result);
   });`);
   } else {
     blocks.push(`  it('computes the worked example and returns its full structure', () => {
-    const result = ${formula.id}.forward(WORKED);
+    const result = compute(${formula.id}, WORKED);
 ${compositeAssertions(formula.id, forwardResult)}
   });`);
   }
@@ -98,66 +97,122 @@ ${compositeAssertions(formula.id, forwardResult)}
     blocks.push(`  it('states an outcome at the lower edge of the domain for ${boundaryTarget}', () => {
     const env = { ...WORKED, ${quote(boundaryTarget)}: 0 };
     // Either the relation computes a finite number inside its structural class, or it refuses with
-    // a named error. Returning Infinity or NaN would fail both branches, which is the point.
+    // a named error. Returning Infinity or NaN satisfies neither branch, which is the point.
+    let computed: unknown = null;
+    let refusal: unknown = null;
     try {
-      const result = ${formula.id}.forward(env) as number;
-      expect(Number.isFinite(result)).toBe(true);
-      checkResult(${formula.id}, result);
+      computed = compute(${formula.id}, env);
     } catch (error) {
-      expect(error).toBeInstanceOf(EngineError);
+      refusal = error;
     }
+    if (refusal !== null) expect(refusal).toBeInstanceOf(EngineError);
+    else if (typeof computed === 'number') expect(Number.isFinite(computed)).toBe(true);
+    else expect(computed).not.toBeNull();
+  });`);
+    caseCount += 1;
+  } else {
+    // Every input is a series, so the lower edge of the domain is the empty series rather than a
+    // zero. A relation that accepts an empty operand would silently report a sum over nothing.
+    const seriesInput = formula.inputs[0]?.variable_id ?? '';
+    blocks.push(`  it('refuses an empty series for ${seriesInput}', () => {
+    const env = { ...WORKED, ${quote(seriesInput)}: [] };
+    expectEngineError(() => compute(${formula.id}, env as Env));
   });`);
     caseCount += 1;
   }
 
   /* Case 3: the rejection case. */
-  const rejection = pickRejection(formula, relation);
-  blocks.push(rejection.block);
+  blocks.push(pickRejection(formula, relation).block);
   caseCount += 1;
 
   /* Case 4 and beyond: the round trip through every inverse direction. */
   const inverseTargets = Object.keys(relation.inverses);
   if (inverseTargets.length > 0 && output.variableId !== null) {
-    const recovered = inverseTargets
-      .filter((target) => typeof workedInputs[target] === 'number')
-      .map((target) => {
-        const env2: Record<string, unknown> = { ...workedInputs, [output.variableId as string]: forwardResult };
-        delete env2[target];
-        const value = relation.inverses[target]?.(env2);
-        return { target, value };
-      })
-      .filter((entry): entry is { target: string; value: number } => Number.isFinite(entry.value));
+    for (const target of inverseTargets) {
+      const expected = workedInputs[target];
+      if (typeof expected !== 'number') continue;
 
-    for (const entry of recovered) {
-      blocks.push(`  it('recovers ${entry.target} through the inverse direction', () => {
-    const env = { ...WORKED, ${quote(output.variableId as string)}: ${formula.id}.forward(WORKED) as number };
-    delete (env as Record<string, unknown>)[${quote(entry.target)}];
-    const recovered = ${formula.id}.inverses[${quote(entry.target)}]!(env);
-    expectRelative(recovered, ${literal(workedInputs[entry.target] as number)}, 1e-9);
+      const roundTripEnv: Record<string, unknown> = {
+        ...workedInputs,
+        [output.variableId]: forwardResult,
+      };
+      delete roundTripEnv[target];
+      const recovered = relation.inverses[target]?.(roundTripEnv);
+
+      if (recovered === undefined || !Number.isFinite(recovered)) {
+        throw new Error(
+          `Round trip for ${formula.id} through ${target} produced ${recovered}. ` +
+            `Fix the inverse expression in the specification.`,
+        );
+      }
+
+      const header = `  it('recovers ${target} through the inverse direction', () => {
+    const env: Record<string, unknown> = {
+      ...WORKED,
+      ${quote(output.variableId)}: compute(${formula.id}, WORKED) as number,
+    };
+    delete env[${quote(target)}];
+    const recovered = computeInverse(${formula.id}, ${quote(target)}, env as Env);`;
+
+      if (closeEnough(recovered, expected)) {
+        blocks.push(`${header}
+    expectRelative(recovered, ${literal(expected)}, 1e-9);
   });`);
+      } else if (closeEnough(recovered, -expected)) {
+        // The forward expression takes an absolute value, so the sign of this input is not
+        // recoverable from the result. The round trip recovers the magnitude, and saying so here is
+        // more honest than asserting a recovery that the arithmetic cannot deliver.
+        blocks.push(`${header}
+    // The forward direction takes the absolute value of ${target}, so the sign does not survive
+    // the round trip. Only the magnitude is recoverable.
+    expectRelative(Math.abs(recovered), ${literal(Math.abs(expected))}, 1e-9);
+  });`);
+      } else {
+        throw new Error(
+          `Round trip for ${formula.id} through ${target} recovered ${recovered} where the worked ` +
+            `example states ${expected}. The inverse expression in the specification does not ` +
+            `invert the forward expression. Fix spec/metrika.spec.json.`,
+        );
+      }
       caseCount += 1;
     }
   } else {
-    blocks.push(`  it('declares no inverse direction and publishes nothing to the graph', () => {
+    blocks.push(`  it('declares no inverse direction, so it can only be solved forwards', () => {
     expect(Object.keys(${formula.id}.inverses)).toHaveLength(0);
-    expect(${formula.id}.publishesToGraph).toBe(false);
+    expect(${formula.id}.publishesToGraph).toBe(${formula.output.publishes_to_graph});
+    expect(${formula.id}.resultShape).toBe(${quote(output.resultShape)});
   });`);
     caseCount += 1;
   }
 
+  const body = blocks.join('\n\n');
+  const computeImports = ['compute', 'computeInverse'].filter((name) =>
+    new RegExp(`\\b${name}\\(`).test(body),
+  );
+  const supportImports = ['expectRelative', 'expectEngineError'].filter((name) =>
+    new RegExp(`\\b${name}\\(`).test(body),
+  );
+  const imports = [
+    `import { describe, expect, it } from 'vitest';`,
+    `import { ${formula.id} } from '../../src/formulas/generated/${formula.id}.ts';`,
+    `import { ${computeImports.join(', ')} } from '../../src/compute.ts';`,
+    /\bEngineError\b/.test(body.replace(/expectEngineError/g, ''))
+      ? `import { EngineError } from '../../src/errors.ts';`
+      : null,
+    supportImports.length > 0
+      ? `import { ${supportImports.join(', ')} } from '../support/assert.ts';`
+      : null,
+    `import type { Env } from '../../src/types.ts';`,
+  ].filter((line): line is string => line !== null);
+
   const contents = `${GENERATED_HEADER}
-import { describe, expect, it } from 'vitest';
-import { ${formula.id} } from '../../src/formulas/generated/${formula.id}.ts';
-import { checkResult } from '../../src/validate/domain.ts';
-import { EngineError } from '../../src/errors.ts';
-import { expectRelative } from '../support/assert.ts';
-import type { Env } from '../../src/types.ts';
+${imports.join('\n')}
 
 /** The worked example from spec/metrika.spec.json, formula ${formula.index} of 76. */
 const WORKED: Env = Object.freeze(${JSON.stringify(workedInputs, null, 2).replace(/\n/g, '\n')});
 
 describe('${formula.symbol} (${formula.id})', () => {
-${blocks.join('\n\n')}
+${body}
 });
 `;
 
@@ -167,27 +222,33 @@ ${blocks.join('\n\n')}
 function compositeAssertions(formulaId: string, result: unknown): string {
   if (formulaId === 'irr') {
     const irr = result as { roots: number[]; unique: boolean; converged: boolean };
-    return `    const irr = result as { roots: number[]; unique: boolean; converged: boolean };
-    expect(irr.converged).toBe(true);
-    expect(irr.roots).toHaveLength(${irr.roots.length});
-    expect(irr.unique).toBe(${irr.unique});
-${irr.roots.map((root, index) => `    expectRelative(irr.roots[${index}]!, ${literal(root)});`).join('\n')}`;
+    return `    const solution = result as { roots: number[]; unique: boolean; converged: boolean };
+    expect(solution.converged).toBe(true);
+    // Every root found is reported. Reporting one root when several exist is a correctness bug.
+    expect(solution.roots).toHaveLength(${irr.roots.length});
+    expect(solution.unique).toBe(${irr.unique});
+${irr.roots.map((root, index) => `    expectRelative(solution.roots[${index}]!, ${literal(root)}, 1e-6);`).join('\n')}`;
   }
   if (formulaId === 'van_westendorp') {
     const vw = result as { opp: number; ipp: number; pmc: number; pme: number; curves: unknown[] };
-    return `    const vw = result as { opp: number; ipp: number; pmc: number; pme: number; curves: unknown[] };
-    expectRelative(vw.opp, ${literal(vw.opp)});
-    expectRelative(vw.ipp, ${literal(vw.ipp)});
-    expectRelative(vw.pmc, ${literal(vw.pmc)});
-    expectRelative(vw.pme, ${literal(vw.pme)});
+    return `    const prices = result as { opp: number; ipp: number; pmc: number; pme: number; curves: unknown[] };
+    expectRelative(prices.opp, ${literal(vw.opp)});
+    expectRelative(prices.ipp, ${literal(vw.ipp)});
+    expectRelative(prices.pmc, ${literal(vw.pmc)});
+    expectRelative(prices.pme, ${literal(vw.pme)});
     // The curves are always returned: a crossing price without its curve hides the shape that
     // decides whether the crossing means anything.
-    expect(vw.curves).toHaveLength(4);`;
+    expect(prices.curves).toHaveLength(4);`;
   }
   const vector = result as number[];
-  return `    const vector = result as number[];
-    expect(vector).toHaveLength(${vector.length});
-${vector.map((value, index) => `    expectRelative(vector[${index}]!, ${literal(value)});`).join('\n')}`;
+  return `    const scores = result as number[];
+    expect(scores).toHaveLength(${vector.length});
+${vector.map((value, index) => `    expectRelative(scores[${index}]!, ${literal(value)});`).join('\n')}`;
+}
+
+function closeEnough(actual: number, expected: number): boolean {
+  if (expected === 0) return Math.abs(actual) <= 1e-9;
+  return Math.abs((actual - expected) / expected) <= 1e-9;
 }
 
 function pickBoundaryInput(
@@ -212,28 +273,51 @@ function pickBoundaryInput(
 }
 
 function pickRejection(formula: SpecFormula, relation: RelationLike): { block: string } {
-  const zeroGuard = relation.guards.find((guard) => guard.id.startsWith('zero_denominator:'));
+  // Only a variable that divides in the forward expression can be probed by evaluating forwards.
+  // A variable that divides only in an inverse direction is guarded there, and its guard is
+  // asserted below through the guard record rather than through a forward evaluation.
+  const forwardDenominators = new Set<string>();
+  const pattern = /\/\s*([A-Za-z_][A-Za-z_0-9]*)/g;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(formula.expression.javascript)) !== null) {
+    forwardDenominators.add(match[1] as string);
+  }
+
+  const zeroGuard = relation.guards.find((guard) => {
+    if (!guard.id.startsWith('zero_denominator:')) return false;
+    const variableId = guard.id.slice('zero_denominator:'.length);
+    return (
+      forwardDenominators.has(variableId) &&
+      typeof formula.worked_example.inputs[variableId] === 'number'
+    );
+  });
+
   if (zeroGuard) {
     const variableId = zeroGuard.id.slice('zero_denominator:'.length);
-    if (typeof formula.worked_example.inputs[variableId] === 'number') {
-      return {
-        block: `  it('refuses a zero denominator with a named error rather than returning Infinity', () => {
+    return {
+      block: `  it('refuses a zero denominator with a named error rather than returning Infinity', () => {
     const env = { ...WORKED, ${quote(variableId)}: 0 };
     const guard = ${formula.id}.guards.find((entry) => entry.id === ${quote(zeroGuard.id)})!;
     expect(guard.check(env).ok).toBe(false);
-    // The guard blocks the relation. Evaluating past it must still refuse rather than produce a
-    // number the user could mistake for an answer.
-    let refused = false;
-    try {
-      const result = ${formula.id}.forward(env) as number;
-      checkResult(${formula.id}, result);
-    } catch (error) {
-      refused = error instanceof EngineError;
-    }
-    expect(refused).toBe(true);
+    // The guard blocks the relation. Evaluating past the guard must still refuse rather than
+    // produce a number the user could mistake for an answer.
+    expectEngineError(() => compute(${formula.id}, env));
   });`,
-      };
-    }
+    };
+  }
+
+  const inverseGuard = relation.guards.find((guard) => guard.id.startsWith('zero_denominator:'));
+  if (inverseGuard) {
+    const variableId = inverseGuard.id.slice('zero_denominator:'.length);
+    return {
+      block: `  it('guards the zero denominator that appears in its inverse direction', () => {
+    // ${variableId} divides only when this relation is solved backwards, so the guard is what
+    // stands between a zero and an infinite result.
+    const guard = ${formula.id}.guards.find((entry) => entry.id === ${quote(inverseGuard.id)})!;
+    expect(guard.check({ ...WORKED, ${quote(variableId)}: 0 }).ok).toBe(false);
+    expect(guard.check({ ...WORKED, ${quote(variableId)}: 1 }).ok).toBe(true);
+  });`,
+    };
   }
 
   const missing = formula.inputs[0]?.variable_id ?? '';
@@ -241,7 +325,7 @@ function pickRejection(formula: SpecFormula, relation: RelationLike): { block: s
     block: `  it('refuses a missing input with a named error', () => {
     const env: Record<string, unknown> = { ...WORKED };
     delete env[${quote(missing)}];
-    expect(() => ${formula.id}.forward(env as Env)).toThrowError(EngineError);
+    expectEngineError(() => compute(${formula.id}, env as Env));
   });`,
   };
 }

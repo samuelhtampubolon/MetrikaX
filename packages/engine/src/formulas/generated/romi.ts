@@ -22,6 +22,7 @@ export const romi: Relation = Object.freeze({
   inputs: Object.freeze(["incremental_revenue", "marketing_cost"]),
   output: "romi",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "(incremental_revenue - marketing_cost) / marketing_cost",
   latex: "ROMI = \\dfrac{IncrementalRevenue - MarketingCost}{MarketingCost}",
   resultShape: "scalar",

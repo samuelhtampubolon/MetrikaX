@@ -22,6 +22,7 @@ export const sales_velocity: Relation = Object.freeze({
   inputs: Object.freeze(["opportunities", "deal_value", "win_rate", "cycle_length"]),
   output: "sales_velocity",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "(opportunities * deal_value * win_rate) / cycle_length",
   latex: "SV = \\dfrac{Opportunities \\times DealValue \\times WinRate}{CycleLength}",
   resultShape: "scalar",

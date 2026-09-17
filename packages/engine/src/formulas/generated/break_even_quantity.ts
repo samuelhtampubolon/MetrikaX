@@ -22,6 +22,7 @@ export const break_even_quantity: Relation = Object.freeze({
   inputs: Object.freeze(["fixed_cost", "price", "variable_cost"]),
   output: "break_even_quantity",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "fixed_cost / (price - variable_cost)",
   latex: "BEQ = \\dfrac{FixedCost}{Price - VariableCost}",
   resultShape: "scalar",

@@ -22,6 +22,7 @@ export const mrr_churn_rate: Relation = Object.freeze({
   inputs: Object.freeze(["churned_mrr", "total_mrr"]),
   output: "mrr_churn_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "churned_mrr / total_mrr",
   latex: "MRRChurn = \\dfrac{ChurnedMRR}{TotalMRR}",
   resultShape: "scalar",

@@ -23,6 +23,7 @@ export const weighted_screening: Relation = Object.freeze({
   inputs: Object.freeze(["w_vector", "r_vector"]),
   output: "weighted_screening",
   structuralClass: "C5",
+  resultBounds: null,
   expressionSource: "dot(w_vector, r_vector)",
   latex: "S_j = \\sum_{i=1}^{n} w_i r_{ij}",
   resultShape: "scalar",

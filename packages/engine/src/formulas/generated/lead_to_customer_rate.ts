@@ -22,6 +22,7 @@ export const lead_to_customer_rate: Relation = Object.freeze({
   inputs: Object.freeze(["customers", "leads"]),
   output: "lead_to_customer_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "customers / leads",
   latex: "L2C = \\dfrac{Customers}{Leads}",
   resultShape: "scalar",

@@ -64,7 +64,10 @@ export const UNIT_CLASS_OVERRIDES: Readonly<Record<string, { unitClass: string; 
     kano_better: { unitClass: 'ratio', why: 'A coefficient bounded by the response counts.' },
     kano_worse: { unitClass: 'ratio', why: 'A coefficient bounded by the response counts.' },
     nps: { unitClass: 'score', why: 'A net score on a fixed scale of -100 to 100.' },
-    csat: { unitClass: 'ratio', why: 'A share of satisfied respondents.' },
+    csat: {
+      unitClass: 'percent',
+      why: 'A share of satisfied respondents, scaled to a percentage by the expression itself.',
+    },
     ces: { unitClass: 'score', why: 'A mean effort rating on the survey scale.' },
     sales_velocity: {
       unitClass: 'currency',

@@ -22,6 +22,7 @@ export const grp: Relation = Object.freeze({
   inputs: Object.freeze(["reach_pct", "frequency"]),
   output: "grp",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "reach_pct * frequency",
   latex: "GRP = ReachPercent \\times Frequency",
   resultShape: "scalar",

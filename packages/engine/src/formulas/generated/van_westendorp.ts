@@ -23,6 +23,7 @@ export const van_westendorp: Relation = Object.freeze({
   inputs: Object.freeze(["too_cheap", "cheap", "expensive", "too_expensive"]),
   output: null,
   structuralClass: "C10",
+  resultBounds: null,
   expressionSource: "vw_intersection(too_cheap, cheap, expensive, too_expensive)",
   latex: "OPP = \\{P : F_{TooCheap}(P) = F_{TooExpensive}(P)\\}",
   resultShape: "composite",

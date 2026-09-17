@@ -23,6 +23,7 @@ export const conjoint_utility: Relation = Object.freeze({
   inputs: Object.freeze(["beta_vector", "x_vector"]),
   output: "conjoint_utility",
   structuralClass: "C5",
+  resultBounds: null,
   expressionSource: "dot(beta_vector, x_vector)",
   latex: "U = \\sum_{i=1}^{n} \\beta_i x_i",
   resultShape: "scalar",

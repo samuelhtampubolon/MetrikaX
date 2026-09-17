@@ -22,6 +22,7 @@ export const payback_period: Relation = Object.freeze({
   inputs: Object.freeze(["cac", "arpu", "gross_margin"]),
   output: "payback_period",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "cac / (arpu * gross_margin)",
   latex: "Payback = \\dfrac{CAC}{ARPU \\times GrossMargin}",
   resultShape: "scalar",

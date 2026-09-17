@@ -22,6 +22,7 @@ export const forecast_accuracy: Relation = Object.freeze({
   inputs: Object.freeze(["forecast", "actual"]),
   output: "forecast_accuracy",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "1 - Math.abs(forecast - actual) / Math.abs(actual)",
   latex: "FA = 1 - \\dfrac{|Forecast - Actual|}{|Actual|}",
   resultShape: "scalar",

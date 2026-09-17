@@ -22,6 +22,7 @@ export const clv_simple: Relation = Object.freeze({
   inputs: Object.freeze(["arpu", "gross_margin", "churn_rate"]),
   output: "clv_simple",
   structuralClass: "C6",
+  resultBounds: null,
   expressionSource: "(arpu * gross_margin) / churn_rate",
   latex: "CLV_{simple} = \\dfrac{ARPU \\times GrossMargin}{ChurnRate}",
   resultShape: "scalar",

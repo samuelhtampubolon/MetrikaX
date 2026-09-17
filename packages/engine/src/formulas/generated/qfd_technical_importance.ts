@@ -7,7 +7,7 @@
 import type { Env, Relation, FormulaResult } from '../../types.ts';
 import { mat, vec } from '../env.ts';
 import { buildGuards } from '../../validate/domain.ts';
-import { matvec } from '../../helpers/index.ts';
+import { matvec, transpose } from '../../helpers/index.ts';
 
 /**
  * QFD_Technical_Importance: QFD Technical Importance
@@ -23,13 +23,14 @@ export const qfd_technical_importance: Relation = Object.freeze({
   inputs: Object.freeze(["customer_importance", "relationship_matrix"]),
   output: null,
   structuralClass: "C5",
-  expressionSource: "matvec(relationship_matrix, customer_importance)",
+  resultBounds: null,
+  expressionSource: "matvec(transpose(relationship_matrix), customer_importance)",
   latex: "TI_j = \\sum_{i=1}^{m} CustomerImportance_i \\times Relationship_{ij}",
   resultShape: "composite",
   forward: (env: Env): FormulaResult => {
     const relationship_matrix = mat(env, "relationship_matrix");
     const customer_importance = vec(env, "customer_importance");
-    return matvec(relationship_matrix, customer_importance);
+    return matvec(transpose(relationship_matrix), customer_importance);
   },
   inverses: Object.freeze({
 

@@ -22,6 +22,7 @@ export const kano_better: Relation = Object.freeze({
   inputs: Object.freeze(["kano_a", "kano_o", "kano_m", "kano_i"]),
   output: "kano_better",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "(kano_a + kano_o) / (kano_a + kano_o + kano_m + kano_i)",
   latex: "Better = \\dfrac{A + O}{A + O + M + I}",
   resultShape: "scalar",

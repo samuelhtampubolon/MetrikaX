@@ -22,6 +22,7 @@ export const tam: Relation = Object.freeze({
   inputs: Object.freeze(["population", "need_percent", "arpu"]),
   output: "tam",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "population * (need_percent / 100) * arpu",
   latex: "TAM = Population \\times NeedPercent \\times ARPU",
   resultShape: "scalar",

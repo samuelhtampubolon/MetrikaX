@@ -22,6 +22,7 @@ export const sov: Relation = Object.freeze({
   inputs: Object.freeze(["brand_mentions", "market_mentions"]),
   output: "sov",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "brand_mentions / market_mentions",
   latex: "SOV = \\dfrac{BrandMentions}{MarketMentions}",
   resultShape: "scalar",

@@ -22,6 +22,7 @@ export const retention_rate: Relation = Object.freeze({
   inputs: Object.freeze(["end_customers", "new_customers", "start_customers"]),
   output: "retention_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "(end_customers - new_customers) / start_customers",
   latex: "RR = \\dfrac{EndCustomers - NewCustomers}{StartCustomers}",
   resultShape: "scalar",

@@ -22,6 +22,7 @@ export const opportunity_score: Relation = Object.freeze({
   inputs: Object.freeze(["importance", "satisfaction"]),
   output: "opportunity_score",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "importance + Math.max(0, importance - satisfaction)",
   latex: "OS = Importance + \\max(0,\\; Importance - Satisfaction)",
   resultShape: "scalar",

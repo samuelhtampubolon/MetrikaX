@@ -22,6 +22,7 @@ export const wsjf_score: Relation = Object.freeze({
   inputs: Object.freeze(["user_value", "time_value", "risk_reduction", "job_size"]),
   output: "wsjf_score",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "(user_value + time_value + risk_reduction) / job_size",
   latex: "WSJF = \\dfrac{UserValue + TimeCriticality + RiskReduction}{JobSize}",
   resultShape: "scalar",

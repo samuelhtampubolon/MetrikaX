@@ -22,6 +22,7 @@ export const relative_market_share: Relation = Object.freeze({
   inputs: Object.freeze(["company_share", "largest_competitor_share"]),
   output: "relative_market_share",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "company_share / largest_competitor_share",
   latex: "RMS = \\dfrac{CompanyShare}{LargestCompetitorShare}",
   resultShape: "scalar",

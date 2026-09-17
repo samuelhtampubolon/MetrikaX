@@ -22,6 +22,7 @@ export const bass_n: Relation = Object.freeze({
   inputs: Object.freeze(["bass_p", "bass_q", "bass_m", "bass_nt"]),
   output: "bass_n",
   structuralClass: "C9",
+  resultBounds: null,
   expressionSource: "(bass_p + (bass_q / bass_m) * bass_nt) * (bass_m - bass_nt)",
   latex: "n(t) = \\left(p + \\dfrac{q}{m} N(t)\\right)\\left(m - N(t)\\right)",
   resultShape: "scalar",

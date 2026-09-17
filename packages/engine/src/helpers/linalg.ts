@@ -40,6 +40,32 @@ export function matvec(m: readonly (readonly number[])[], v: readonly number[]):
   });
 }
 
+/**
+ * Transpose a matrix.
+ *
+ * The QFD relation needs it: its relationship matrix is indexed by customer need down the rows and
+ * by technical characteristic across the columns, while the weighting runs over the needs. See
+ * DEVIATIONS.md, D-04.
+ */
+export function transpose(m: readonly (readonly number[])[]): number[][] {
+  if (m.length < 1) {
+    throw new ShapeMismatch({
+      id: 'Matriks tidak memiliki baris.',
+      en: 'The matrix has no rows.',
+    });
+  }
+  const width = (m[0] as readonly number[]).length;
+  for (const [index, row] of m.entries()) {
+    if (row.length !== width) {
+      throw new ShapeMismatch({
+        id: `Panjang baris ${index + 1} adalah ${row.length}, sedangkan baris pertama memiliki panjang ${width}.`,
+        en: `Row ${index + 1} has length ${row.length} while the first row has length ${width}.`,
+      });
+    }
+  }
+  return Array.from({ length: width }, (_unused, column) => m.map((row) => row[column] as number));
+}
+
 /** Sum a vector. Used by the weighted-screening and QFD relations. */
 export function sum(values: readonly number[]): number {
   let total = 0;

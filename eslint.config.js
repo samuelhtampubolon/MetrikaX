@@ -25,6 +25,12 @@ export default tseslint.config(
     },
   },
   {
+    files: ['scripts/**/*.mjs', 'packages/codegen/src/**/*.ts'],
+    languageOptions: {
+      globals: { console: 'readonly', process: 'readonly' },
+    },
+  },
+  {
     // ADR-003: the shipped application never parses formulas at runtime.
     files: ['packages/engine/src/**/*.ts'],
     rules: {

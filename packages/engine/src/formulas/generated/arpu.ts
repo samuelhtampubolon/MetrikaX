@@ -22,6 +22,7 @@ export const arpu: Relation = Object.freeze({
   inputs: Object.freeze(["revenue", "users"]),
   output: "arpu",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "revenue / users",
   latex: "ARPU = \\dfrac{Revenue}{Users}",
   resultShape: "scalar",

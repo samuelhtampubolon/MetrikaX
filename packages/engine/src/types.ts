@@ -99,6 +99,12 @@ export interface Relation {
   readonly inputs: readonly VariableId[];
   readonly output: VariableId | null;
   readonly structuralClass: string;
+  /**
+   * The range the result must stay inside, from the structural class. Class C1 is bounded by its
+   * own signature; the bound is stated in the unit the expression produces, so a relation that
+   * scales its quotient to a percentage is bounded by 100 rather than by 1.
+   */
+  readonly resultBounds: { readonly lower: number; readonly upper: number } | null;
   readonly expressionSource: string;
   readonly latex: string;
   /** Present when the forward result is a structure rather than a scalar (IRR, Van Westendorp). */

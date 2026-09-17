@@ -23,6 +23,7 @@ export const irr: Relation = Object.freeze({
   inputs: Object.freeze(["cash_flows", "investment_0"]),
   output: null,
   structuralClass: "C10",
+  resultBounds: null,
   expressionSource: "irr_solve(cash_flows, investment_0)",
   latex: "IRR = \\{r : \\sum_{t=1}^{T} \\dfrac{CF_t}{(1+r)^t} - Investment_0 = 0\\}",
   resultShape: "composite",

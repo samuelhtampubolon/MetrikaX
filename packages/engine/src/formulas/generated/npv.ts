@@ -23,6 +23,7 @@ export const npv: Relation = Object.freeze({
   inputs: Object.freeze(["cash_flows", "discount_rate", "investment_0"]),
   output: "npv_out",
   structuralClass: "C6",
+  resultBounds: null,
   expressionSource: "npv_calc(cash_flows, discount_rate) - investment_0",
   latex: "NPV = \\sum_{t=1}^{T} \\dfrac{CF_t}{(1 + r)^t} - Investment_0",
   resultShape: "scalar",

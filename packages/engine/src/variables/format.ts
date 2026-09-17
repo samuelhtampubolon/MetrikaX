@@ -110,7 +110,9 @@ export function formatByUnitClass(
     case 'period':
       return withSuffix ? `${body} ${options.locale === 'id' ? 'periode' : 'periods'}` : body;
     case 'person_month':
-      return withSuffix ? `${body} ${options.locale === 'id' ? 'orang bulan' : 'person months'}` : body;
+      return withSuffix
+        ? `${body} ${options.locale === 'id' ? 'orang bulan' : 'person months'}`
+        : body;
     default:
       return body;
   }

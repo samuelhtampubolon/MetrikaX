@@ -22,6 +22,7 @@ export const k_factor: Relation = Object.freeze({
   inputs: Object.freeze(["invites_per_user", "invite_conversion"]),
   output: "k_factor",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "invites_per_user * invite_conversion",
   latex: "K = InvitesPerUser \\times InviteConversion",
   resultShape: "scalar",

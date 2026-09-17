@@ -22,6 +22,7 @@ export const cpm: Relation = Object.freeze({
   inputs: Object.freeze(["spend", "impressions"]),
   output: "cpm",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "(spend / impressions) * 1000",
   latex: "CPM = \\dfrac{Spend}{Impressions} \\times 1000",
   resultShape: "scalar",

@@ -22,6 +22,7 @@ export const cpc: Relation = Object.freeze({
   inputs: Object.freeze(["spend", "clicks"]),
   output: "cpc",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "spend / clicks",
   latex: "CPC = \\dfrac{Spend}{Clicks}",
   resultShape: "scalar",

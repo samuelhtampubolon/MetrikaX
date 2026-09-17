@@ -20,11 +20,11 @@ keeps all data on the user's own device.
 
 ## Struktur repositori
 
-| Jalur              | Isi                                                        |
-| ------------------ | ---------------------------------------------------------- |
-| `spec/`            | Sumber kebenaran tunggal: `metrika.spec.json`              |
-| `packages/codegen` | Pembaca spesifikasi yang memancarkan sumber TypeScript     |
-| `packages/engine`  | Mesin perhitungan murni, tanpa impor antarmuka             |
+| Jalur              | Isi                                                    |
+| ------------------ | ------------------------------------------------------ |
+| `spec/`            | Sumber kebenaran tunggal: `metrika.spec.json`          |
+| `packages/codegen` | Pembaca spesifikasi yang memancarkan sumber TypeScript |
+| `packages/engine`  | Mesin perhitungan murni, tanpa impor antarmuka         |
 
 Seluruh berkas di bawah `src/**/generated/` dan `test/golden/` dihasilkan oleh codegen. Berkas
 tersebut tidak boleh disunting dengan tangan. Bila sebuah rumus keliru, perbaiki
@@ -46,13 +46,13 @@ pnpm lint
 Nilai berikut diisi dengan hasil pengukuran, bukan dengan perkiraan. Baris yang belum diukur
 dinyatakan sebagai belum diukur, bukan dikosongkan.
 
-| Ukuran                                | Ambang spesifikasi | Terukur     |
-| ------------------------------------- | ------------------ | ----------- |
-| Jumlah rumus dalam registri           | tepat 76           | 76          |
-| Jumlah variabel kanonik               | minimal 150        | 161         |
-| Kasus uji emas                        | minimal 304        | 337         |
-| Ukuran pasang Windows                 | di bawah 30 MB     | belum diukur |
-| Waktu mulai dingin                    | di bawah 2 detik   | belum diukur |
+| Ukuran                      | Ambang spesifikasi | Terukur      |
+| --------------------------- | ------------------ | ------------ |
+| Jumlah rumus dalam registri | tepat 76           | 76           |
+| Jumlah variabel kanonik     | minimal 150        | 161          |
+| Kasus uji emas              | minimal 304        | 376          |
+| Ukuran pasang Windows       | di bawah 30 MB     | belum diukur |
+| Waktu mulai dingin          | di bawah 2 detik   | belum diukur |
 
 ## Lisensi
 

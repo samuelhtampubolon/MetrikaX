@@ -22,6 +22,7 @@ export const evpi: Relation = Object.freeze({
   inputs: Object.freeze(["ev_perfect", "ev_base"]),
   output: "evpi",
   structuralClass: "C7",
+  resultBounds: null,
   expressionSource: "ev_perfect - ev_base",
   latex: "EVPI = EV_{perfect} - EV_{base}",
   resultShape: "scalar",

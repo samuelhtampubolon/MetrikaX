@@ -22,6 +22,7 @@ export const csat: Relation = Object.freeze({
   inputs: Object.freeze(["satisfied_count", "total_responses"]),
   output: "csat",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 100 }),
   expressionSource: "(satisfied_count / total_responses) * 100",
   latex: "CSAT = \\dfrac{SatisfiedCount}{TotalResponses} \\times 100",
   resultShape: "scalar",

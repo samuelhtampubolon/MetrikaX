@@ -22,6 +22,7 @@ export const penetration_rate: Relation = Object.freeze({
   inputs: Object.freeze(["customers", "tam_population"]),
   output: "penetration_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "customers / tam_population",
   latex: "PR = \\dfrac{Customers}{TAMPopulation}",
   resultShape: "scalar",

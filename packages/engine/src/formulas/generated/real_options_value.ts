@@ -23,6 +23,7 @@ export const real_options_value: Relation = Object.freeze({
   inputs: Object.freeze(["opt_s", "opt_x", "opt_r", "opt_t", "opt_sigma"]),
   output: "real_options_value",
   structuralClass: "C7",
+  resultBounds: null,
   expressionSource: "black_scholes_call(opt_s, opt_x, opt_r, opt_t, opt_sigma)",
   latex: "ROV = S \\cdot N(d_1) - X e^{-rT} N(d_2), \\quad d_1 = \\dfrac{\\ln(S/X) + (r + \\sigma^2/2)T}{\\sigma\\sqrt{T}}, \\quad d_2 = d_1 - \\sigma\\sqrt{T}",
   resultShape: "scalar",

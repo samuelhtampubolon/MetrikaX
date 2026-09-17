@@ -22,6 +22,7 @@ export const rfm_score: Relation = Object.freeze({
   inputs: Object.freeze(["rfm_r", "rfm_f", "rfm_m", "rfm_wr", "rfm_wf", "rfm_wm"]),
   output: "rfm_score",
   structuralClass: "C5",
+  resultBounds: null,
   expressionSource: "rfm_wr * rfm_r + rfm_wf * rfm_f + rfm_wm * rfm_m",
   latex: "RFM = w_R R + w_F F + w_M M",
   resultShape: "scalar",

@@ -22,6 +22,7 @@ export const income_elasticity: Relation = Object.freeze({
   inputs: Object.freeze(["q1", "q2", "i1", "i2"]),
   output: "income_elasticity",
   structuralClass: "C8",
+  resultBounds: null,
   expressionSource: "((q2 - q1) / ((q1 + q2) / 2)) / ((i2 - i1) / ((i1 + i2) / 2))",
   latex: "E_i = \\dfrac{(Q_2 - Q_1) / \\left[(Q_1 + Q_2)/2\\right]}{(I_2 - I_1) / \\left[(I_1 + I_2)/2\\right]}",
   resultShape: "scalar",

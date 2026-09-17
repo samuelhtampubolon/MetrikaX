@@ -22,6 +22,7 @@ export const sam: Relation = Object.freeze({
   inputs: Object.freeze(["tam", "reachable_percent"]),
   output: "sam",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "tam * (reachable_percent / 100)",
   latex: "SAM = TAM \\times ReachablePercent",
   resultShape: "scalar",

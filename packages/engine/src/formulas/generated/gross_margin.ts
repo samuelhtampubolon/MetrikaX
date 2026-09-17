@@ -22,6 +22,7 @@ export const gross_margin: Relation = Object.freeze({
   inputs: Object.freeze(["revenue", "cogs"]),
   output: "gross_margin",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "(revenue - cogs) / revenue",
   latex: "GM = \\dfrac{Revenue - COGS}{Revenue}",
   resultShape: "scalar",

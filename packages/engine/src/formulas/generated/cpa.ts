@@ -22,6 +22,7 @@ export const cpa: Relation = Object.freeze({
   inputs: Object.freeze(["spend", "acquisitions"]),
   output: "cpa",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "spend / acquisitions",
   latex: "CPA = \\dfrac{Spend}{Acquisitions}",
   resultShape: "scalar",

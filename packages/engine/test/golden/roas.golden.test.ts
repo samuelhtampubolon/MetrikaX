@@ -1,0 +1,70 @@
+// GENERATED FILE. DO NOT EDIT.
+//
+// Emitted by packages/codegen from spec/metrika.spec.json.
+// To change anything here, change the specification and run `pnpm codegen`.
+// CI fails when a file under a generated directory differs from a fresh generation (AC-17).
+
+import { describe, expect, it } from 'vitest';
+import { roas } from '../../src/formulas/generated/roas.ts';
+import { compute, computeInverse } from '../../src/compute.ts';
+import { EngineError } from '../../src/errors.ts';
+import { expectRelative, expectEngineError } from '../support/assert.ts';
+import type { Env } from '../../src/types.ts';
+
+/** The worked example from spec/metrika.spec.json, formula 34 of 76. */
+const WORKED: Env = Object.freeze({
+  "ad_revenue": 96000000,
+  "ad_cost": 24000000
+});
+
+describe('ROAS (roas)', () => {
+  it('computes the worked example', () => {
+    const result = compute(roas, WORKED) as number;
+    expectRelative(result, 4);
+  });
+
+  it('states an outcome at the lower edge of the domain for ad_revenue', () => {
+    const env = { ...WORKED, "ad_revenue": 0 };
+    // Either the relation computes a finite number inside its structural class, or it refuses with
+    // a named error. Returning Infinity or NaN satisfies neither branch, which is the point.
+    let computed: unknown = null;
+    let refusal: unknown = null;
+    try {
+      computed = compute(roas, env);
+    } catch (error) {
+      refusal = error;
+    }
+    if (refusal !== null) expect(refusal).toBeInstanceOf(EngineError);
+    else if (typeof computed === 'number') expect(Number.isFinite(computed)).toBe(true);
+    else expect(computed).not.toBeNull();
+  });
+
+  it('refuses a zero denominator with a named error rather than returning Infinity', () => {
+    const env = { ...WORKED, "ad_cost": 0 };
+    const guard = roas.guards.find((entry) => entry.id === "zero_denominator:ad_cost")!;
+    expect(guard.check(env).ok).toBe(false);
+    // The guard blocks the relation. Evaluating past the guard must still refuse rather than
+    // produce a number the user could mistake for an answer.
+    expectEngineError(() => compute(roas, env));
+  });
+
+  it('recovers ad_revenue through the inverse direction', () => {
+    const env: Record<string, unknown> = {
+      ...WORKED,
+      "roas": compute(roas, WORKED) as number,
+    };
+    delete env["ad_revenue"];
+    const recovered = computeInverse(roas, "ad_revenue", env as Env);
+    expectRelative(recovered, 96000000, 1e-9);
+  });
+
+  it('recovers ad_cost through the inverse direction', () => {
+    const env: Record<string, unknown> = {
+      ...WORKED,
+      "roas": compute(roas, WORKED) as number,
+    };
+    delete env["ad_cost"];
+    const recovered = computeInverse(roas, "ad_cost", env as Env);
+    expectRelative(recovered, 24000000, 1e-9);
+  });
+});

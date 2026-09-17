@@ -22,6 +22,7 @@ export const ndr: Relation = Object.freeze({
   inputs: Object.freeze(["start_mrr", "expansion_mrr", "contraction_mrr", "churned_mrr"]),
   output: "ndr",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "(start_mrr + expansion_mrr - contraction_mrr - churned_mrr) / start_mrr",
   latex: "NDR = \\dfrac{StartMRR + Expansion - Contraction - Churn}{StartMRR}",
   resultShape: "scalar",

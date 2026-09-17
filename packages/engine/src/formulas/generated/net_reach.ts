@@ -22,6 +22,7 @@ export const net_reach: Relation = Object.freeze({
   inputs: Object.freeze(["gross_reach", "duplication"]),
   output: "net_reach",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "gross_reach - duplication",
   latex: "NetReach = GrossReach - Duplication",
   resultShape: "scalar",

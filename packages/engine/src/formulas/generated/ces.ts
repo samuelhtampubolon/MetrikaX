@@ -22,6 +22,7 @@ export const ces: Relation = Object.freeze({
   inputs: Object.freeze(["effort_sum", "total_responses"]),
   output: "ces",
   structuralClass: "C5",
+  resultBounds: null,
   expressionSource: "effort_sum / total_responses",
   latex: "CES = \\dfrac{\\sum EffortScores}{TotalResponses}",
   resultShape: "scalar",

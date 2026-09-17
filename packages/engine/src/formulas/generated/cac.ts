@@ -22,6 +22,7 @@ export const cac: Relation = Object.freeze({
   inputs: Object.freeze(["total_acquisition_cost", "new_customers"]),
   output: "cac",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "total_acquisition_cost / new_customers",
   latex: "CAC = \\dfrac{TotalAcquisitionCost}{NewCustomers}",
   resultShape: "scalar",

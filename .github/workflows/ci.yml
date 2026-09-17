@@ -60,6 +60,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       # AC-14 and the humility paradox test: the forbidden adjectives appear zero times.
       - name: Forbidden adjective check
-        run: bash scripts/forbidden-words.sh
+        run: node scripts/content-lint.mjs

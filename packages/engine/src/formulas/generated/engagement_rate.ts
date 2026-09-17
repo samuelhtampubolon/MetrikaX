@@ -22,6 +22,7 @@ export const engagement_rate: Relation = Object.freeze({
   inputs: Object.freeze(["engagements", "followers"]),
   output: "engagement_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "engagements / followers",
   latex: "ER = \\dfrac{Engagements}{Followers}",
   resultShape: "scalar",

@@ -59,7 +59,11 @@ export class DomainViolation extends EngineError {
       variableIds?: readonly string[];
       code?: Extract<
         EngineErrorCode,
-        'domain_violation' | 'zero_denominator' | 'negative_count' | 'range_violation' | 'non_finite'
+        | 'domain_violation'
+        | 'zero_denominator'
+        | 'negative_count'
+        | 'range_violation'
+        | 'non_finite'
       >;
     } = {},
   ) {

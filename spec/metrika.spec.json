@@ -1,7 +1,7 @@
 {
   "meta": {
     "spec_name": "MetriKa Build Specification",
-    "spec_version": "1.0.0",
+    "spec_version": "1.0.1",
     "spec_format": "json",
     "generated_for": "Claude Code",
     "authored_by": "Owner and Claude, jointly",
@@ -17135,7 +17135,7 @@
       "inverse_solutions": [
         {
           "solve_for": "q2",
-          "javascript": "q1 * (1 + result * ((p2 - p1) / ((p1 + p2) / 2))) / (1 - 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2)))",
+          "javascript": "q1 * (1 + 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2))) / (1 - 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2)))",
           "note": "Dipakai oleh mesin propagasi untuk menghitung mundur."
         }
       ],
@@ -19112,7 +19112,7 @@
       },
       "expression": {
         "latex": "TI_j = \\sum_{i=1}^{m} CustomerImportance_i \\times Relationship_{ij}",
-        "javascript": "matvec(relationship_matrix, customer_importance)",
+        "javascript": "matvec(transpose(relationship_matrix), customer_importance)",
         "requires_helper": "matvec",
         "alternate_forms": []
       },

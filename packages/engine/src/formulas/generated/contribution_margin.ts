@@ -22,6 +22,7 @@ export const contribution_margin: Relation = Object.freeze({
   inputs: Object.freeze(["price", "variable_cost"]),
   output: "contribution_margin",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "price - variable_cost",
   latex: "CM = Price - VariableCost",
   resultShape: "scalar",

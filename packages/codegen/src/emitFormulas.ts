@@ -136,6 +136,7 @@ export const ${formula.id}: Relation = Object.freeze({
   inputs: Object.freeze([${inputIds.map(quote).join(', ')}]),
   output: ${output.variableId === null ? 'null' : quote(output.variableId)},
   structuralClass: ${quote(formula.validation.structural_class)},
+  resultBounds: ${renderBounds(formula, output)},
   expressionSource: ${quote(formula.expression.javascript)},
   latex: ${quote(formula.expression.latex)},
   resultShape: ${quote(output.resultShape)},
@@ -177,6 +178,20 @@ ${workedExample.join('\n')}
 }
 
 /**
+ * The range a result must stay inside.
+ *
+ * Structural class C1 is a bounded proportion, so its result lies in [0, 1] by its own signature.
+ * One relation in the corpus, CSAT, scales the proportion to a percentage inside the expression, so
+ * its bound is stated in the unit the expression actually produces. No other class carries a
+ * range assertion: an unbounded intensity ratio has no ceiling and a gap index may be negative.
+ */
+function renderBounds(formula: SpecFormula, output: ResolvedOutput): string {
+  if (formula.validation.structural_class !== 'C1') return 'null';
+  const upper = output.unitClass === 'percent' ? 100 : 1;
+  return `Object.freeze({ lower: 0, upper: ${upper} })`;
+}
+
+/**
  * Identifiers that sit directly under a division bar, which are the ones a zero-denominator guard
  * has to watch. A parenthesised denominator is reported through the non-finite result check
  * instead, because its zero point depends on more than one variable.
@@ -197,7 +212,8 @@ function denominators(formula: SpecFormula, output: ResolvedOutput): string[] {
     while ((inverseMatch = inversePattern.exec(inverse.javascript)) !== null) {
       const name = inverseMatch[1] as string;
       if (inputIds.has(name)) found.add(name);
-      else if (name === output.inverseAlias && output.variableId !== null) found.add(output.variableId);
+      else if (name === output.inverseAlias && output.variableId !== null)
+        found.add(output.variableId);
     }
   }
   return [...found].sort();
@@ -205,9 +221,7 @@ function denominators(formula: SpecFormula, output: ResolvedOutput): string[] {
 
 function renderIndex(spec: Spec): string {
   const ids = spec.formula_registry.map((formula) => formula.id);
-  const imports = ids
-    .map((id) => `import { ${id} } from './${id}.ts';`)
-    .join('\n');
+  const imports = ids.map((id) => `import { ${id} } from './${id}.ts';`).join('\n');
   const entries = ids.map((id) => `  ${id},`).join('\n');
 
   return `${GENERATED_HEADER}

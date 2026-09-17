@@ -23,6 +23,7 @@ export const ev: Relation = Object.freeze({
   inputs: Object.freeze(["prob_vector", "payoff_vector"]),
   output: "ev_out",
   structuralClass: "C7",
+  resultBounds: null,
   expressionSource: "dot(prob_vector, payoff_vector)",
   latex: "EV = \\sum_{i=1}^{n} p_i \\times Payoff_i",
   resultShape: "scalar",

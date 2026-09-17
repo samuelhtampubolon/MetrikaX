@@ -22,6 +22,7 @@ export const ltv_cac_ratio: Relation = Object.freeze({
   inputs: Object.freeze(["clv", "cac"]),
   output: "ltv_cac_ratio",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "clv / cac",
   latex: "LTV\\!:\\!CAC = \\dfrac{CLV}{CAC}",
   resultShape: "scalar",

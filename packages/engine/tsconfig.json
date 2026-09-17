@@ -4,6 +4,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "types": [],
+    "allowImportingTsExtensions": true,
     "noEmit": true,
     "composite": false,
     "declaration": false,

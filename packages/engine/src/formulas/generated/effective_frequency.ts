@@ -22,6 +22,7 @@ export const effective_frequency: Relation = Object.freeze({
   inputs: Object.freeze(["reach_at_threshold", "total_reach"]),
   output: "effective_frequency",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "reach_at_threshold / total_reach",
   latex: "EF = \\dfrac{ReachAtThreshold}{TotalReach}",
   resultShape: "scalar",

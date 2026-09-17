@@ -15,6 +15,7 @@ export const HELPER_NAMES = new Set([
   'vw_intersection',
   'dot',
   'matvec',
+  'transpose',
   'phi',
   'sum',
 ]);

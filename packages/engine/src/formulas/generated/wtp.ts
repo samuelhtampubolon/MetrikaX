@@ -22,6 +22,7 @@ export const wtp: Relation = Object.freeze({
   inputs: Object.freeze(["delta_u", "beta_price"]),
   output: "wtp",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "delta_u / Math.abs(beta_price)",
   latex: "WTP = \\dfrac{\\Delta U}{|\\beta_{price}|}",
   resultShape: "scalar",

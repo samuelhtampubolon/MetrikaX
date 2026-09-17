@@ -22,6 +22,7 @@ export const bass_f: Relation = Object.freeze({
   inputs: Object.freeze(["bass_p", "bass_q", "time_t"]),
   output: "bass_f",
   structuralClass: "C9",
+  resultBounds: null,
   expressionSource: "(1 - Math.exp(-(bass_p + bass_q) * time_t)) / (1 + (bass_q / bass_p) * Math.exp(-(bass_p + bass_q) * time_t))",
   latex: "F(t) = \\dfrac{1 - e^{-(p+q)t}}{1 + \\frac{q}{p} e^{-(p+q)t}}",
   resultShape: "scalar",

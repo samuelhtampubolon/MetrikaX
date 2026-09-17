@@ -22,6 +22,7 @@ export const arr: Relation = Object.freeze({
   inputs: Object.freeze(["mrr"]),
   output: "arr",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "mrr * 12",
   latex: "ARR = MRR \\times 12",
   resultShape: "scalar",

@@ -22,6 +22,7 @@ export const fmea_rpn: Relation = Object.freeze({
   inputs: Object.freeze(["severity", "occurrence", "detection"]),
   output: "fmea_rpn",
   structuralClass: "C4",
+  resultBounds: null,
   expressionSource: "severity * occurrence * detection",
   latex: "RPN = Severity \\times Occurrence \\times Detection",
   resultShape: "scalar",

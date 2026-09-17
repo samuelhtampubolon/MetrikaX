@@ -22,6 +22,7 @@ export const net_margin: Relation = Object.freeze({
   inputs: Object.freeze(["net_profit", "revenue"]),
   output: "net_margin",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "net_profit / revenue",
   latex: "NM = \\dfrac{NetProfit}{Revenue}",
   resultShape: "scalar",

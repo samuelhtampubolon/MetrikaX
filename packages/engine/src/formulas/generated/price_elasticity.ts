@@ -22,6 +22,7 @@ export const price_elasticity: Relation = Object.freeze({
   inputs: Object.freeze(["q1", "q2", "p1", "p2"]),
   output: "price_elasticity",
   structuralClass: "C8",
+  resultBounds: null,
   expressionSource: "((q2 - q1) / ((q1 + q2) / 2)) / ((p2 - p1) / ((p1 + p2) / 2))",
   latex: "E_p = \\dfrac{(Q_2 - Q_1) / \\left[(Q_1 + Q_2)/2\\right]}{(P_2 - P_1) / \\left[(P_1 + P_2)/2\\right]}",
   resultShape: "scalar",
@@ -38,11 +39,11 @@ export const price_elasticity: Relation = Object.freeze({
     const result = num(env, "price_elasticity");
     const p2 = num(env, "p2");
     const p1 = num(env, "p1");
-      return q1 * (1 + result * ((p2 - p1) / ((p1 + p2) / 2))) / (1 - 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2)));
+      return q1 * (1 + 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2))) / (1 - 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2)));
     },
   }),
   inverseSources: Object.freeze({
-    "q2": "q1 * (1 + result * ((p2 - p1) / ((p1 + p2) / 2))) / (1 - 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2)))",
+    "q2": "q1 * (1 + 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2))) / (1 - 0.5 * result * ((p2 - p1) / ((p1 + p2) / 2)))",
   }),
   guards: buildGuards({
     formulaId: "price_elasticity",

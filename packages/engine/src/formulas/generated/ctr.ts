@@ -22,6 +22,7 @@ export const ctr: Relation = Object.freeze({
   inputs: Object.freeze(["clicks", "impressions"]),
   output: "ctr_out",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "clicks / impressions",
   latex: "CTR = \\dfrac{Clicks}{Impressions}",
   resultShape: "scalar",

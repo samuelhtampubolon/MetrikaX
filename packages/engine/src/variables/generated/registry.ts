@@ -3931,7 +3931,7 @@ export const VARIABLE_DEFINITIONS: readonly VariableDefinition[] = Object.freeze
   {
     id: "csat",
     label: { id: "Skor Kepuasan Pelanggan", en: "Customer Satisfaction Score" },
-    unitClass: "ratio",
+    unitClass: "percent",
     valueKind: 'number',
     constraints: {
       min: 0,

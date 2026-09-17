@@ -22,6 +22,7 @@ export const sos: Relation = Object.freeze({
   inputs: Object.freeze(["brand_searches", "category_searches"]),
   output: "sos",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "brand_searches / category_searches",
   latex: "SOS = \\dfrac{BrandSearches}{CategorySearches}",
   resultShape: "scalar",

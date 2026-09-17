@@ -22,6 +22,7 @@ export const churn_rate: Relation = Object.freeze({
   inputs: Object.freeze(["lost_customers", "start_customers"]),
   output: "churn_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "lost_customers / start_customers",
   latex: "Churn = \\dfrac{LostCustomers}{StartCustomers}",
   resultShape: "scalar",

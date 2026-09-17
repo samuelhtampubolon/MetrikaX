@@ -22,6 +22,7 @@ export const nps: Relation = Object.freeze({
   inputs: Object.freeze(["promoters", "detractors", "total_respondents"]),
   output: "nps",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "((promoters - detractors) / total_respondents) * 100",
   latex: "NPS = \\left(\\dfrac{Promoters - Detractors}{TotalRespondents}\\right) \\times 100",
   resultShape: "scalar",

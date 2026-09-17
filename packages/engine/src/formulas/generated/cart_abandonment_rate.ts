@@ -22,6 +22,7 @@ export const cart_abandonment_rate: Relation = Object.freeze({
   inputs: Object.freeze(["carts_created", "carts_purchased"]),
   output: "cart_abandonment_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "1 - (carts_purchased / carts_created)",
   latex: "CAR = 1 - \\dfrac{CartsPurchased}{CartsCreated}",
   resultShape: "scalar",

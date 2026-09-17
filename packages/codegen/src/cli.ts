@@ -117,7 +117,9 @@ function assertCounts(spec: ReturnType<typeof loadSpec>): void {
     throw new Error(`AC-01: the formula registry holds ${formulaCount} formulas, expected 76.`);
   }
   if (variableCount < 150) {
-    throw new Error(`AC-03: the variable registry holds ${variableCount} variables, expected 150 or more.`);
+    throw new Error(
+      `AC-03: the variable registry holds ${variableCount} variables, expected 150 or more.`,
+    );
   }
   const ids = new Set(spec.formula_registry.map((formula) => formula.id));
   if (ids.size !== formulaCount) {
@@ -134,7 +136,9 @@ function report(spec: ReturnType<typeof loadSpec>, formulaCount: number, caseCou
   console.log(`  formulas emitted            ${formulaCount}`);
   console.log(`  canonical variables         ${spec.canonical_variables.length}`);
   console.log(`  synthesised result variables ${synthesised.length}`);
-  console.log(`  composite results           ${composite.length} (${composite.map((entry) => entry.formulaId).join(', ')})`);
+  console.log(
+    `  composite results           ${composite.length} (${composite.map((entry) => entry.formulaId).join(', ')})`,
+  );
   console.log(`  golden cases                ${caseCount}`);
 }
 

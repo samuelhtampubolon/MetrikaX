@@ -22,6 +22,7 @@ export const pipeline_coverage: Relation = Object.freeze({
   inputs: Object.freeze(["pipeline_value", "quota"]),
   output: "pipeline_coverage",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "pipeline_value / quota",
   latex: "PC = \\dfrac{PipelineValue}{Quota}",
   resultShape: "scalar",

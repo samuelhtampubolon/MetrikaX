@@ -22,6 +22,7 @@ export const kano_worse: Relation = Object.freeze({
   inputs: Object.freeze(["kano_a", "kano_o", "kano_m", "kano_i"]),
   output: "kano_worse",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "-1 * (kano_o + kano_m) / (kano_a + kano_o + kano_m + kano_i)",
   latex: "Worse = -\\dfrac{O + M}{A + O + M + I}",
   resultShape: "scalar",

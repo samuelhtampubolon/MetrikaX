@@ -22,6 +22,7 @@ export const cost_of_delay: Relation = Object.freeze({
   inputs: Object.freeze(["delta_value", "delta_time"]),
   output: "cost_of_delay",
   structuralClass: "C3",
+  resultBounds: null,
   expressionSource: "delta_value / delta_time",
   latex: "CoD = \\dfrac{\\Delta Value}{\\Delta Time}",
   resultShape: "scalar",

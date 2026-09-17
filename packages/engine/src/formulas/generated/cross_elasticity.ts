@@ -22,6 +22,7 @@ export const cross_elasticity: Relation = Object.freeze({
   inputs: Object.freeze(["qx1", "qx2", "py1", "py2"]),
   output: "cross_elasticity",
   structuralClass: "C8",
+  resultBounds: null,
   expressionSource: "((qx2 - qx1) / ((qx1 + qx2) / 2)) / ((py2 - py1) / ((py1 + py2) / 2))",
   latex: "E_{xy} = \\dfrac{(Q_{x2} - Q_{x1}) / \\left[(Q_{x1} + Q_{x2})/2\\right]}{(P_{y2} - P_{y1}) / \\left[(P_{y1} + P_{y2})/2\\right]}",
   resultShape: "scalar",

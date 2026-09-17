@@ -22,6 +22,7 @@ export const gabor_granger: Relation = Object.freeze({
   inputs: Object.freeze(["buyers_at_p", "total_respondents"]),
   output: "gabor_granger",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "buyers_at_p / total_respondents",
   latex: "D(P) = \\dfrac{BuyersAtP}{TotalRespondents}",
   resultShape: "scalar",

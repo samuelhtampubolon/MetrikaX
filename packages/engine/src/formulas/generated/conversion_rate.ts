@@ -22,6 +22,7 @@ export const conversion_rate: Relation = Object.freeze({
   inputs: Object.freeze(["conversions", "visitors"]),
   output: "conversion_rate",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "conversions / visitors",
   latex: "CVR = \\dfrac{Conversions}{Visitors}",
   resultShape: "scalar",

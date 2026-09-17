@@ -22,6 +22,7 @@ export const aov: Relation = Object.freeze({
   inputs: Object.freeze(["revenue", "orders"]),
   output: "aov",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "revenue / orders",
   latex: "AOV = \\dfrac{Revenue}{Orders}",
   resultShape: "scalar",

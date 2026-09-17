@@ -22,6 +22,7 @@ export const market_share: Relation = Object.freeze({
   inputs: Object.freeze(["company_sales", "market_sales"]),
   output: "company_share",
   structuralClass: "C1",
+  resultBounds: Object.freeze({ lower: 0, upper: 1 }),
   expressionSource: "company_sales / market_sales",
   latex: "MS = \\dfrac{CompanySales}{MarketSales}",
   resultShape: "scalar",

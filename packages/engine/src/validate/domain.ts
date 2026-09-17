@@ -27,7 +27,7 @@ export function buildGuards(spec: GuardSpec): readonly Guard[] {
 
   if (spec.guardZeroDenominator) {
     for (const denominator of spec.denominators) {
-      guards.push(zeroDenominatorGuard(spec.formulaId, denominator));
+      guards.push(zeroDenominatorGuard(denominator));
     }
   }
 
@@ -47,7 +47,7 @@ function labelOf(variableId: string): { id: string; en: string } {
   return definition ? definition.label : { id: variableId, en: variableId };
 }
 
-function zeroDenominatorGuard(formulaId: string, variableId: string): Guard {
+function zeroDenominatorGuard(variableId: string): Guard {
   const label = labelOf(variableId);
   return {
     id: `zero_denominator:${variableId}`,
@@ -92,7 +92,10 @@ export function checkGuards(relation: Relation, env: Env): GuardResult {
 }
 
 /** Turn a guard reason code into a sentence in both locales. */
-export function describeGuardReason(relation: Relation, reason: string): {
+export function describeGuardReason(
+  relation: Relation,
+  reason: string,
+): {
   id: string;
   en: string;
 } {
@@ -145,17 +148,20 @@ export function checkResult(relation: Relation, magnitude: Magnitude): void {
     );
   }
 
-  if (relation.structuralClass === 'C1' && !(magnitude >= 0 && magnitude <= 1)) {
+  const bounds = relation.resultBounds;
+  if (bounds !== null && !(magnitude >= bounds.lower && magnitude <= bounds.upper)) {
     throw new DomainViolation(
       {
         id:
-          `${relation.symbol} menghasilkan ${magnitude}, di luar rentang nol sampai satu yang ` +
-          `diwajibkan kelas struktur C1. Penyebut kemungkinan bukan himpunan induk sesungguhnya ` +
-          `dari pembilang, atau kedua besaran berasal dari periode yang berbeda.`,
+          `${relation.symbol} menghasilkan ${magnitude}, di luar rentang ${bounds.lower} sampai ` +
+          `${bounds.upper} yang diwajibkan kelas struktur ${relation.structuralClass}. Penyebut ` +
+          `kemungkinan bukan himpunan induk sesungguhnya dari pembilang, atau kedua besaran ` +
+          `berasal dari periode yang berbeda.`,
         en:
-          `${relation.symbol} produced ${magnitude}, outside the range zero to one that structural ` +
-          `class C1 requires. The denominator is probably not the true parent set of the numerator, ` +
-          `or the two quantities come from different periods.`,
+          `${relation.symbol} produced ${magnitude}, outside the range ${bounds.lower} to ` +
+          `${bounds.upper} that structural class ${relation.structuralClass} requires. The ` +
+          `denominator is probably not the true parent set of the numerator, or the two quantities ` +
+          `come from different periods.`,
       },
       { formulaId: relation.formulaId, code: 'range_violation' },
     );

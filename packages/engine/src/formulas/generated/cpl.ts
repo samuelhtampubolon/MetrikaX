@@ -22,6 +22,7 @@ export const cpl: Relation = Object.freeze({
   inputs: Object.freeze(["spend", "leads"]),
   output: "cpl",
   structuralClass: "C2",
+  resultBounds: null,
   expressionSource: "spend / leads",
   latex: "CPL = \\dfrac{Spend}{Leads}",
   resultShape: "scalar",
