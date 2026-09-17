@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+spec/metrika.spec.json
+packages/engine/src/formulas/generated/
+packages/engine/src/variables/generated/
+packages/engine/test/golden/
+pnpm-lock.yaml

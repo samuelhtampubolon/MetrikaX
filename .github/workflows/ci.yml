@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: install, codegen, verify, typecheck, test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Codegen
+        run: pnpm codegen
+
+      # AC-17: no generated file differs from a fresh generation.
+      - name: Verify generated sources are unchanged
+        run: |
+          pnpm verify
+          if ! git diff --quiet; then
+            echo "Generated files differ from a fresh generation. Run pnpm codegen and commit."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Test
+        run: pnpm test
+
+  content-lint:
+    name: content lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # AC-14 and the humility paradox test: the forbidden adjectives appear zero times.
+      - name: Forbidden adjective check
+        run: bash scripts/forbidden-words.sh
