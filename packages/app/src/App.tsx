@@ -6,10 +6,12 @@
  * cannot honour.
  */
 
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { MenuBar, ModalDialog, StatusBar, TitleBar, type Menu } from '@metrika/ui';
 import { LocaleProvider, useLocale, type Locale } from './locale/index.ts';
 import { useCalculator } from './state/calculator.ts';
+import { useWorkspace } from './state/workspace.ts';
+import { exportWorkspaceFile } from './storage/download.ts';
 import { Calculator } from './screens/Calculator.tsx';
 import { FORMULA_COUNT } from '@metrika/engine';
 
@@ -35,8 +37,16 @@ export function App(): ReactNode {
 function Shell(): ReactNode {
   const { t } = useLocale();
   const state = useCalculator();
+  const workspace = useWorkspace();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const importRef = useRef<HTMLInputElement>(null);
+
+  // Open storage once, on the first render. Nothing blocks on it: the calculator works whether or
+  // not anything can be kept, and the status bar reports which of the two it turned out to be.
+  useEffect(() => {
+    void useWorkspace.getState().init();
+  }, []);
 
   const menus: readonly Menu[] = [
     {
@@ -45,8 +55,8 @@ function Shell(): ReactNode {
       mnemonicIndex: 0,
       items: [
         { id: 'new', label: t('menu.file.new') },
-        { id: 'open', label: t('menu.file.open'), disabled: true },
-        { id: 'save', label: t('menu.file.save'), disabled: true },
+        { id: 'export', label: t('file.export') },
+        { id: 'import', label: t('file.import') },
         { id: 'print', label: t('menu.file.print'), shortcut: 'Ctrl+P' },
       ],
     },
@@ -116,6 +126,16 @@ function Shell(): ReactNode {
     }
     if (menuId === 'file' && itemId === 'new') {
       state.clearInputs();
+      void useWorkspace.getState().create(t('status.workspace.unsaved'));
+      return;
+    }
+    if (menuId === 'file' && itemId === 'export') {
+      exportWorkspaceFile(useWorkspace.getState().exportJson());
+      setMessage(t('file.exported'));
+      return;
+    }
+    if (menuId === 'file' && itemId === 'import') {
+      importRef.current?.click();
       return;
     }
     if (menuId === 'file' && itemId === 'print') {
@@ -141,10 +161,38 @@ function Shell(): ReactNode {
         <Calculator />
       </main>
 
+      {/*
+        The import control. A file the person chooses, read in this window and never sent anywhere.
+        It is kept out of the tab order because the File menu is how it is reached.
+      */}
+      <input
+        ref={importRef}
+        type="file"
+        accept="application/json,.json"
+        tabIndex={-1}
+        aria-hidden="true"
+        style={{ display: 'none' }}
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          event.target.value = '';
+          if (file === undefined) return;
+          void file.text().then(async (text) => {
+            await useWorkspace.getState().importJson(text);
+            setMessage(
+              useWorkspace.getState().lastError === null
+                ? t('file.imported')
+                : t('file.import.failed'),
+            );
+          });
+        }}
+      />
+
       <StatusBar
-        message={message ?? `${t('status.selected')} ${state.selectedId}`}
+        message={
+          message ?? storageMessage(workspace, t) ?? `${t('status.selected')} ${state.selectedId}`
+        }
         state={computationState}
-        workspace={t('status.workspace.unsaved')}
+        workspace={workspace.current?.name ?? t('status.workspace.unsaved')}
         messageLabel={t('status.label.message')}
         stateLabel={t('status.label.state')}
         workspaceLabel={t('status.label.workspace')}
@@ -167,8 +215,24 @@ function Shell(): ReactNode {
           </p>
           <p>{t('dialog.about.offline')}</p>
           <p>{t('dialog.about.licence')}</p>
+          <p>{t('honesty.not_verified')}</p>
         </ModalDialog>
       ) : null}
     </div>
   );
+}
+
+/**
+ * The storage sentence for the status bar.
+ *
+ * When nothing can be kept, that is the message: a tool that appears to save and does not is worse
+ * than one that says plainly that it cannot. Otherwise the bar stays out of the way and the
+ * ordinary selected-formula message shows instead.
+ */
+function storageMessage(
+  workspace: { ready: boolean; ephemeral: boolean },
+  t: (key: string) => string,
+): string | null {
+  if (!workspace.ready) return null;
+  return workspace.ephemeral ? t('storage.memory') : null;
 }

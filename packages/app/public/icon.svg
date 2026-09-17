@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The application icon. A monochrome maskable glyph, drawn rather than illustrated.
+
+  Principle P04 sets the decorative asset budget for the whole application at zero files, so this
+  is not decoration: it is the one mark an operating system requires in order to list a window at
+  all. It carries data, in the sense that it is the division bar every ratio in the corpus is built
+  from, and nothing else.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="MetriKa">
+  <rect width="64" height="64" fill="#d4d0c8"/>
+  <rect x="6" y="6" width="52" height="52" fill="none" stroke="#000000" stroke-width="2"/>
+  <rect x="16" y="20" width="32" height="2" fill="#000000"/>
+  <rect x="16" y="41" width="32" height="2" fill="#000000"/>
+  <rect x="30" y="29" width="4" height="4" fill="#000000"/>
+</svg>

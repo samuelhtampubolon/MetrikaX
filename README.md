@@ -20,13 +20,14 @@ keeps all data on the user's own device.
 
 ## Struktur repositori
 
-| Jalur              | Isi                                                    |
-| ------------------ | ------------------------------------------------------ |
-| `spec/`            | Sumber kebenaran tunggal: `metrika.spec.json`          |
-| `packages/codegen` | Pembaca spesifikasi yang memancarkan sumber TypeScript |
-| `packages/engine`  | Mesin perhitungan murni, tanpa impor antarmuka         |
-| `packages/ui`      | Kit widget lawas: bevel, kendali, dan chrome jendela   |
-| `packages/app`     | Aplikasi: ragam bahasa, keadaan, dan layar             |
+| Jalur              | Isi                                                     |
+| ------------------ | ------------------------------------------------------- |
+| `spec/`            | Sumber kebenaran tunggal: `metrika.spec.json`           |
+| `packages/codegen` | Pembaca spesifikasi yang memancarkan sumber TypeScript  |
+| `packages/engine`  | Mesin perhitungan murni, tanpa impor antarmuka          |
+| `packages/ui`      | Kit widget lawas: bevel, kendali, dan chrome jendela    |
+| `packages/app`     | Aplikasi: ragam bahasa, keadaan, penyimpanan, dan layar |
+| `packages/desktop` | Cangkang Tauri: jendela, izin, dan penyimpanan portabel |
 
 Seluruh berkas di bawah `src/**/generated/` dan `test/golden/` dihasilkan oleh codegen. Berkas
 tersebut tidak boleh disunting dengan tangan. Bila sebuah rumus keliru, perbaiki
@@ -43,7 +44,29 @@ pnpm test
 pnpm lint
 pnpm build        # membangun aplikasi web ke docs/
 pnpm --filter @metrika/app run dev   # galeri komponen ada pada #gallery
+pnpm --filter @metrika/app exec playwright test   # uji luring dan keamanan
+pnpm audit --audit-level low
 ```
+
+## Luring dan keamanan
+
+Perangkat ini tidak melakukan permintaan jaringan apa pun, dan hal itu diukur, bukan dijanjikan.
+Berkas `packages/app/e2e/offline.spec.ts` menjalankan bangunan produksi di dalam peramban
+sungguhan, mencatat setiap permintaan yang dikeluarkan halaman, lalu menegaskan bahwa jumlah
+permintaan ke asal lain adalah nol. Uji lain memuat halaman satu kali, mematikan jaringan, memuat
+ulang, dan menghitung dua rumus beserta penurunannya.
+
+Ringkasan langkah pengamanan:
+
+| Langkah                                                      | Tempat                                    |
+| ------------------------------------------------------------ | ----------------------------------------- |
+| `connect-src 'none'` pada desktop, `'self'` pada web         | `tauri.conf.json`, `index.html`           |
+| Tidak ada plugin http, tidak ada pembaru otomatis            | `Cargo.toml`, `capabilities/default.json` |
+| Tidak ada `eval` dan tidak ada konstruktor `Function`        | aturan lint, dan uji pada peramban        |
+| Tidak ada `fetch` dan `XMLHttpRequest` pada sumber antarmuka | aturan lint                               |
+| Service worker menolak permintaan lintas asal                | `public/sw.js`                            |
+| Pemeriksaan nasihat kebergantungan                           | `pnpm audit` pada CI                      |
+| Seluruh data tersimpan pada perangkat pengguna               | IndexedDB pada web, SQLite pada desktop   |
 
 ## Angka terukur
 

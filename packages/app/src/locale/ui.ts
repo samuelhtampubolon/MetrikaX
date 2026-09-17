@@ -154,6 +154,19 @@ export const uiCatalogue = {
   },
   'dialog.about.licence': { id: 'Lisensi: MIT.', en: 'Licence: MIT.' },
 
+  /* Storage. The status bar states where the work went, and says so plainly when it went nowhere. */
+  'storage.indexeddb': { id: 'Tersimpan di peramban', en: 'Saved in the browser' },
+  'storage.sqlite': { id: 'Tersimpan di berkas', en: 'Saved to a file' },
+  'storage.memory': {
+    id: 'Tidak tersimpan: kemajuan akan hilang saat jendela ditutup.',
+    en: 'Not saved: progress will be lost when this window closes.',
+  },
+  'file.export': { id: 'Ekspor ruang kerja', en: 'Export workspace' },
+  'file.import': { id: 'Impor ruang kerja', en: 'Import workspace' },
+  'file.import.failed': { id: 'Impor gagal', en: 'The import failed' },
+  'file.exported': { id: 'Ruang kerja diekspor.', en: 'The workspace was exported.' },
+  'file.imported': { id: 'Ruang kerja diimpor.', en: 'The workspace was imported.' },
+
   /* The honesty clause. It appears wherever a result could be mistaken for a credential. */
   'honesty.not_verified': {
     id: 'Hasil ini dihasilkan secara lokal oleh perangkat ini dan tidak diverifikasi oleh lembaga mana pun.',

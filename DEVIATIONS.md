@@ -275,6 +275,66 @@ alat, menunggu gilirannya.
 
 ---
 
+## D-17. Kelas satuan tidak pernah dikirim ke jaringan: apa yang benar benar diperiksa
+
+**Temuan.** Spesifikasi menuntut nol permintaan jaringan, dan menyebut empat cara penegakan:
+`connect-src 'none'` pada CSP, tidak ada plugin http pada daftar kebergantungan, uji Playwright
+pada aplikasi terpaket dengan pencegat jaringan, dan langkah CI yang menggagalkan pembangunan bila
+`fetch(` atau `XMLHttpRequest` muncul di dalam `packages/app/src`.
+
+**Yang dikerjakan.** Keempatnya ada, dengan satu penyesuaian yang perlu dicatat. Kebijakan pada
+`tauri.conf.json` memakai `connect-src 'none'` persis sebagaimana diminta. Kebijakan pada bangunan
+web memakai `connect-src 'self'`, bukan `'none'`, karena pendaftaran service worker mengambil
+`sw.js` dari asal yang sama, dan `'none'` akan menggagalkannya sehingga justru merusak kemampuan
+luring yang menjadi tujuan aturan itu. Tidak ada asal lain yang diizinkan.
+
+Penegakan yang sesungguhnya bukan kebijakan itu, melainkan pengukuran: berkas
+`packages/app/e2e/offline.spec.ts` memuat uji yang mencatat setiap permintaan yang dikeluarkan
+halaman sambil aplikasi dipakai, lalu menegaskan bahwa jumlah permintaan ke asal lain adalah nol.
+Uji lain menegaskan bahwa tidak ada rujukan jarak jauh pada dokumen. Aturan lint melarang `fetch`
+dan `XMLHttpRequest` pada seluruh sumber antarmuka. Service worker sendiri menolak permintaan
+lintas asal dengan `Response.error()`.
+
+**Terukur.** Nol permintaan ke asal lain, diukur pada bangunan produksi di dalam Chromium.
+
+---
+
+## D-18. Berkas exe belum dijalankan, dan itu dinyatakan apa adanya
+
+**Temuan.** Permintaan pemilik adalah memastikan exe dan situs berjalan. Situs diperiksa secara
+langsung: bangunan produksi dijalankan di dalam Chromium, jaringan dimatikan, halaman dimuat ulang,
+lalu dua rumus dihitung beserta penurunannya. Exe tidak dapat diperlakukan sama pada lingkungan
+ini. Membangun binari Tauri memerlukan webkit2gtk untuk Linux, yang tidak terpasang dan tidak dapat
+dipasang di sini, dan membangun berkas Windows memerlukan pelaksana Windows.
+
+**Yang dikerjakan.** Bagian yang dapat diperiksa, diperiksa. Logika penentuan tempat penyimpanan
+portabel dikompilasi dan diuji tersendiri, tiga uji, lulus. Konfigurasi Tauri, daftar izin, dan
+kebijakan keamanan ditulis sesuai spesifikasi. Sisanya diperiksa pada pelaksana yang sebenarnya:
+alur kerja rilis membangun untuk tiga sistem, dan dapat dijalankan tanpa menandai versi sehingga
+hasilnya dapat diperiksa lebih dahulu.
+
+**Yang belum diukur.** Ukuran pasang dan waktu mulai dingin, yaitu AC-18. Keduanya memerlukan mesin
+Windows yang sebenarnya. Alur kerja rilis mencetak ukuran setiap artefak pada ringkasan
+pekerjaannya, sehingga angka itu tersedia tanpa perlu mengunduh apa pun.
+
+---
+
+## D-19. Kebergantungan pembangun dimutakhirkan karena nasihat keamanan
+
+**Temuan.** `pnpm audit` melaporkan delapan nasihat: satu kritis, satu tinggi, enam sedang.
+Seluruhnya pada kebergantungan pengembangan, yaitu peladen pengembangan Vite dan antarmuka Vitest,
+dan tidak satu pun ikut pada bundel yang dikirimkan.
+
+**Yang dikerjakan.** Tetap dimutakhirkan. Perkakas pembangun yang disusupi menulis artefak yang
+diunduh orang, sehingga memperlakukannya sebagai bukan bagian dari permukaan serangan adalah
+keliru. Vite naik dari 5 ke 8, Vitest dari 3 ke 5, dan plugin React dari 4 ke 6. Seluruh 550 uji
+tetap lulus. Langkah `pnpm audit --audit-level low` ditambahkan ke CI, sehingga nasihat berikutnya
+menggagalkan pembangunan alih alih menunggu ditemukan.
+
+**Terukur.** Nol nasihat yang diketahui setelah pemutakhiran.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

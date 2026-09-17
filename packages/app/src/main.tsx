@@ -2,11 +2,18 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App.tsx';
 import './styles/app.css';
+import { registerServiceWorker } from './offline.ts';
 
 const container = document.getElementById('root');
 if (container === null) throw new Error('The root element is missing from index.html.');
 
 const root = createRoot(container);
+
+// P23: a second visit works with the network disabled. Registration never blocks the first paint,
+// and its outcome is published so the end to end suite can assert it rather than wait on it.
+void registerServiceWorker().then((state) => {
+  (window as unknown as { __metrikaOffline?: string }).__metrikaOffline = state;
+});
 
 /**
  * The component gallery is a development aid reached at #gallery.

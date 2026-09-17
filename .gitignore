@@ -7,3 +7,11 @@ target/
 
 # The built web application. The Pages workflow builds and deploys it; see DEVIATIONS.md, D-15.
 docs/
+
+# Rust build output
+packages/desktop/src-tauri/target/
+packages/desktop/src-tauri/gen/
+
+# Playwright
+packages/app/test-results/
+packages/app/playwright-report/

@@ -1,0 +1,33 @@
+[package]
+name = "metrika"
+version = "0.1.0"
+description = "MetriKa: a quantitative marketing analysis workbench"
+authors = ["Samuel H. Tampubolon"]
+edition = "2021"
+rust-version = "1.77"
+license = "MIT"
+
+[lib]
+name = "metrika_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+# Only the two plugins the specification names. Notably absent: tauri-plugin-http. The desktop
+# build performs no network request of any kind, and the surest way to keep that true is for the
+# capability to be missing rather than merely unused.
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+# The installed size budget is 30 MB. These four settings are what keep a Tauri binary inside it.
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true

@@ -1,0 +1,145 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  # A build without a release, so the desktop artefacts can be verified before a tag is cut.
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Create a draft release as well as building'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  desktop:
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-latest
+            target: ''
+          - platform: ubuntu-22.04
+            target: ''
+          - platform: macos-latest
+            target: ''
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the Linux webview dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            libssl-dev \
+            build-essential \
+            curl \
+            wget \
+            file
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: packages/desktop/src-tauri
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Codegen and verify
+        run: |
+          pnpm codegen
+          pnpm verify
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build the web application
+        run: pnpm build
+
+      # The offline assertion, checked on the same artefact the desktop shell wraps.
+      - name: Verify the build is offline and makes no outbound request
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          pnpm --filter @metrika/app exec playwright install --with-deps chromium
+          pnpm --filter @metrika/app exec playwright test
+
+      - name: Check the desktop shell
+        working-directory: packages/desktop/src-tauri
+        run: |
+          cargo fmt --check
+          cargo clippy --all-targets -- -D warnings
+
+      - uses: tauri-apps/tauri-action@v0
+        id: tauri
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: packages/desktop
+          tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+          releaseName: 'MetriKa ${{ github.ref_name }}'
+          releaseBody: |
+            Unduh berkas yang sesuai dengan sistem Anda.
+
+            `MetriKa-portable-windows-x64.exe` berjalan tanpa pemasangan dan tanpa hak
+            administrator. Salin ke flash drive, lalu jalankan. Perangkat ini tidak melakukan
+            permintaan jaringan apa pun, dan seluruh data tersimpan pada perangkat Anda.
+          releaseDraft: true
+          prerelease: false
+          includeUpdaterJson: false
+          args: ${{ matrix.platform == 'macos-latest' && '--target universal-apple-darwin' || '' }}
+
+      # desktop.portable_build: also emit the raw executable, under a plain name, so the portable
+      # download is obvious rather than buried in a bundle directory.
+      - name: Name the portable Windows executable
+        if: matrix.platform == 'windows-latest'
+        shell: bash
+        run: |
+          set -euo pipefail
+          src="packages/desktop/src-tauri/target/release/metrika.exe"
+          if [ ! -f "$src" ]; then
+            echo "The release executable was not found at $src"
+            ls -R packages/desktop/src-tauri/target/release | head -40
+            exit 1
+          fi
+          mkdir -p portable
+          cp "$src" "portable/MetriKa-portable-windows-x64.exe"
+          ls -l portable
+
+      - uses: actions/upload-artifact@v4
+        if: matrix.platform == 'windows-latest'
+        with:
+          name: MetriKa-portable-windows-x64
+          path: portable/MetriKa-portable-windows-x64.exe
+          if-no-files-found: error
+
+      - name: Record the measured size
+        shell: bash
+        run: |
+          echo "### Measured artefact sizes on ${{ matrix.platform }}" >> "$GITHUB_STEP_SUMMARY"
+          find packages/desktop/src-tauri/target/release/bundle -type f \
+            \( -name '*.exe' -o -name '*.AppImage' -o -name '*.dmg' -o -name '*.deb' \) \
+            -printf '%s\t%p\n' 2>/dev/null | sort -rn | head -10 \
+            | awk -F'\t' '{printf "- %.1f MB  %s\n", $1/1048576, $2}' >> "$GITHUB_STEP_SUMMARY" || true

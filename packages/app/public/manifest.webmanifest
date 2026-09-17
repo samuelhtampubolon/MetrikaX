@@ -1,0 +1,21 @@
+{
+  "name": "MetriKa: Perangkat Analisis Kuantitatif Pemasaran",
+  "short_name": "MetriKa",
+  "description": "Menghitung 76 rumus pemasaran kuantitatif dari angka yang dimasukkan pengguna, tanpa sambungan jaringan.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#d4d0c8",
+  "theme_color": "#000080",
+  "lang": "id",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
