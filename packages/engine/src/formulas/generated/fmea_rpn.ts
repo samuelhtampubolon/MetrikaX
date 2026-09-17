@@ -70,6 +70,7 @@ export const fmea_rpn: Relation = Object.freeze({
     { lower: 100, upper: 200, label: "Tinggi", guidance: "Tindakan perbaikan diperlukan." },
     { lower: 200, upper: 1000, label: "Kritis", guidance: "Hentikan dan perbaiki sebelum melanjutkan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "X",
     phase: "B8",

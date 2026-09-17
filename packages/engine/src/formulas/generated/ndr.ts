@@ -74,6 +74,7 @@ export const ndr: Relation = Object.freeze({
     { lower: 1, upper: 1.2, label: "Bertumbuh", guidance: "Pendapatan tumbuh tanpa pelanggan baru." },
     { lower: 1.2, upper: 10, label: "Sangat kuat", guidance: "Model ekspansi bekerja sangat baik." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B6",

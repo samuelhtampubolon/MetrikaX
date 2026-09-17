@@ -60,6 +60,7 @@ export const pipeline_coverage: Relation = Object.freeze({
     { lower: 3, upper: 5, label: "Memadai", guidance: "Rentang yang lazim dianggap sehat." },
     { lower: 5, upper: 1000, label: "Berlebih", guidance: "Periksa apakah pipeline berisi peluang yang sudah mati." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B4",

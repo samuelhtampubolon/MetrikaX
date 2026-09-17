@@ -1,0 +1,486 @@
+/*
+ * P08: the fifteen controls in design_system.components.
+ *
+ * Every metric here comes from design_system.tokens.metrics. Control height is 22px, the vertical
+ * gap between controls is 4px and the gap between groups is 10px, because information density is
+ * the feature: the reader is reading numbers, not admiring layout.
+ */
+
+/* ---- TitleBar: solid fill, no gradient, glyphs drawn as text characters ---- */
+.mk-titlebar {
+  height: var(--titlebar-height);
+  background: var(--titlebar-active);
+  color: var(--selection-fg);
+  display: flex;
+  align-items: center;
+  padding: 0 2px 0 4px;
+  font-size: var(--size-ui);
+  font-weight: 700;
+  user-select: none;
+}
+.mk-titlebar[data-active='false'] {
+  background: var(--titlebar-inactive);
+}
+.mk-titlebar__title {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.mk-titlebar__button {
+  width: 16px;
+  height: 14px;
+  margin-left: 2px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+/* ---- MenuBar: mnemonic letters underlined, opens on Alt ---- */
+.mk-menubar {
+  height: var(--menubar-height);
+  display: flex;
+  align-items: stretch;
+  background: var(--surface);
+  border-bottom: 1px solid var(--bevel-shadow);
+  user-select: none;
+}
+.mk-menubar__item {
+  padding: 0 7px;
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--size-ui);
+  cursor: default;
+}
+.mk-menubar__item[aria-expanded='true'],
+.mk-menubar__item:hover {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+.mk-menubar__mnemonic {
+  text-decoration: underline;
+}
+.mk-menu {
+  position: absolute;
+  z-index: 40;
+  min-width: 160px;
+  background: var(--surface);
+  padding: 2px;
+  margin: 0;
+  list-style: none;
+}
+.mk-menu__item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--group-gap);
+  padding: 2px 16px 2px 20px;
+  cursor: default;
+}
+.mk-menu__item:hover {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+.mk-menu__shortcut {
+  color: var(--ink-muted);
+}
+.mk-menu__item:hover .mk-menu__shortcut {
+  color: var(--selection-fg);
+}
+
+/* ---- GroupBox: legend sits on the border line, border interrupted behind it ---- */
+.mk-groupbox {
+  position: relative;
+  padding: var(--panel-padding);
+  padding-top: calc(var(--panel-padding) + 4px);
+  margin-top: 7px;
+  min-width: 0;
+}
+.mk-groupbox__legend {
+  position: absolute;
+  top: -7px;
+  left: 8px;
+  padding: 0 4px;
+  background: var(--surface);
+  font-size: var(--size-label);
+}
+
+/* ---- NumericField: sunken, white, right aligned, monospace; suffix outside ---- */
+.mk-field-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px auto;
+  align-items: center;
+  gap: var(--control-gap);
+  margin-bottom: var(--control-gap);
+}
+.mk-field-row__label {
+  font-size: var(--size-label);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mk-numeric {
+  height: var(--control-height);
+  width: 100%;
+  padding: 0 4px;
+  background: var(--field);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--size-ui);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.mk-numeric:disabled {
+  background: var(--field-disabled);
+  color: var(--ink-disabled);
+}
+.mk-field-row__suffix {
+  font-size: var(--size-small);
+  color: var(--ink-muted);
+  min-width: 2ch;
+}
+
+/* ---- ComboBox: sunken field, raised 16px drop button with a text caret ---- */
+.mk-combo {
+  height: var(--control-height);
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--field);
+  width: 100%;
+}
+.mk-combo__select {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--size-ui);
+  padding: 0 4px;
+  appearance: none;
+}
+.mk-combo__button {
+  width: 16px;
+  flex: none;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* ---- PushButton: raised, sunken while active, dotted focus rectangle inset 3px ---- */
+.mk-button {
+  height: var(--control-height);
+  min-width: 75px;
+  padding: 0 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--size-ui);
+  cursor: default;
+}
+.mk-button:active:not(:disabled) {
+  border-top: 1px solid var(--bevel-dark);
+  border-left: 1px solid var(--bevel-dark);
+  border-right: 1px solid var(--bevel-light);
+  border-bottom: 1px solid var(--bevel-light);
+  box-shadow: inset 1px 1px 0 var(--bevel-shadow);
+  padding-top: 1px;
+  padding-left: 11px;
+}
+.mk-button:disabled {
+  color: var(--ink-disabled);
+}
+.mk-button[data-default='true'] {
+  font-weight: 700;
+}
+
+/* ---- TabStrip: notched tabs, the active tab 2px taller, merging with the panel ---- */
+.mk-tabstrip {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  margin-bottom: -1px;
+  padding-left: 4px;
+}
+.mk-tab {
+  height: 20px;
+  padding: 0 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--size-ui);
+  border-top: 1px solid var(--bevel-light);
+  border-left: 1px solid var(--bevel-light);
+  border-right: 1px solid var(--bevel-dark);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  cursor: default;
+}
+.mk-tab[aria-selected='true'] {
+  height: 22px;
+  position: relative;
+  z-index: 2;
+}
+.mk-tabpanel {
+  position: relative;
+  z-index: 1;
+  padding: var(--panel-padding);
+  background: var(--surface);
+}
+
+/* ---- ListView: report style, sortable headers drawn as raised buttons ---- */
+.mk-listview {
+  background: var(--field);
+  overflow: auto;
+}
+.mk-listview__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-ui);
+}
+.mk-listview__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.mk-listview__header th {
+  padding: 0;
+  background: var(--surface);
+}
+.mk-listview__sort {
+  width: 100%;
+  height: 20px;
+  padding: 0 5px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--size-ui);
+  font-weight: 400;
+  text-align: left;
+  cursor: default;
+}
+.mk-listview__row td {
+  padding: 1px 5px;
+  border-bottom: 1px solid var(--surface-alt);
+  white-space: nowrap;
+}
+.mk-listview__row[aria-selected='true'] td {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+.mk-listview__numeric {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- TreeView: plus and minus glyphs in boxes, dotted connector lines ---- */
+.mk-treeview {
+  background: var(--field);
+  overflow: auto;
+  font-size: var(--size-ui);
+  padding: 2px;
+}
+.mk-tree__group {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 12px;
+  border-left: 1px dotted var(--bevel-shadow);
+}
+.mk-tree__group--root {
+  padding-left: 0;
+  border-left: 0;
+}
+.mk-tree__node {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 17px;
+}
+.mk-tree__toggle {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  border: 1px solid var(--bevel-shadow);
+  background: var(--field);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 9px;
+  padding: 0;
+  cursor: default;
+}
+.mk-tree__spacer {
+  width: 11px;
+  flex: none;
+}
+.mk-tree__label {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--size-ui);
+  padding: 0 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+}
+.mk-tree__label[aria-current='true'] {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+/* ---- StatusBar: three sunken panes ---- */
+.mk-statusbar {
+  height: var(--statusbar-height);
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface);
+}
+.mk-statusbar__pane {
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  font-size: var(--size-small);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.mk-statusbar__pane--message {
+  flex: 1;
+}
+.mk-statusbar__pane--state {
+  width: 150px;
+  flex: none;
+}
+.mk-statusbar__pane--workspace {
+  width: 170px;
+  flex: none;
+}
+
+/* ---- ProgressBar: segmented blocks, not a continuous fill ---- */
+.mk-progress {
+  height: 16px;
+  padding: 2px;
+  background: var(--field);
+  display: flex;
+  gap: 1px;
+  align-items: stretch;
+}
+.mk-progress__block {
+  flex: 1;
+  background: var(--surface);
+}
+.mk-progress__block[data-filled='true'] {
+  background: var(--selection-bg);
+}
+
+/* ---- ResultField: heavier border, monospace, selectable ---- */
+.mk-result {
+  min-height: 24px;
+  padding: 2px 5px;
+  background: var(--field);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--size-result);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  user-select: text;
+  border-width: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.mk-result__unit {
+  font-size: var(--size-small);
+  color: var(--ink-muted);
+}
+.mk-result[data-state='refused'] {
+  justify-content: flex-start;
+  text-align: left;
+  font-size: var(--size-ui);
+}
+
+/* ---- DerivationPane: collapsible monospace region ---- */
+.mk-derivation {
+  background: var(--field);
+  font-family: var(--font-mono);
+  font-size: var(--size-ui);
+  padding: 4px 6px;
+  white-space: pre;
+  overflow: auto;
+  user-select: text;
+  max-height: 260px;
+}
+.mk-derivation__empty {
+  color: var(--ink-muted);
+  white-space: normal;
+}
+
+/* ---- ModalDialog: fixed size, centred, title bar, OK and Cancel right aligned ---- */
+.mk-modal__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mk-modal {
+  background: var(--surface);
+  min-width: 320px;
+  max-width: 520px;
+}
+.mk-modal__body {
+  padding: var(--group-gap);
+  font-size: var(--size-ui);
+}
+.mk-modal__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--control-gap);
+  padding: 0 var(--group-gap) var(--group-gap);
+}
+
+/* ---- PlotCanvas: black strokes on white, hatch patterns instead of fills ---- */
+.mk-plot {
+  background: var(--field);
+  display: block;
+}
+.mk-plot text {
+  font-family: var(--font-ui);
+  font-size: var(--size-small);
+  fill: var(--ink);
+}
+.mk-plot .mk-plot__axis {
+  stroke: var(--ink);
+  stroke-width: 1;
+  fill: none;
+}
+.mk-plot .mk-plot__bar {
+  stroke: var(--ink);
+  stroke-width: 1;
+}

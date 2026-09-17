@@ -4,3 +4,6 @@ coverage/
 *.tsbuildinfo
 .DS_Store
 target/
+
+# The built web application. The Pages workflow builds and deploys it; see DEVIATIONS.md, D-15.
+docs/

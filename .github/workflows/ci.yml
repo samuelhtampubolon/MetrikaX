@@ -54,6 +54,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Build the web application
+        run: pnpm build
+
   content-lint:
     name: content lint
     runs-on: ubuntu-latest

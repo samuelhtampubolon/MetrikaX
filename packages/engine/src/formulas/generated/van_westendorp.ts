@@ -50,6 +50,7 @@ export const van_westendorp: Relation = Object.freeze({
   interpretationBands: Object.freeze([
 
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VIII",
     phase: "B1",

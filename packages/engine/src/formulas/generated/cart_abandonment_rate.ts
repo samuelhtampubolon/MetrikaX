@@ -60,6 +60,7 @@ export const cart_abandonment_rate: Relation = Object.freeze({
     { lower: 0.7, upper: 0.85, label: "Wajar", guidance: "Rentang lazim ritel daring." },
     { lower: 0.85, upper: 1, label: "Kritis", guidance: "Periksa biaya kirim tersembunyi dan kewajiban membuat akun." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B4",

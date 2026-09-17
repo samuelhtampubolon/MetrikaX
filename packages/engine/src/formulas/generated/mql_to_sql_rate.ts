@@ -60,6 +60,7 @@ export const mql_to_sql_rate: Relation = Object.freeze({
     { lower: 0.3, upper: 0.6, label: "Baik", guidance: "Keselarasan pemasaran dan penjualan kuat." },
     { lower: 0.6, upper: 1, label: "Sangat tinggi", guidance: "Periksa apakah kriteria MQL terlalu ketat sehingga volume hilang." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B3",

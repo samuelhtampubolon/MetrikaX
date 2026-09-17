@@ -51,6 +51,7 @@ export const income_elasticity: Relation = Object.freeze({
     { lower: 0, upper: 1, label: "Kebutuhan pokok", guidance: "Permintaan naik lebih lambat daripada pendapatan." },
     { lower: 1, upper: 1000, label: "Barang mewah", guidance: "Permintaan naik lebih cepat daripada pendapatan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VII",
     phase: "B0",

@@ -60,6 +60,7 @@ export const roi: Relation = Object.freeze({
     { lower: 0.2, upper: 1, label: "Baik", guidance: "Melampaui biaya modal pada sebagian besar konteks." },
     { lower: 1, upper: 1000, label: "Sangat baik", guidance: "Periksa apakah seluruh biaya telah dimasukkan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "IV",
     phase: "B8",

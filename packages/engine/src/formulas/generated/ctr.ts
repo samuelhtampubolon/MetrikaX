@@ -60,6 +60,7 @@ export const ctr: Relation = Object.freeze({
     { lower: 0.02, upper: 0.1, label: "Baik", guidance: "Relevansi pesan tinggi. Periksa apakah audiens terlalu sempit." },
     { lower: 0.1, upper: 1, label: "Curiga", guidance: "Periksa lalu lintas tidak sah atau penghitungan ganda." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B3",

@@ -60,6 +60,7 @@ export const forecast_accuracy: Relation = Object.freeze({
     { lower: 0.85, upper: 0.95, label: "Baik", guidance: "Layak untuk perencanaan operasional." },
     { lower: 0.95, upper: 1, label: "Sangat baik", guidance: "Periksa apakah prakiraan disesuaikan setelah fakta." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B8",

@@ -60,6 +60,7 @@ export const lead_to_customer_rate: Relation = Object.freeze({
     { lower: 0.15, upper: 0.4, label: "Baik", guidance: "Prospek tersaring dengan baik." },
     { lower: 0.4, upper: 1, label: "Sangat tinggi", guidance: "Volume prospek kemungkinan terlalu kecil." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B4",

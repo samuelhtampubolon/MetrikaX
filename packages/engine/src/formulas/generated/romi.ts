@@ -60,6 +60,7 @@ export const romi: Relation = Object.freeze({
     { lower: 0.5, upper: 2, label: "Baik", guidance: "Kampanye memberi pengembalian jelas." },
     { lower: 2, upper: 1000, label: "Sangat baik", guidance: "Periksa keabsahan estimasi inkremental." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "IV",
     phase: "B8",

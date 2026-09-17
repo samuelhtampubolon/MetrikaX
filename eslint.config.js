@@ -7,6 +7,8 @@ export default tseslint.config(
       '**/node_modules/**',
       '**/dist/**',
       '**/coverage/**',
+      'docs/**',
+      'packages/app/src/locale/generated/**',
       'packages/engine/src/formulas/generated/**',
       'packages/engine/src/variables/generated/**',
       'packages/engine/test/golden/**',
@@ -36,6 +38,40 @@ export default tseslint.config(
     rules: {
       'no-eval': 'error',
       'no-new-func': 'error',
+    },
+  },
+  {
+    files: ['packages/ui/**/*.tsx', 'packages/app/**/*.tsx'],
+    languageOptions: {
+      parserOptions: { ecmaFeatures: { jsx: true } },
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+        HTMLElement: 'readonly',
+        HTMLInputElement: 'readonly',
+        HTMLButtonElement: 'readonly',
+        HTMLDivElement: 'readonly',
+        Element: 'readonly',
+        KeyboardEvent: 'readonly',
+        React: 'readonly',
+      },
+    },
+    rules: {
+      // P10, offline is the default: the desktop build performs no network request of any kind.
+      'no-restricted-globals': [
+        'error',
+        { name: 'fetch', message: 'The application makes no network request (principle P10).' },
+        {
+          name: 'XMLHttpRequest',
+          message: 'The application makes no network request (principle P10).',
+        },
+      ],
+    },
+  },
+  {
+    files: ['packages/ui/**/*.ts', 'packages/app/**/*.ts'],
+    languageOptions: {
+      globals: { document: 'readonly', window: 'readonly' },
     },
   },
 );

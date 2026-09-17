@@ -60,6 +60,7 @@ export const conversion_rate: Relation = Object.freeze({
     { lower: 0.03, upper: 0.1, label: "Baik", guidance: "Kecocokan penawaran kuat." },
     { lower: 0.1, upper: 1, label: "Sangat tinggi", guidance: "Lazim hanya pada audiens yang sudah sangat tersaring." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B4",

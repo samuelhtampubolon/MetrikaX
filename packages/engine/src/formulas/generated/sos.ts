@@ -60,6 +60,7 @@ export const sos: Relation = Object.freeze({
     { lower: 0.2, upper: 0.45, label: "Kuat", guidance: "Permintaan bermerek menopang penjualan." },
     { lower: 0.45, upper: 1, label: "Sangat kuat", guidance: "Merek nyaris identik dengan kategori." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B2",

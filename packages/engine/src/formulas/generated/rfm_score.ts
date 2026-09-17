@@ -82,6 +82,7 @@ export const rfm_score: Relation = Object.freeze({
     { lower: 3.5, upper: 4.5, label: "Segmen bernilai", guidance: "Prioritas retensi." },
     { lower: 4.5, upper: 5, label: "Segmen utama", guidance: "Prioritas program loyalitas dan rujukan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B6",

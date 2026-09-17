@@ -54,6 +54,7 @@ export const opportunity_score: Relation = Object.freeze({
     { lower: 12, upper: 15, label: "Peluang", guidance: "Kesenjangan nyata antara kepentingan dan kepuasan." },
     { lower: 15, upper: 20, label: "Peluang besar", guidance: "Prioritas utama pengembangan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VIII",
     phase: "B1",

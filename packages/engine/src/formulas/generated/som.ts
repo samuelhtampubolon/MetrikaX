@@ -57,6 +57,7 @@ export const som: Relation = Object.freeze({
   interpretationBands: Object.freeze([
 
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VII",
     phase: "B0",

@@ -207,6 +207,74 @@ spesifikasi dapat diperbaiki.
 
 ---
 
+## D-13. AC-16 belum terpenuhi: 801 kunci berbahasa Indonesia pada katalog Inggris
+
+**Temuan.** AC-16 menyatakan bahwa setiap teks antarmuka tersedia dalam bahasa Indonesia dan
+bahasa Inggris. Spesifikasi menyediakan pasangan dua bahasa hanya untuk nama rumus, definisi rumus,
+label variabel dan nama modul kurikulum: 398 kunci. Label pita, panduan pita, kekeliruan yang
+lazim, kendali, dan definisi variabel hanya berbahasa Indonesia: 801 kunci dari total 1199.
+
+**Yang dikerjakan.** Katalog Inggris memuat teks Indonesia untuk 801 kunci tersebut, dan seluruh
+kuncinya diekspor sebagai `UNTRANSLATED`. Uji menegaskan angka 801 secara persis, sehingga setiap
+penerjemahan menggagalkan uji itu dan memaksa catatan ini diperbarui. Antarmuka tidak pernah
+menampilkan kolom kosong, dan celahnya dapat dihitung, bukan ditemukan satu layar demi satu layar.
+
+Teks antarmuka yang ditulis sendiri, yaitu 80 kunci pada `packages/app/src/locale/ui.ts`,
+seluruhnya dwibahasa. Kunci itu tidak ada pada spesifikasi karena spesifikasi menyebut layar dan
+kendalinya tanpa menuliskan labelnya.
+
+**Yang perlu diputuskan.** Penerjemahan 801 teks itu adalah pekerjaan penulisan, dan aturan operasi
+meminta persetujuan pemilik sebelum isi ditulis. Dua pilihan: menerjemahkannya, atau menerima
+bahwa katalog Inggris memakai teks Indonesia pada bagian yang bersifat penjelasan. Pilihan kedua
+sejalan dengan salah satu pertanyaan terbuka pada spesifikasi sendiri, yaitu kemungkinan versi
+khusus bahasa Indonesia untuk penggunaan di kelas.
+
+---
+
+## D-14. Uji regresi visual bevel belum ada
+
+**Temuan.** Definisi selesainya fase P08 berbunyi: galeri komponen tampil dan bevelnya tepat pada
+perbesaran 100 dan 150 persen. Ketepatan piksel hanya dapat diperiksa dengan tangkapan layar, dan
+alat untuk itu adalah Playwright, yang masuk pada fase berikutnya.
+
+**Yang dikerjakan.** Galeri komponen tersedia pada `#gallery` dan hanya ada pada mode
+pengembangan: penjaga `import.meta.env.DEV` membuang berkasnya sepenuhnya dari bundel produksi,
+dan hal itu diperiksa dengan menelusuri hasil bangun. Uji P08 menegaskan bagian doktrin yang dapat
+diperiksa tanpa tangkapan layar: bevel yang dikenakan setiap kendali, metrik yang diberikan
+kepadanya, nama yang dapat diakses, dan perilaku papan tik. Ketepatan piksel belum diukur.
+
+---
+
+## D-15. Hasil bangun web tidak dikomit
+
+**Temuan.** Tata letak monorepo pada spesifikasi mencantumkan `docs/` sebagai aplikasi web
+terbangun untuk GitHub Pages, dan sekaligus mencantumkan `.github/workflows/pages.yml`.
+
+**Yang dikerjakan.** Alur kerja Pages membangun dan menerbitkan, sedangkan `docs/` tidak dikomit.
+Mengomit hasil bangun berarti setiap cabang membawa bundel yang dibangun ulang, dan selisihnya
+tidak dapat dibaca manusia. Hasil yang diterbitkan tetap sama persis.
+
+**Terukur.** Bundel produksi: 612 KB JavaScript dan 12 KB CSS, atau 134 KB JavaScript setelah
+gzip. Dari 612 KB itu, 272 KB adalah dua katalog teks dan sisanya adalah 76 modul relasi beserta
+React. Peta sumber tidak disertakan pada bangunan produksi karena ukurannya 1,3 MB, lebih besar
+daripada bundelnya sendiri; `vite build --sourcemap` menghasilkannya bila diperlukan.
+
+---
+
+## D-16. Fase P15 dikerjakan lebih awal daripada urutan nomornya
+
+**Temuan.** Aturan operasi meminta fase dikerjakan berurutan. Sistem ragam bahasa adalah fase P15,
+sedangkan layar Kalkulator adalah fase P09. Namun ADR-006 menyatakan bahwa pengantarabangsaan ada
+sejak komit pertama dan tidak dipasang belakangan, dan tidak ada teks yang boleh ditulis langsung
+di dalam komponen.
+
+**Yang dikerjakan.** Inti fase P15, yaitu pembangkitan katalog dan penyedia ragam bahasa, dikerjakan
+sebelum P08 dan P09. Membangun layar lebih dahulu akan berarti menuliskan teks di dalam komponen
+lalu mencabutnya kembali, yang persis dilarang ADR-006. Sisa fase P15, yaitu pengalih pada bilah
+alat, menunggu gilirannya.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

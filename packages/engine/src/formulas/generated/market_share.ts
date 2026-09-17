@@ -60,6 +60,7 @@ export const market_share: Relation = Object.freeze({
     { lower: 0.15, upper: 0.4, label: "Pemimpin bersama", guidance: "Perhatikan pangsa relatif terhadap pesaing terbesar." },
     { lower: 0.4, upper: 1, label: "Dominan", guidance: "Pertumbuhan lebih mudah diperoleh dari perluasan kategori." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B0",

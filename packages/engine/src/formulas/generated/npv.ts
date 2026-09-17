@@ -55,6 +55,7 @@ export const npv: Relation = Object.freeze({
     { lower: -1000000000000000, upper: 0, label: "Tolak", guidance: "Proyek menghancurkan nilai pada tingkat diskonto yang dipakai." },
     { lower: 0, upper: 1000000000000000, label: "Terima", guidance: "Proyek menambah nilai pada tingkat diskonto yang dipakai." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "XI",
     phase: "B8",

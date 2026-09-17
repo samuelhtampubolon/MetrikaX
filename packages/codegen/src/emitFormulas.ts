@@ -160,6 +160,7 @@ ${inverseSourceEntries.join('\n')}
   interpretationBands: Object.freeze([
 ${bands.join('\n')}
   ]),
+  pitfallCount: ${formula.failure_modes.length},
   taxonomy: Object.freeze({
     stratum: ${quote(formula.taxonomy.axis_a.stratum_code)},
     phase: ${quote(formula.taxonomy.axis_b.phase_code)},

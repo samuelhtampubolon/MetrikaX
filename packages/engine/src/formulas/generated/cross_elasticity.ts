@@ -51,6 +51,7 @@ export const cross_elasticity: Relation = Object.freeze({
     { lower: -0.1, upper: 0.1, label: "Tidak terkait", guidance: "Bukan pesaing dan bukan pelengkap." },
     { lower: 0.1, upper: 1000, label: "Substitusi", guidance: "Kedua produk bersaing langsung." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VII",
     phase: "B0",

@@ -70,6 +70,7 @@ export const payback_period: Relation = Object.freeze({
     { lower: 12, upper: 18, label: "Waspada", guidance: "Kebutuhan modal kerja membesar." },
     { lower: 18, upper: 1000, label: "Kritis", guidance: "Pertumbuhan akan terhambat oleh kas, bukan oleh permintaan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "IV",
     phase: "B6",

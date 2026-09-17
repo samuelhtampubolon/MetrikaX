@@ -60,6 +60,7 @@ export const bounce_rate: Relation = Object.freeze({
     { lower: 0.55, upper: 0.75, label: "Wajar", guidance: "Rentang lazim halaman arahan." },
     { lower: 0.75, upper: 1, label: "Tinggi", guidance: "Kecocokan kata kunci dan isi halaman perlu diperiksa." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B3",

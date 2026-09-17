@@ -25,6 +25,8 @@ keeps all data on the user's own device.
 | `spec/`            | Sumber kebenaran tunggal: `metrika.spec.json`          |
 | `packages/codegen` | Pembaca spesifikasi yang memancarkan sumber TypeScript |
 | `packages/engine`  | Mesin perhitungan murni, tanpa impor antarmuka         |
+| `packages/ui`      | Kit widget lawas: bevel, kendali, dan chrome jendela   |
+| `packages/app`     | Aplikasi: ragam bahasa, keadaan, dan layar             |
 
 Seluruh berkas di bawah `src/**/generated/` dan `test/golden/` dihasilkan oleh codegen. Berkas
 tersebut tidak boleh disunting dengan tangan. Bila sebuah rumus keliru, perbaiki
@@ -39,6 +41,8 @@ pnpm verify       # memeriksa bahwa sumber terbangkit sama dengan hasil pembangk
 pnpm typecheck
 pnpm test
 pnpm lint
+pnpm build        # membangun aplikasi web ke docs/
+pnpm --filter @metrika/app run dev   # galeri komponen ada pada #gallery
 ```
 
 ## Angka terukur
@@ -46,14 +50,17 @@ pnpm lint
 Nilai berikut diisi dengan hasil pengukuran, bukan dengan perkiraan. Baris yang belum diukur
 dinyatakan sebagai belum diukur, bukan dikosongkan.
 
-| Ukuran                      | Ambang spesifikasi | Terukur            |
-| --------------------------- | ------------------ | ------------------ |
-| Jumlah rumus dalam registri | tepat 76           | 76                 |
-| Jumlah variabel kanonik     | minimal 150        | 161                |
-| Kasus uji emas              | minimal 304        | 376                |
-| Ukuran pasang Windows       | di bawah 30 MB     | belum diukur       |
-| Waktu mulai dingin          | di bawah 2 detik   | belum diukur       |
-| Jangkauan propagasi AC-04   | minimal 12         | 4, belum terpenuhi |
+| Ukuran                      | Ambang spesifikasi | Terukur                       |
+| --------------------------- | ------------------ | ----------------------------- |
+| Jumlah rumus dalam registri | tepat 76           | 76                            |
+| Jumlah variabel kanonik     | minimal 150        | 161                           |
+| Kasus uji emas              | minimal 304        | 376                           |
+| Ukuran pasang Windows       | di bawah 30 MB     | belum diukur                  |
+| Waktu mulai dingin          | di bawah 2 detik   | belum diukur                  |
+| Jangkauan propagasi AC-04   | minimal 12         | 4, belum terpenuhi            |
+| Kunci katalog teks          | dua bahasa penuh   | 1199, 801 tanpa nilai Inggris |
+| Bundel web JavaScript       | belum ditetapkan   | 612 KB, 134 KB setelah gzip   |
+| Bundel web CSS              | belum ditetapkan   | 12 KB                         |
 
 ## Lisensi
 

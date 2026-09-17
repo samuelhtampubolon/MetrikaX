@@ -60,6 +60,7 @@ export const churn_rate: Relation = Object.freeze({
     { lower: 0.05, upper: 0.1, label: "Waspada", guidance: "Nilai seumur hidup tertekan." },
     { lower: 0.1, upper: 1, label: "Kritis", guidance: "Akuisisi tidak akan mampu mengejar kebocoran." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B6",

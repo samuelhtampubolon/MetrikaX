@@ -60,6 +60,7 @@ export const relative_market_share: Relation = Object.freeze({
     { lower: 1, upper: 2, label: "Pemimpin tipis", guidance: "Kepemimpinan belum aman." },
     { lower: 2, upper: 1000, label: "Pemimpin kuat", guidance: "Keunggulan biaya struktural lazimnya menyertai posisi ini." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "IV",
     phase: "B0",

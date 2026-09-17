@@ -51,6 +51,7 @@ export const irr: Relation = Object.freeze({
     { lower: 0.12, upper: 0.3, label: "Baik", guidance: "Melampaui biaya modal pada sebagian besar konteks." },
     { lower: 0.3, upper: 10, label: "Sangat tinggi", guidance: "Periksa apakah arus kas terlalu optimistis." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "XI",
     phase: "B8",

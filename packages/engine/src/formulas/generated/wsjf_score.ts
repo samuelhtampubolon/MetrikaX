@@ -63,6 +63,7 @@ export const wsjf_score: Relation = Object.freeze({
   interpretationBands: Object.freeze([
 
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "X",
     phase: "B8",

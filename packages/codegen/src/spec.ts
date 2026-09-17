@@ -78,6 +78,8 @@ export interface SpecFormula {
     warn_on_extreme: boolean;
   };
   interpretation_bands: { lower: number; upper: number; label: string; guidance_id: string }[];
+  failure_modes: { source: string; description_id: string }[];
+  controls: { source: string; description_id: string }[];
   worked_example: {
     inputs: Record<string, number | number[]>;
     narrative_id: string;

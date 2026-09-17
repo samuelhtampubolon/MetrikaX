@@ -57,6 +57,7 @@ export const contribution_margin: Relation = Object.freeze({
   interpretationBands: Object.freeze([
 
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "III",
     phase: "B1",

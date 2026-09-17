@@ -51,6 +51,7 @@ export const kano_worse: Relation = Object.freeze({
     { lower: -0.6, upper: -0.3, label: "Risiko sedang", guidance: "Ketiadaan fitur terasa namun tidak menghancurkan." },
     { lower: -0.3, upper: 0, label: "Risiko rendah", guidance: "Fitur dapat ditunda tanpa akibat berat." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VIII",
     phase: "B1",

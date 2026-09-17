@@ -60,6 +60,7 @@ export const purchase_frequency: Relation = Object.freeze({
     { lower: 2.5, upper: 6, label: "Berulang kuat", guidance: "Basis pelanggan memiliki kebiasaan membeli." },
     { lower: 6, upper: 1000, label: "Sangat sering", guidance: "Lazim pada kategori konsumsi harian." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B5",

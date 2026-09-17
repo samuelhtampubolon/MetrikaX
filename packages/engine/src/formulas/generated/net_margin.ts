@@ -60,6 +60,7 @@ export const net_margin: Relation = Object.freeze({
     { lower: 0.05, upper: 0.15, label: "Sehat", guidance: "Rentang lazim usaha mapan." },
     { lower: 0.15, upper: 1, label: "Sangat sehat", guidance: "Periksa apakah investasi pertumbuhan terlalu ditahan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "III",
     phase: "B5",

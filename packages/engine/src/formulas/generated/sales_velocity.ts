@@ -79,6 +79,7 @@ export const sales_velocity: Relation = Object.freeze({
   interpretationBands: Object.freeze([
 
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B4",

@@ -60,6 +60,7 @@ export const k_factor: Relation = Object.freeze({
     { lower: 0.7, upper: 1, label: "Kuat", guidance: "Mendekati ambang pertumbuhan mandiri." },
     { lower: 1, upper: 100, label: "Eksponensial", guidance: "Jarang bertahan lama. Periksa keberlanjutan asumsi." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B7",

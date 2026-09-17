@@ -70,6 +70,7 @@ export const gdr: Relation = Object.freeze({
     { lower: 0.9, upper: 0.97, label: "Baik", guidance: "Rentang lazim segmen korporat." },
     { lower: 0.97, upper: 1, label: "Sangat baik", guidance: "Nyaris tidak ada kebocoran." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B6",

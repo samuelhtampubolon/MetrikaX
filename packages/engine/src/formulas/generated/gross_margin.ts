@@ -60,6 +60,7 @@ export const gross_margin: Relation = Object.freeze({
     { lower: 0.45, upper: 0.75, label: "Tebal", guidance: "Ruang investasi pemasaran luas." },
     { lower: 0.75, upper: 1, label: "Sangat tebal", guidance: "Lazim pada perangkat lunak dan konten digital." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "III",
     phase: "B5",

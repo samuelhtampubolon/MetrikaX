@@ -60,6 +60,7 @@ export const csat: Relation = Object.freeze({
     { lower: 75, upper: 90, label: "Baik", guidance: "Pengalaman layanan menjadi kekuatan." },
     { lower: 90, upper: 100, label: "Sangat baik", guidance: "Periksa bias responden yang hanya menjawab bila puas." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "II",
     phase: "B6",

@@ -60,6 +60,7 @@ export const ltv_cac_ratio: Relation = Object.freeze({
     { lower: 3, upper: 5, label: "Sehat", guidance: "Rentang yang lazim dianggap layak." },
     { lower: 5, upper: 1000, label: "Terlalu hemat", guidance: "Kemungkinan kurang berinvestasi pada pertumbuhan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "V",
     phase: "B8",

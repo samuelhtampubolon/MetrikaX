@@ -60,6 +60,7 @@ export const penetration_rate: Relation = Object.freeze({
     { lower: 0.1, upper: 0.35, label: "Matang awal", guidance: "Pertumbuhan mulai menuntut biaya akuisisi lebih tinggi." },
     { lower: 0.35, upper: 1, label: "Jenuh", guidance: "Prioritas bergeser ke retensi dan perluasan nilai per pelanggan." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B0",

@@ -70,6 +70,7 @@ export const retention_rate: Relation = Object.freeze({
     { lower: 0.9, upper: 0.98, label: "Baik", guidance: "Rentang sehat langganan bulanan." },
     { lower: 0.98, upper: 1, label: "Sangat baik", guidance: "Periksa apakah definisi aktif terlalu longgar." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B6",

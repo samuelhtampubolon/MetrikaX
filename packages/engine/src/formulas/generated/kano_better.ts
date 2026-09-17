@@ -51,6 +51,7 @@ export const kano_better: Relation = Object.freeze({
     { lower: 0.3, upper: 0.6, label: "Dampak sedang", guidance: "Fitur layak dipertimbangkan." },
     { lower: 0.6, upper: 1, label: "Dampak tinggi", guidance: "Fitur berpotensi menjadi pembeda utama." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VIII",
     phase: "B1",

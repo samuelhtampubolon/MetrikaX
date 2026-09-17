@@ -19,12 +19,14 @@ import { REPO_ROOT, loadSpec } from './spec.ts';
 import { emitVariables, type EmittedFile } from './emitVariables.ts';
 import { emitFormulas } from './emitFormulas.ts';
 import { emitGolden } from './emitGolden.ts';
+import { emitLocale } from './emitLocale.ts';
 import { resolveOutputs } from './outputs.ts';
 
 const GENERATED_DIRECTORIES = [
   'packages/engine/src/variables/generated',
   'packages/engine/src/formulas/generated',
   'packages/engine/test/golden',
+  'packages/app/src/locale/generated',
 ];
 
 async function main(): Promise<void> {
@@ -37,7 +39,8 @@ async function main(): Promise<void> {
   const spec = loadSpec();
   assertCounts(spec);
 
-  const firstPass: EmittedFile[] = [...emitVariables(spec), ...emitFormulas(spec)];
+  const locale = emitLocale(spec);
+  const firstPass: EmittedFile[] = [...emitVariables(spec), ...emitFormulas(spec), ...locale.files];
 
   if (command === 'generate') {
     for (const directory of GENERATED_DIRECTORIES) {
@@ -61,7 +64,7 @@ async function main(): Promise<void> {
 
   if (command === 'generate') {
     writeAll(golden.files);
-    report(spec, module.FORMULA_COUNT, golden.caseCount);
+    report(spec, module.FORMULA_COUNT, golden.caseCount, locale);
     return;
   }
 
@@ -127,7 +130,12 @@ function assertCounts(spec: ReturnType<typeof loadSpec>): void {
   }
 }
 
-function report(spec: ReturnType<typeof loadSpec>, formulaCount: number, caseCount: number): void {
+function report(
+  spec: ReturnType<typeof loadSpec>,
+  formulaCount: number,
+  caseCount: number,
+  locale: { total: number; untranslated: number },
+): void {
   const outputs = resolveOutputs(spec);
   const synthesised = [...outputs.values()].filter((output) => output.synthesised);
   const composite = [...outputs.values()].filter((output) => output.resultShape === 'composite');
@@ -140,6 +148,8 @@ function report(spec: ReturnType<typeof loadSpec>, formulaCount: number, caseCou
     `  composite results           ${composite.length} (${composite.map((entry) => entry.formulaId).join(', ')})`,
   );
   console.log(`  golden cases                ${caseCount}`);
+  console.log(`  locale keys                 ${locale.total}`);
+  console.log(`  without an English value    ${locale.untranslated} (see DEVIATIONS.md, D-13)`);
 }
 
 await main();

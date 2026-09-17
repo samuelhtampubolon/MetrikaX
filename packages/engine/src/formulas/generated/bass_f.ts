@@ -51,6 +51,7 @@ export const bass_f: Relation = Object.freeze({
     { lower: 0.5, upper: 0.84, label: "Mayoritas akhir", guidance: "Pertumbuhan mulai melambat." },
     { lower: 0.84, upper: 1, label: "Pengadopsi terakhir", guidance: "Pasar mendekati jenuh." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "IX",
     phase: "B0",

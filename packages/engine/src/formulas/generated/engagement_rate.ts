@@ -60,6 +60,7 @@ export const engagement_rate: Relation = Object.freeze({
     { lower: 0.035, upper: 0.08, label: "Baik", guidance: "Kelekatan audiens kuat." },
     { lower: 0.08, upper: 1, label: "Luar biasa", guidance: "Periksa apakah pengikut terlalu sedikit sehingga penyebut kecil." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "I",
     phase: "B3",

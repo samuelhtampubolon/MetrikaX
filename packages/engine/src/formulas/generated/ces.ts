@@ -59,6 +59,7 @@ export const ces: Relation = Object.freeze({
     { lower: 3, upper: 5, label: "Sedang", guidance: "Ada gesekan yang dapat dihilangkan." },
     { lower: 5, upper: 7, label: "Tinggi", guidance: "Upaya tinggi adalah prediktor churn terkuat di antara metrik persepsi." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "II",
     phase: "B6",

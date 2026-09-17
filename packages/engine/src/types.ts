@@ -114,6 +114,11 @@ export interface Relation {
   readonly inverseSources: Readonly<Record<VariableId, string>>;
   readonly guards: readonly Guard[];
   readonly interpretationBands: readonly InterpretationBand[];
+  /**
+   * How many failure modes the specification lists for this formula. The text itself lives in the
+   * locale catalogue under formula.<id>.pitfall.<index>, so no component holds it inline.
+   */
+  readonly pitfallCount: number;
   readonly taxonomy: FormulaTaxonomy;
   readonly workedExample: Readonly<Record<VariableId, Magnitude>>;
   readonly publishesToGraph: boolean;

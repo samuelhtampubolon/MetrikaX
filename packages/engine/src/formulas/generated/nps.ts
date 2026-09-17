@@ -70,6 +70,7 @@ export const nps: Relation = Object.freeze({
     { lower: 30, upper: 60, label: "Baik", guidance: "Basis advokasi mulai terbentuk." },
     { lower: 60, upper: 100, label: "Sangat baik", guidance: "Pertumbuhan dari rujukan seharusnya terlihat pada K faktor." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "II",
     phase: "B7",

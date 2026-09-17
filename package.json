@@ -11,11 +11,12 @@
     "codegen": "pnpm --filter @metrika/codegen run generate",
     "verify": "pnpm --filter @metrika/codegen run verify",
     "typecheck": "tsc --build --force",
-    "test": "pnpm --filter @metrika/engine run test",
+    "test": "pnpm -r --sequential run test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "content-lint": "node scripts/content-lint.mjs"
+    "content-lint": "node scripts/content-lint.mjs",
+    "build": "pnpm --filter @metrika/app run build"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

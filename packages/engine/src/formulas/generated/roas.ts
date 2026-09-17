@@ -60,6 +60,7 @@ export const roas: Relation = Object.freeze({
     { lower: 2, upper: 4, label: "Sehat", guidance: "Rentang lazim ritel daring." },
     { lower: 4, upper: 1000, label: "Sangat baik", guidance: "Periksa apakah model atribusi terlalu murah hati." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "IV",
     phase: "B8",

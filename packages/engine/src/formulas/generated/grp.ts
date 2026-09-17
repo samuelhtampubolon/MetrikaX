@@ -60,6 +60,7 @@ export const grp: Relation = Object.freeze({
     { lower: 300, upper: 800, label: "Berat", guidance: "Rentang lazim peluncuran besar." },
     { lower: 800, upper: 10000, label: "Sangat berat", guidance: "Periksa titik jenuh dan kelelahan audiens." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VI",
     phase: "B2",

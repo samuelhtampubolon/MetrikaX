@@ -57,6 +57,7 @@ export const price_elasticity: Relation = Object.freeze({
     { lower: -1, upper: 0, label: "Inelastis", guidance: "Kenaikan harga menaikkan pendapatan total." },
     { lower: 0, upper: 1000, label: "Anomali", guidance: "Tanda positif menandakan barang Giffen, barang Veblen, atau kesalahan data." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VII",
     phase: "B0",

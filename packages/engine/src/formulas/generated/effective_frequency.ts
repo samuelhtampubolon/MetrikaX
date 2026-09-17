@@ -60,6 +60,7 @@ export const effective_frequency: Relation = Object.freeze({
     { lower: 0.55, upper: 0.8, label: "Baik", guidance: "Mayoritas audiens terpapar cukup." },
     { lower: 0.8, upper: 1, label: "Sangat baik", guidance: "Periksa apakah anggaran berlebih pada audiens sempit." },
   ]),
+  pitfallCount: 3,
   taxonomy: Object.freeze({
     stratum: "VI",
     phase: "B2",
