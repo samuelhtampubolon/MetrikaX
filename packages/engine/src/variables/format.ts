@@ -36,6 +36,11 @@ export interface FormatOptions {
   readonly decimals?: number;
   /** Adds the class suffix, for example the percent sign. Defaults to true. */
   readonly withSuffix?: boolean;
+  /**
+   * Adds the currency prefix. Defaults to true. A derivation line sets it false: the substituted
+   * expression reads as arithmetic, and repeating the currency mark on every operand obscures it.
+   */
+  readonly withPrefix?: boolean;
 }
 
 /** Default decimal places by unit class, used when the variable does not state its own. */
@@ -102,6 +107,7 @@ export function formatByUnitClass(
 
   switch (unitClass) {
     case 'currency': {
+      if (options.withPrefix === false) return body;
       const prefix = CURRENCY_PREFIX[options.currency ?? 'IDR'];
       return `${prefix}${body}`;
     }

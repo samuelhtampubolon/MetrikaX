@@ -46,13 +46,14 @@ pnpm lint
 Nilai berikut diisi dengan hasil pengukuran, bukan dengan perkiraan. Baris yang belum diukur
 dinyatakan sebagai belum diukur, bukan dikosongkan.
 
-| Ukuran                      | Ambang spesifikasi | Terukur      |
-| --------------------------- | ------------------ | ------------ |
-| Jumlah rumus dalam registri | tepat 76           | 76           |
-| Jumlah variabel kanonik     | minimal 150        | 161          |
-| Kasus uji emas              | minimal 304        | 376          |
-| Ukuran pasang Windows       | di bawah 30 MB     | belum diukur |
-| Waktu mulai dingin          | di bawah 2 detik   | belum diukur |
+| Ukuran                      | Ambang spesifikasi | Terukur            |
+| --------------------------- | ------------------ | ------------------ |
+| Jumlah rumus dalam registri | tepat 76           | 76                 |
+| Jumlah variabel kanonik     | minimal 150        | 161                |
+| Kasus uji emas              | minimal 304        | 376                |
+| Ukuran pasang Windows       | di bawah 30 MB     | belum diukur       |
+| Waktu mulai dingin          | di bawah 2 detik   | belum diukur       |
+| Jangkauan propagasi AC-04   | minimal 12         | 4, belum terpenuhi |
 
 ## Lisensi
 

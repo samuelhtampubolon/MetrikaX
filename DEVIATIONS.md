@@ -155,6 +155,58 @@ nirdimensi namun secara makna adalah cacah unit, dicantumkan pada tabel pengecua
 
 ---
 
+## D-11. AC-04 tidak terpenuhi oleh korpus: jangkauan terukur adalah empat, bukan dua belas
+
+**Temuan.** AC-04 menyatakan bahwa memasukkan tayangan, klik, belanja, pengunjung dan konversi
+menurunkan sekurang kurangnya dua belas variabel lain. Angka terukur adalah empat: `ctr_out`,
+`conversion_rate`, `cpm` dan `cpc`.
+
+Penyebabnya ada pada korpus, bukan pada mesin. Hanya 18 dari 76 rumus menyatakan keterkaitan pada
+`cross_references`, dan hanya 30 dari 155 variabel masukan dipakai oleh lebih dari satu rumus.
+Rumus yang seharusnya memperpanjang rantai ini membaca variabel yang tidak disediakan kelima
+masukan tersebut: `cpa` membaca `acquisitions` sedangkan yang tersedia adalah `conversions`, dan
+`cpl` membaca `leads`. Keduanya hanya kurang satu variabel.
+
+Mesin propagasinya sendiri bekerja dua arah dan berantai: dari
+`revenue, orders, users, unique_customers, cogs, retention_rate, discount_rate, horizon_t`
+mesin menurunkan `clv` melalui `aov`, `purchase_frequency` dan `gross_margin`, tidak satu pun di
+antaranya dimasukkan pengguna.
+
+**Yang dikerjakan.** Uji propagasi menegaskan angka empat secara persis, bukan sebagai batas bawah,
+disertai komentar yang menyebut AC-04 belum terpenuhi. Bila korpus diperbaiki sehingga
+jangkauannya naik, uji itu gagal dan catatan ini wajib diperbarui. Anggaran tidak dilonggarkan dan
+angka terukur tidak disembunyikan.
+
+**Yang perlu diputuskan.** Dua jalan keluar, dan keduanya milik pemilik proyek:
+
+1. Menyatakan kesamaan identitas antar variabel, misalnya bahwa `conversions` dan `acquisitions`
+   adalah besaran yang sama pada konteks kampanye tertentu. Ini keputusan pemodelan, bukan
+   keputusan teknis, karena sebuah konversi tidak selalu berarti akuisisi pelanggan baru.
+2. Menambahkan rumus penghubung ke dalam spesifikasi sehingga rantainya menyambung.
+
+Sebelum salah satu dipilih, AC-04 tetap dicatat sebagai belum terpenuhi.
+
+---
+
+## D-12. Contoh render pada modul penjelasan tidak konsisten dengan dirinya sendiri
+
+**Temuan.** Definisi selesainya fase P07 berbunyi: contoh render pada `engine.explain_module`
+direproduksi persis. Contoh itu tidak dapat direproduksi persis karena tidak konsisten secara
+internal. Baris substitusinya menuliskan frekuensi pembelian sebesar 2,40, sedangkan baris
+provenans di bawahnya pada contoh yang sama menurunkan 1.480 dibagi 620 sama dengan 2,3871 untuk
+variabel yang sama. Kedua angka tidak dapat benar bersamaan.
+
+**Yang dikerjakan.** Bentuk barisnya direproduksi persis: tiga baris untuk setiap langkah, penanda
+`<-` pada baris provenans, tanda silang untuk perkalian, penanda asal dan nomor generasi dalam
+kurung siku, serta pemformatan angka sesuai kelas satuan dan ragam bahasa. Angka yang dipakai pada
+uji adalah angka yang saling menutup. Mata uang ditampilkan tanpa awalan di dalam baris turunan,
+sebagaimana pada contoh spesifikasi.
+
+**Yang perlu diputuskan.** Mana yang benar pada contoh tersebut, 2,40 atau 2,3871, agar contoh pada
+spesifikasi dapat diperbaiki.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada
