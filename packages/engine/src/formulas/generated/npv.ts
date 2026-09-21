@@ -70,5 +70,13 @@ export const npv: Relation = Object.freeze({
     "discount_rate": 0.12,
     "investment_0": 480000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 110,
+    xpRepeat: 22,
+    masteryThreshold: 3,
+    badgeId: "badge_npv",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

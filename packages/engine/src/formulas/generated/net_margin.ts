@@ -74,5 +74,13 @@ export const net_margin: Relation = Object.freeze({
     "net_profit": 16650000,
     "revenue": 185000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 20,
+    xpRepeat: 4,
+    masteryThreshold: 4,
+    badgeId: "badge_net_margin",
+    unlocksAfterModule: 2,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

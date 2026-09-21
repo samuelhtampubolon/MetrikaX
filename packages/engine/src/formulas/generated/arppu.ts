@@ -71,5 +71,13 @@ export const arppu: Relation = Object.freeze({
     "revenue": 185000000,
     "paying_users": 7300,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_arppu",
+    unlocksAfterModule: 1,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

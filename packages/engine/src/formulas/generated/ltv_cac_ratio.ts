@@ -74,5 +74,13 @@ export const ltv_cac_ratio: Relation = Object.freeze({
     "clv": 2775000,
     "cac": 371681,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 45,
+    xpRepeat: 9,
+    masteryThreshold: 3,
+    badgeId: "badge_ltv_cac_ratio",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

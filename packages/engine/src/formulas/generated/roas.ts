@@ -74,5 +74,13 @@ export const roas: Relation = Object.freeze({
     "ad_revenue": 96000000,
     "ad_cost": 24000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 30,
+    xpRepeat: 6,
+    masteryThreshold: 3,
+    badgeId: "badge_roas",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

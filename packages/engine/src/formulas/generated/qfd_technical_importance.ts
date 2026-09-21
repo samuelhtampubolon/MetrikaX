@@ -62,5 +62,13 @@ export const qfd_technical_importance: Relation = Object.freeze({
     "customer_importance": [9,7,5,8],
     "relationship_matrix": [[9,3,0],[3,9,1],[0,3,9],[9,0,3]],
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 70,
+    xpRepeat: 14,
+    masteryThreshold: 3,
+    badgeId: "badge_qfd_technical_importance",
+    unlocksAfterModule: 7,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

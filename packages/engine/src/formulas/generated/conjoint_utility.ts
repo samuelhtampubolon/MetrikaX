@@ -62,5 +62,13 @@ export const conjoint_utility: Relation = Object.freeze({
     "beta_vector": [0.42,-0.31,0.18,0.55],
     "x_vector": [1,1,0,1],
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 70,
+    xpRepeat: 14,
+    masteryThreshold: 3,
+    badgeId: "badge_conjoint_utility",
+    unlocksAfterModule: 7,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

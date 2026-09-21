@@ -65,5 +65,13 @@ export const irr: Relation = Object.freeze({
     "cash_flows": [120000000,180000000,240000000,260000000,280000000],
     "investment_0": 480000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 110,
+    xpRepeat: 22,
+    masteryThreshold: 3,
+    badgeId: "badge_irr",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

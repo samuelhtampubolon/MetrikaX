@@ -85,7 +85,14 @@ export interface SpecFormula {
     narrative_id: string;
     must_be_verified_by_test: boolean;
   };
-  gamification: Record<string, unknown>;
+  gamification: {
+    xp_award_first_solve: number;
+    xp_award_repeat: number;
+    mastery_threshold_correct_in_row: number;
+    badge_id: string;
+    unlocks_after_module: number;
+    challenge_types: string[];
+  };
   ui: Record<string, unknown>;
   cross_references: Record<string, string[]>;
 }

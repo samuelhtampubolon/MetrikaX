@@ -74,5 +74,13 @@ export const gross_margin: Relation = Object.freeze({
     "revenue": 185000000,
     "cogs": 74000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 20,
+    xpRepeat: 4,
+    masteryThreshold: 4,
+    badgeId: "badge_gross_margin",
+    unlocksAfterModule: 2,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

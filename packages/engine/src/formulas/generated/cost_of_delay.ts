@@ -71,5 +71,13 @@ export const cost_of_delay: Relation = Object.freeze({
     "delta_value": 240000000,
     "delta_time": 3,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 75,
+    xpRepeat: 15,
+    masteryThreshold: 3,
+    badgeId: "badge_cost_of_delay",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

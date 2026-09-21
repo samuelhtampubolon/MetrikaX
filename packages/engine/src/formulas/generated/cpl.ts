@@ -71,5 +71,13 @@ export const cpl: Relation = Object.freeze({
     "spend": 24000000,
     "leads": 960,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_cpl",
+    unlocksAfterModule: 1,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

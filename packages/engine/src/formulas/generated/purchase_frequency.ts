@@ -74,5 +74,13 @@ export const purchase_frequency: Relation = Object.freeze({
     "orders": 1480,
     "unique_customers": 620,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_purchase_frequency",
+    unlocksAfterModule: 1,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

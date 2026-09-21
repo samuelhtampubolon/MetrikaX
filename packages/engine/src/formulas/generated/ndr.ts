@@ -90,5 +90,13 @@ export const ndr: Relation = Object.freeze({
     "contraction_mrr": 2600000,
     "churned_mrr": 4200000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 45,
+    xpRepeat: 9,
+    masteryThreshold: 3,
+    badgeId: "badge_ndr",
+    unlocksAfterModule: 3,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

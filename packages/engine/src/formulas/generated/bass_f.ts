@@ -66,5 +66,13 @@ export const bass_f: Relation = Object.freeze({
     "bass_q": 0.38,
     "time_t": 6,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 90,
+    xpRepeat: 18,
+    masteryThreshold: 3,
+    badgeId: "badge_bass_f",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

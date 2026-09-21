@@ -67,5 +67,13 @@ export const kano_better: Relation = Object.freeze({
     "kano_m": 112,
     "kano_i": 64,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 70,
+    xpRepeat: 14,
+    masteryThreshold: 3,
+    badgeId: "badge_kano_better",
+    unlocksAfterModule: 7,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

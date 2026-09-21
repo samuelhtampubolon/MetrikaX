@@ -74,5 +74,13 @@ export const grp: Relation = Object.freeze({
     "reach_pct": 62,
     "frequency": 4.8,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 40,
+    xpRepeat: 8,
+    masteryThreshold: 3,
+    badgeId: "badge_grp",
+    unlocksAfterModule: 6,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

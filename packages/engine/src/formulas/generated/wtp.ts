@@ -71,5 +71,13 @@ export const wtp: Relation = Object.freeze({
     "delta_u": 0.55,
     "beta_price": -0.000012,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 70,
+    xpRepeat: 14,
+    masteryThreshold: 3,
+    badgeId: "badge_wtp",
+    unlocksAfterModule: 7,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

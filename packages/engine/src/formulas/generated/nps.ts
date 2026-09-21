@@ -85,5 +85,13 @@ export const nps: Relation = Object.freeze({
     "detractors": 74,
     "total_respondents": 420,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 15,
+    xpRepeat: 3,
+    masteryThreshold: 4,
+    badgeId: "badge_nps",
+    unlocksAfterModule: 4,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

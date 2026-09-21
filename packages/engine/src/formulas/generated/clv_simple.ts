@@ -82,5 +82,13 @@ export const clv_simple: Relation = Object.freeze({
     "gross_margin": 0.6,
     "churn_rate": 0.04,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 45,
+    xpRepeat: 9,
+    masteryThreshold: 3,
+    badgeId: "badge_clv_simple",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

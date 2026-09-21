@@ -74,5 +74,13 @@ export const market_share: Relation = Object.freeze({
     "company_sales": 4200000000,
     "market_sales": 38000000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_market_share",
+    unlocksAfterModule: 6,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

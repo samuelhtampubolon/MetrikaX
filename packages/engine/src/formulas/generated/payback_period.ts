@@ -85,5 +85,13 @@ export const payback_period: Relation = Object.freeze({
     "arpu": 185000,
     "gross_margin": 0.6,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 30,
+    xpRepeat: 6,
+    masteryThreshold: 3,
+    badgeId: "badge_payback_period",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

@@ -74,5 +74,13 @@ export const conversion_rate: Relation = Object.freeze({
     "conversions": 420,
     "visitors": 14000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_conversion_rate",
+    unlocksAfterModule: 1,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

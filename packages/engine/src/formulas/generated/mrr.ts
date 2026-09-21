@@ -71,5 +71,13 @@ export const mrr: Relation = Object.freeze({
     "arpu": 185000,
     "subscribers": 940,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 20,
+    xpRepeat: 4,
+    masteryThreshold: 4,
+    badgeId: "badge_mrr",
+    unlocksAfterModule: 3,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

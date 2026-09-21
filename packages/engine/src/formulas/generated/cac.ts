@@ -71,5 +71,13 @@ export const cac: Relation = Object.freeze({
     "total_acquisition_cost": 42000000,
     "new_customers": 113,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 30,
+    xpRepeat: 6,
+    masteryThreshold: 3,
+    badgeId: "badge_cac",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

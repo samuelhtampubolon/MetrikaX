@@ -98,5 +98,13 @@ export const clv: Relation = Object.freeze({
     "discount_rate": 0.1,
     "horizon_t": 5,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 45,
+    xpRepeat: 9,
+    masteryThreshold: 3,
+    badgeId: "badge_clv",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

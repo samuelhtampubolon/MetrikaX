@@ -71,5 +71,13 @@ export const evpi: Relation = Object.freeze({
     "ev_perfect": 412000000,
     "ev_base": 289000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 110,
+    xpRepeat: 22,
+    masteryThreshold: 3,
+    badgeId: "badge_evpi",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

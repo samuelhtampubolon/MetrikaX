@@ -73,5 +73,13 @@ export const ces: Relation = Object.freeze({
     "effort_sum": 1218,
     "total_responses": 420,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 15,
+    xpRepeat: 3,
+    masteryThreshold: 4,
+    badgeId: "badge_ces",
+    unlocksAfterModule: 4,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

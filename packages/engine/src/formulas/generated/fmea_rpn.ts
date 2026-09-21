@@ -85,5 +85,13 @@ export const fmea_rpn: Relation = Object.freeze({
     "occurrence": 4,
     "detection": 6,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 75,
+    xpRepeat: 15,
+    masteryThreshold: 3,
+    badgeId: "badge_fmea_rpn",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

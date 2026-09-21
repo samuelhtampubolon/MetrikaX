@@ -86,9 +86,10 @@ Tiga sifat menentukan rancangannya:
 | Analisis sensitivitas | Pergeseran satu per satu 10 persen untuk kelas struktur C4, C5, C6, C7, C9 |
 | Grafik                | Garis, langkah, batang, tornado, kurva kumulatif, sebar, hitam putih       |
 | Pembangkit soal       | Tujuh jenis, tiap soal dapat dibangkitkan ulang dari benihnya              |
+| Penjadwal ulangan     | Empat selang tetap: 1, 4, 12, dan 35 hari                                  |
 | Bahasa antarmuka      | Indonesia dan Inggris, 1199 kunci teks                                     |
 | Penyimpanan           | IndexedDB pada web, SQLite pada desktop, memori bila keduanya ditolak      |
-| Uji                   | 693 uji satuan dan 16 uji ujung ke ujung pada peramban sungguhan           |
+| Uji                   | 716 uji satuan dan 16 uji ujung ke ujung pada peramban sungguhan           |
 
 Rancangan tampilannya mengacu pada G\*Power 3.1: bevel Win32, kerapatan tinggi, tanpa animasi,
 tanpa warna aksen. Yang dicari adalah tampilan sebuah instrumen, bukan sebuah produk.

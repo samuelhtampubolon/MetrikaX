@@ -67,5 +67,13 @@ export const income_elasticity: Relation = Object.freeze({
     "i1": 4800000,
     "i2": 5600000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 55,
+    xpRepeat: 11,
+    masteryThreshold: 3,
+    badgeId: "badge_income_elasticity",
+    unlocksAfterModule: 6,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

@@ -71,5 +71,13 @@ export const gabor_granger: Relation = Object.freeze({
     "buyers_at_p": 168,
     "total_respondents": 420,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 70,
+    xpRepeat: 14,
+    masteryThreshold: 3,
+    badgeId: "badge_gabor_granger",
+    unlocksAfterModule: 7,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

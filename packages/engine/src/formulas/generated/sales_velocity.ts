@@ -95,5 +95,13 @@ export const sales_velocity: Relation = Object.freeze({
     "win_rate": 0.22,
     "cycle_length": 45,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 45,
+    xpRepeat: 9,
+    masteryThreshold: 3,
+    badgeId: "badge_sales_velocity",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

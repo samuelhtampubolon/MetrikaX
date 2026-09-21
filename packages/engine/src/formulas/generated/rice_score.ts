@@ -79,5 +79,13 @@ export const rice_score: Relation = Object.freeze({
     "rice_confidence": 80,
     "rice_effort": 3,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 75,
+    xpRepeat: 15,
+    masteryThreshold: 3,
+    badgeId: "badge_rice_score",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

@@ -100,5 +100,13 @@ export const rfm_score: Relation = Object.freeze({
     "rfm_wf": 0.3,
     "rfm_wm": 0.3,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 45,
+    xpRepeat: 9,
+    masteryThreshold: 3,
+    badgeId: "badge_rfm_score",
+    unlocksAfterModule: 4,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

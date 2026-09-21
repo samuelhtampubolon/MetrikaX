@@ -74,5 +74,13 @@ export const mrr_churn_rate: Relation = Object.freeze({
     "churned_mrr": 4200000,
     "total_mrr": 173900000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 20,
+    xpRepeat: 4,
+    masteryThreshold: 4,
+    badgeId: "badge_mrr_churn_rate",
+    unlocksAfterModule: 3,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

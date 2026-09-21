@@ -74,5 +74,13 @@ export const effective_frequency: Relation = Object.freeze({
     "reach_at_threshold": 782000,
     "total_reach": 1320000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 40,
+    xpRepeat: 8,
+    masteryThreshold: 3,
+    badgeId: "badge_effective_frequency",
+    unlocksAfterModule: 6,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

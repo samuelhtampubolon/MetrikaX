@@ -74,5 +74,13 @@ export const cart_abandonment_rate: Relation = Object.freeze({
     "carts_created": 9500,
     "carts_purchased": 1900,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_cart_abandonment_rate",
+    unlocksAfterModule: 1,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

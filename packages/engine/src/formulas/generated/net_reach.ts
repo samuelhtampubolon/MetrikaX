@@ -71,5 +71,13 @@ export const net_reach: Relation = Object.freeze({
     "gross_reach": 1840000,
     "duplication": 520000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 40,
+    xpRepeat: 8,
+    masteryThreshold: 3,
+    badgeId: "badge_net_reach",
+    unlocksAfterModule: 6,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

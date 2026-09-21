@@ -173,6 +173,14 @@ ${bands.join('\n')}
   workedExample: Object.freeze({
 ${workedExample.join('\n')}
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: ${formula.gamification.xp_award_first_solve},
+    xpRepeat: ${formula.gamification.xp_award_repeat},
+    masteryThreshold: ${formula.gamification.mastery_threshold_correct_in_row},
+    badgeId: ${quote(formula.gamification.badge_id)},
+    unlocksAfterModule: ${formula.gamification.unlocks_after_module},
+    challengeTypes: Object.freeze([${formula.gamification.challenge_types.map(quote).join(', ')}]),
+  }),
   publishesToGraph: ${formula.output.publishes_to_graph},
 });
 `;

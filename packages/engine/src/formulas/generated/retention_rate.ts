@@ -85,5 +85,13 @@ export const retention_rate: Relation = Object.freeze({
     "new_customers": 113,
     "start_customers": 940,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 10,
+    xpRepeat: 2,
+    masteryThreshold: 4,
+    badgeId: "badge_retention_rate",
+    unlocksAfterModule: 3,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: true,
 });

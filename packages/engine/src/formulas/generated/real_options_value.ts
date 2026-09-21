@@ -68,5 +68,13 @@ export const real_options_value: Relation = Object.freeze({
     "opt_t": 2,
     "opt_sigma": 0.45,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 110,
+    xpRepeat: 22,
+    masteryThreshold: 3,
+    badgeId: "badge_real_options_value",
+    unlocksAfterModule: 8,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

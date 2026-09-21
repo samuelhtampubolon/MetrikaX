@@ -62,5 +62,13 @@ export const weighted_screening: Relation = Object.freeze({
     "w_vector": [0.35,0.25,0.25,0.15],
     "r_vector": [8,6,9,4],
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 75,
+    xpRepeat: 15,
+    masteryThreshold: 3,
+    badgeId: "badge_weighted_screening",
+    unlocksAfterModule: 7,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

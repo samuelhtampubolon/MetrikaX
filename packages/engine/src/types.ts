@@ -121,7 +121,20 @@ export interface Relation {
   readonly pitfallCount: number;
   readonly taxonomy: FormulaTaxonomy;
   readonly workedExample: Readonly<Record<VariableId, Magnitude>>;
+  /** What this formula is worth, and what mastering it takes, from gamification. */
+  readonly gamification: FormulaGamification;
   readonly publishesToGraph: boolean;
+}
+
+export interface FormulaGamification {
+  readonly xpFirstSolve: number;
+  readonly xpRepeat: number;
+  /** Consecutive correct solves needed before this formula counts as mastered. */
+  readonly masteryThreshold: number;
+  readonly badgeId: string;
+  readonly unlocksAfterModule: number;
+  /** The challenge types the specification lists for this formula. */
+  readonly challengeTypes: readonly string[];
 }
 
 export interface InterpretationBand {

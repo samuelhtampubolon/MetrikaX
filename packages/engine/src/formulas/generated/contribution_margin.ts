@@ -71,5 +71,13 @@ export const contribution_margin: Relation = Object.freeze({
     "price": 125000,
     "variable_cost": 74000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 20,
+    xpRepeat: 4,
+    masteryThreshold: 4,
+    badgeId: "badge_contribution_margin",
+    unlocksAfterModule: 2,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

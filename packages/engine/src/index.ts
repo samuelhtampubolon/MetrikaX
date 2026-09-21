@@ -110,6 +110,22 @@ export {
 } from './practice/items.ts';
 
 export { makeRng, type Rng } from './practice/rng.ts';
+
+export {
+  applyAttempt,
+  dueFor,
+  experienceFor,
+  initialRecord,
+  introduce,
+  nextTypeFor,
+  stateAt,
+  DISTINCT_TYPES_FOR_MASTERY,
+  INTERVALS_DAYS,
+  type AttemptInput,
+  type AttemptOutcome,
+  type MasteryState,
+  type ProgressRecord,
+} from './practice/schedule.ts';
 export { sampleEnv, roundLike, type Sample, type SampleOptions } from './practice/sample.ts';
 
 export * from './helpers/index.ts';

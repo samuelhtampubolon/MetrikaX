@@ -71,5 +71,13 @@ export const som: Relation = Object.freeze({
     "sam": 98154000000,
     "capture_percent": 8,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 55,
+    xpRepeat: 11,
+    masteryThreshold: 3,
+    badgeId: "badge_som",
+    unlocksAfterModule: 6,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });

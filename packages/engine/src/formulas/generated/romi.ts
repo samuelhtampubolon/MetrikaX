@@ -74,5 +74,13 @@ export const romi: Relation = Object.freeze({
     "incremental_revenue": 68000000,
     "marketing_cost": 42000000,
   }),
+  gamification: Object.freeze({
+    xpFirstSolve: 30,
+    xpRepeat: 6,
+    masteryThreshold: 3,
+    badgeId: "badge_romi",
+    unlocksAfterModule: 5,
+    challengeTypes: Object.freeze(["forward_compute", "inverse_solve", "spot_the_error", "interpret_the_band", "choose_the_metric"]),
+  }),
   publishesToGraph: false,
 });
