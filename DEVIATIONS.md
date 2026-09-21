@@ -313,9 +313,15 @@ kebijakan keamanan ditulis sesuai spesifikasi. Sisanya diperiksa pada pelaksana 
 alur kerja rilis membangun untuk tiga sistem, dan dapat dijalankan tanpa menandai versi sehingga
 hasilnya dapat diperiksa lebih dahulu.
 
-**Yang belum diukur.** Ukuran pasang dan waktu mulai dingin, yaitu AC-18. Keduanya memerlukan mesin
-Windows yang sebenarnya. Alur kerja rilis mencetak ukuran setiap artefak pada ringkasan
-pekerjaannya, sehingga angka itu tersedia tanpa perlu mengunduh apa pun.
+**Pemutakhiran: berkas exe kini terbangun.** Alur kerja rilis berhasil pada ketiga pelaksana.
+Berkas portabel Windows berukuran 4.695.552 bita, yaitu 4,48 MB, jauh di bawah anggaran 30 MB pada
+AC-18. Langkah pengukuran kini juga menggagalkan pembangunan bila artefak Windows terbesar
+melampaui anggaran itu, sehingga angkanya dijaga, bukan sekadar dicatat.
+
+**Yang masih belum diukur.** Waktu mulai dingin, dan perilaku berkas exe itu saat dijalankan.
+Keduanya memerlukan mesin Windows yang sebenarnya. Berkas exe terbangun, terunggah, dan berukuran
+wajar bagi sebuah binari Tauri; bahwa ia membuka jendelanya dengan benar belum disaksikan siapa
+pun, dan hal itu dinyatakan di sini alih alih disiratkan.
 
 ---
 

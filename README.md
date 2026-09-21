@@ -85,17 +85,21 @@ Ringkasan langkah pengamanan:
 Nilai berikut diisi dengan hasil pengukuran, bukan dengan perkiraan. Baris yang belum diukur
 dinyatakan sebagai belum diukur, bukan dikosongkan.
 
-| Ukuran                      | Ambang spesifikasi | Terukur                       |
-| --------------------------- | ------------------ | ----------------------------- |
-| Jumlah rumus dalam registri | tepat 76           | 76                            |
-| Jumlah variabel kanonik     | minimal 150        | 161                           |
-| Kasus uji emas              | minimal 304        | 376                           |
-| Ukuran pasang Windows       | di bawah 30 MB     | belum diukur                  |
-| Waktu mulai dingin          | di bawah 2 detik   | belum diukur                  |
-| Jangkauan propagasi AC-04   | minimal 12         | 4, belum terpenuhi            |
-| Kunci katalog teks          | dua bahasa penuh   | 1199, 801 tanpa nilai Inggris |
-| Bundel web JavaScript       | belum ditetapkan   | 612 KB, 134 KB setelah gzip   |
-| Bundel web CSS              | belum ditetapkan   | 12 KB                         |
+| Ukuran                          | Ambang spesifikasi | Terukur                           |
+| ------------------------------- | ------------------ | --------------------------------- |
+| Jumlah rumus dalam registri     | tepat 76           | 76                                |
+| Jumlah variabel kanonik         | minimal 150        | 161                               |
+| Kasus uji emas                  | minimal 304        | 376                               |
+| Jangkauan propagasi AC-04       | minimal 12         | 4, belum terpenuhi                |
+| Kunci katalog teks              | dua bahasa penuh   | 1199, 801 tanpa nilai Inggris     |
+| Permintaan ke asal lain         | nol                | nol, diukur di Chromium           |
+| Nasihat keamanan kebergantungan | nol                | nol                               |
+| Bundel web JavaScript           | belum ditetapkan   | 652 KB, 146 KB setelah gzip       |
+| Bundel web CSS                  | belum ditetapkan   | 12 KB                             |
+| Berkas tunggal luring           | belum ditetapkan   | 668 KB                            |
+| Berkas portabel Windows         | di bawah 30 MB     | 4,48 MB                           |
+| Bangunan desktop tiga sistem    | berhasil           | berhasil, ketiganya               |
+| Waktu mulai dingin              | di bawah 2 detik   | belum diukur, perlu mesin Windows |
 
 ## Penerbitan web
 

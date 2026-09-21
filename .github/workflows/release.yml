@@ -143,11 +143,31 @@ jobs:
           path: portable/MetriKa-portable-windows-x64.exe
           if-no-files-found: error
 
+      # AC-18 is a size budget, so the sizes are printed rather than left to be guessed at. They
+      # go to the log as well as the job summary: a number only a human can see by opening a
+      # summary page is a number nobody checks.
       - name: Record the measured size
         shell: bash
         run: |
-          echo "### Measured artefact sizes on ${{ matrix.platform }}" >> "$GITHUB_STEP_SUMMARY"
-          find packages/desktop/src-tauri/target/release/bundle -type f \
-            \( -name '*.exe' -o -name '*.AppImage' -o -name '*.dmg' -o -name '*.deb' \) \
-            -printf '%s\t%p\n' 2>/dev/null | sort -rn | head -10 \
-            | awk -F'\t' '{printf "- %.1f MB  %s\n", $1/1048576, $2}' >> "$GITHUB_STEP_SUMMARY" || true
+          set -uo pipefail
+          report() {
+            echo "$1" | tee -a "$GITHUB_STEP_SUMMARY"
+          }
+          report "### Measured artefact sizes on ${{ matrix.platform }}"
+
+          root=packages/desktop/src-tauri/target/release
+          # wc -c rather than find -printf: the latter is GNU findutils and is not on macOS.
+          find "$root" -type f \
+            \( -name '*.exe' -o -name '*.AppImage' -o -name '*.dmg' -o -name '*.deb' -o -name '*.msi' \) \
+            2>/dev/null | while read -r file; do
+              bytes=$(wc -c < "$file" | tr -d ' ')
+              report "$(awk -v b="$bytes" -v f="$file" 'BEGIN { printf "- %.2f MB  %s", b/1048576, f }')"
+            done
+
+          budget=31457280
+          biggest=$(find "$root" -type f \( -name '*.exe' -o -name '*.msi' \) 2>/dev/null \
+            | while read -r file; do wc -c < "$file"; done | sort -rn | head -1)
+          if [ -n "${biggest:-}" ] && [ "$biggest" -gt "$budget" ]; then
+            report "The largest Windows artefact is over the stated 30 MB budget."
+            exit 1
+          fi
