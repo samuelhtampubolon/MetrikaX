@@ -87,4 +87,29 @@ export {
   type FactorSwing,
 } from './sensitivity/oat.ts';
 
+export {
+  generateItem,
+  applicableTypes,
+  grade,
+  keywordsFor,
+  verifyNumeric,
+  derivationDepth,
+  XP_MULTIPLIERS,
+  UNLOCKED_AT,
+  type Item,
+  type ItemType,
+  type NumericItem,
+  type ChoiceItem,
+  type AuditItem,
+  type AuditRow,
+  type ChoiceOption,
+  type OptionRef,
+  type GivenValue,
+  type Response,
+  type Grade,
+} from './practice/items.ts';
+
+export { makeRng, type Rng } from './practice/rng.ts';
+export { sampleEnv, roundLike, type Sample, type SampleOptions } from './practice/sample.ts';
+
 export * from './helpers/index.ts';

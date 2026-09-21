@@ -506,6 +506,43 @@ drive, dan keputusan itu ada pada pemilik proyek.
 
 ---
 
+## D-26. Jangkauan pembangkit soal, dan rubrik kata kunci
+
+**Temuan pertama.** Definisi selesai fase P17 menyatakan setiap dari tujuh jenis soal menghasilkan
+satu soal yang sahih untuk setiap rumus yang berlaku. Jangkauannya diukur, dan hasilnya tidak rata:
+
+| Jenis soal            | Rumus yang menghasilkan soal | Sebab bagi sisanya                                      |
+| --------------------- | ---------------------------- | ------------------------------------------------------- |
+| `forward_compute`     | 73 dari 76                   | tiga rumus menghasilkan struktur, bukan satu angka      |
+| `inverse_solve`       | 64                           | sisanya tidak memiliki penyelesaian balik yang pulih    |
+| `spot_the_error`      | 73                           | sama dengan baris pertama                               |
+| `interpret_the_band`  | 42                           | hanya sebagian rumus memiliki pita penafsiran           |
+| `choose_the_metric`   | 60                           | perlu tiga rumus sekelas dengan ranah keputusan berbeda |
+| `chain_derivation`    | 6                            | korpus hanya menyatakan 18 tempat perantaian            |
+| `audit_the_dashboard` | 73                           | sama dengan baris pertama                               |
+
+Baris `chain_derivation` adalah yang paling jauh dari harapan spesifikasi. Spesifikasi meminta
+sasaran yang berjarak tiga relasi atau lebih. Pada korpus ini hanya ada 18 tempat sebuah rumus
+membaca keluaran rumus lain, dan kedalaman terdalam yang dapat dicapai adalah tiga, melalui satu
+jalur saja. Sebabnya sama dengan AC-04, dan tercatat pada D-11: korpusnya, bukan mesinnya. Bila
+D-11 diselesaikan, angka enam itu naik dengan sendirinya, dan ujinya akan menuntut catatan ini
+diperbarui.
+
+**Temuan kedua.** Jenis `choose_the_metric` meminta jawaban bebas yang dinilai dengan rubrik kata
+kunci. Spesifikasi tidak menyebutkan kata kunci mana pun, dan menyusun rubrik sendiri berarti
+mengarang isi pelajaran.
+
+**Yang dikerjakan.** Kata kuncinya diambil dari bahan yang sudah ada pada spesifikasi: nama rumus
+itu sendiri dan label setiap variabel yang dibacanya, dalam kedua bahasa. Penilaiannya: pilihan
+yang keliru bernilai nol; pilihan yang benar tanpa satu pun kata kunci bernilai 0,6; pilihan yang
+benar disertai alasan yang menyebut salah satu kata kunci bernilai penuh. Pembagian 0,6 itu adalah
+keputusan pelaksana, bukan angka dari spesifikasi.
+
+**Yang perlu diputuskan.** Apakah pemilik proyek ingin menyusun rubrik kata kunci sendiri untuk
+enam puluh rumus tersebut, dan apakah pembagian nilai di atas sudah sesuai.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada
