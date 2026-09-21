@@ -147,6 +147,38 @@
   max-height: 260px;
 }
 
+/* SCR-SENSITIVITY: inputs on the left, the tornado plot and its table on the right. */
+.mk-sens {
+  display: grid;
+  grid-template-columns: 320px minmax(420px, 1fr);
+  gap: var(--group-gap);
+  height: 100%;
+  min-height: 0;
+}
+
+.mk-sens__left,
+.mk-sens__right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--group-gap);
+  min-height: 0;
+  overflow: auto;
+}
+
+.mk-sens__note {
+  font-size: var(--size-small);
+  margin: var(--control-gap) 0 0;
+}
+
+.mk-sens__sentence {
+  margin: 0;
+  max-width: 62ch;
+}
+
+.mk-sens__table {
+  max-height: 320px;
+}
+
 /* The tab strip sits above whichever screen is showing. */
 .mk-shell__body {
   display: flex;
@@ -174,6 +206,7 @@
   .mk-statusbar,
   .mk-calc__left,
   .mk-calc__buttons,
+  .mk-sens__left,
   .mk-modal__scrim {
     display: none !important;
   }
@@ -192,8 +225,14 @@
   }
 
   .mk-calc__centre,
-  .mk-calc__right {
+  .mk-calc__right,
+  .mk-sens__right {
     overflow: visible;
+  }
+
+  /* The plot prints beside its table, both in black on white, which is how they are drawn. */
+  .mk-sens {
+    display: block;
   }
 
   .mk-raised,

@@ -22,8 +22,18 @@ import { useWorkspace } from './state/workspace.ts';
 import { exportWorkspaceFile } from './storage/download.ts';
 import { Calculator } from './screens/Calculator.tsx';
 import { Workbench } from './screens/Workbench.tsx';
+import { Sensitivity } from './screens/Sensitivity.tsx';
 import { useSolver } from './state/solver.ts';
+import { useSensitivity } from './state/sensitivity.ts';
 import { FORMULA_COUNT } from '@metrika/engine';
+
+type Screen = 'calculator' | 'workbench' | 'sensitivity';
+
+const SCREENS: readonly Screen[] = ['calculator', 'workbench', 'sensitivity'];
+
+function isScreen(id: string): id is Screen {
+  return (SCREENS as readonly string[]).includes(id);
+}
 
 const SPEC_VERSION = '1.0.1';
 const APP_VERSION = '0.1.0';
@@ -50,9 +60,10 @@ function Shell(): ReactNode {
   const workspace = useWorkspace();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [screen, setScreen] = useState<'calculator' | 'workbench'>('calculator');
+  const [screen, setScreen] = useState<Screen>('calculator');
   const importRef = useRef<HTMLInputElement>(null);
   const solver = useSolver();
+  const sensitivityState = useSensitivity();
 
   // Open storage once, on the first render. Nothing blocks on it: the calculator works whether or
   // not anything can be kept, and the status bar reports which of the two it turned out to be.
@@ -88,6 +99,7 @@ function Shell(): ReactNode {
       items: [
         { id: 'calculate', label: t('menu.analysis.calculate'), shortcut: 'Enter' },
         { id: 'derivation', label: t('menu.analysis.derivation'), shortcut: 'F9' },
+        { id: 'sensitivity', label: t('menu.analysis.sensitivity') },
       ],
     },
     {
@@ -106,6 +118,7 @@ function Shell(): ReactNode {
       items: [
         { id: 'calculator', label: t('menu.window.calculator') },
         { id: 'workbench', label: t('menu.window.workbench') },
+        { id: 'sensitivity', label: t('menu.window.sensitivity') },
       ],
     },
     {
@@ -124,6 +137,13 @@ function Shell(): ReactNode {
     }
     if (menuId === 'analysis' && itemId === 'derivation') {
       state.toggleDerivation();
+      return;
+    }
+    if (menuId === 'analysis' && itemId === 'sensitivity') {
+      // The Analysis menu opens the screen on whichever formula it already holds rather than
+      // carrying the calculator's selection across: the two screens offer different formula sets,
+      // and silently switching the selection would discard what was typed on this one.
+      setScreen('sensitivity');
       return;
     }
     if (menuId === 'edit' && itemId === 'clear_inputs') {
@@ -158,13 +178,20 @@ function Shell(): ReactNode {
       return;
     }
     if (menuId === 'window') {
-      setScreen(itemId === 'workbench' ? 'workbench' : 'calculator');
+      setScreen(isScreen(itemId) ? itemId : 'calculator');
       return;
     }
     if (menuId === 'help' && itemId === 'about') setAboutOpen(true);
   };
 
   const counter = (): string | null => {
+    if (screen === 'sensitivity') {
+      // The status bar says how many factors were ranked, so a person who typed six inputs and
+      // sees four bars can tell at once that two of them were held fixed rather than lost.
+      const outcome = sensitivityState.outcome;
+      if (outcome.kind !== 'ranked') return null;
+      return `${outcome.result.factors.length} ${t('sensitivity.counter.factors')}`;
+    }
     if (screen !== 'workbench') return null;
     const entered = Object.keys(solver.entered).length;
     const derived = solver.result === null ? 0 : solver.result.reachable;
@@ -192,13 +219,22 @@ function Shell(): ReactNode {
         <TabStrip
           label={t('menu.window')}
           activeId={screen}
-          onSelect={(id) => setScreen(id as 'calculator' | 'workbench')}
+          onSelect={(id) => setScreen(isScreen(id) ? id : 'calculator')}
           tabs={[
             { id: 'calculator', label: t('menu.window.calculator') },
             { id: 'workbench', label: t('menu.window.workbench') },
+            { id: 'sensitivity', label: t('menu.window.sensitivity') },
           ]}
         />
-        <TabPanel id={screen}>{screen === 'calculator' ? <Calculator /> : <Workbench />}</TabPanel>
+        <TabPanel id={screen}>
+          {screen === 'calculator' ? (
+            <Calculator />
+          ) : screen === 'workbench' ? (
+            <Workbench />
+          ) : (
+            <Sensitivity />
+          )}
+        </TabPanel>
       </main>
 
       {/*

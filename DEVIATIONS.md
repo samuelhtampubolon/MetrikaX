@@ -435,6 +435,30 @@ lebih murah daripada menarik kembali rilis.
 
 ---
 
+## D-23. Analisis sensitivitas berjalan atas permintaan, dan tiga rumus tidak dapat diperingkat
+
+**Temuan.** `engine.sensitivity_module.trigger` menyatakan analisis berjalan otomatis untuk setiap
+rumus pada kelas struktur C4, C5, C6, C7 dan C9. Dua puluh lima rumus memikul kelas tersebut.
+Salah satunya, `qfd_technical_importance`, mengembalikan sebuah vektor dan bukan satu angka
+(lihat D-02), sehingga tidak memiliki ayunan untuk diperingkat. Tiga lainnya, yaitu `ev`,
+`conjoint_utility` dan `weighted_screening`, hanya menerima masukan berbentuk vektor, sehingga
+tidak ada satu pun faktor skalar yang dapat digeser sepuluh persen.
+
+**Yang dikerjakan.** Analisis menempati layarnya sendiri, SCR-SENSITIVITY, dan berjalan ketika
+tombol Jalankan ditekan. Dua alasan. Pertama, persen pergeseran adalah sebuah ruas pada layar itu
+dengan nilai awal 10, sehingga angka yang dipakai selalu angka yang terlihat. Kedua, satu analisis
+memanggil mesin dua kali untuk setiap faktor, dan menjalankannya diam diam di belakang kalkulator
+akan menghasilkan peringkat yang tidak diminta dan tidak memiliki tempat untuk ditampilkan. Dua
+puluh empat rumus ditawarkan pada layar itu. Tiga rumus yang tidak dapat diperingkat menyatakannya
+dengan kalimat, bukan dengan plot kosong.
+
+**Yang perlu diputuskan.** Apakah kata otomatis pada spesifikasi berarti kalkulator sendiri harus
+menjalankan analisis dan menampilkan peringkatnya di bawah hasil setiap kali salah satu rumus
+tersebut dihitung. Perubahan itu kecil di atas yang sudah ada, karena modul mesin dan model
+tampilannya sudah dipakai bersama, dan akan dikerjakan bila pemilik proyek menghendakinya.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

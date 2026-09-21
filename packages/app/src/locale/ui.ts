@@ -36,6 +36,7 @@ export const uiCatalogue = {
   'menu.analysis': { id: 'Analisis', en: 'Analysis' },
   'menu.analysis.calculate': { id: 'Hitung', en: 'Calculate' },
   'menu.analysis.derivation': { id: 'Panel penurunan', en: 'Derivation pane' },
+  'menu.analysis.sensitivity': { id: 'Analisis sensitivitas', en: 'Sensitivity analysis' },
   'menu.analysis.send_to_solver': { id: 'Kirim ke ruang kerja', en: 'Send to the workbench' },
   'menu.learn': { id: 'Pelajari', en: 'Learn' },
   'menu.learn.modules': { id: 'Modul', en: 'Modules' },
@@ -44,6 +45,7 @@ export const uiCatalogue = {
   'menu.tools.contrast': { id: 'Kontras tinggi', en: 'High contrast' },
   'menu.window': { id: 'Jendela', en: 'Window' },
   'menu.window.calculator': { id: 'Kalkulator', en: 'Calculator' },
+  'menu.window.sensitivity': { id: 'Sensitivitas', en: 'Sensitivity' },
   'menu.help': { id: 'Bantuan', en: 'Help' },
   'menu.help.formula': { id: 'Bantuan rumus terpilih', en: 'Help for the selected formula' },
   'menu.help.about': { id: 'Tentang', en: 'About' },
@@ -224,6 +226,62 @@ export const uiCatalogue = {
     id: 'Tanda bintang menandai nilai yang bertentangan dengan hasil perhitungan.',
     en: 'An asterisk marks a value that disagrees with what the relations compute.',
   },
+
+  /* Sensitivity screen, SCR-SENSITIVITY. */
+  'sensitivity.formula.legend': { id: 'Rumus', en: 'Formula' },
+  'sensitivity.formula.label': {
+    id: 'Pilih rumus yang akan diuji',
+    en: 'Choose the formula to test',
+  },
+  'sensitivity.scope': {
+    id: 'Hanya rumus dari kelas struktur C4, C5, C6, C7 dan C9 yang diuji di sini, yaitu kelas yang hasilnya berlipat ketika setiap faktor sedikit terlalu optimistis.',
+    en: 'Only the formulas in structural classes C4, C5, C6, C7 and C9 are tested here: the classes whose result compounds when each factor is a little too optimistic.',
+  },
+  'sensitivity.perturbation.label': { id: 'Pergeseran, persen', en: 'Perturbation, percent' },
+  'sensitivity.perturbation.invalid': {
+    id: 'Pergeseran harus berupa angka yang lebih besar dari nol dan kurang dari seratus persen.',
+    en: 'The perturbation must be a number greater than zero and less than one hundred percent.',
+  },
+  'sensitivity.run': { id: 'Jalankan', en: 'Run' },
+  'sensitivity.idle': {
+    id: 'Belum dijalankan. Isi masukan lalu tekan Jalankan.',
+    en: 'Not yet run. Enter the inputs, then press Run.',
+  },
+  'sensitivity.base.legend': { id: 'Hasil dasar', en: 'Base result' },
+  'sensitivity.base.label': { id: 'Nilai hasil dasar', en: 'Base result value' },
+  'sensitivity.plot.legend': { id: 'Plot tornado', en: 'Tornado plot' },
+  'sensitivity.plot.label': {
+    id: 'Plot tornado, satu batang untuk setiap faktor, diurutkan menurut lebar ayunan',
+    en: 'Tornado plot, one bar per factor, ordered by the width of the swing',
+  },
+  'sensitivity.axis.swing': { id: 'Ayunan', en: 'Swing of' },
+  'sensitivity.table.legend': { id: 'Peringkat faktor', en: 'Ranked factors' },
+  'sensitivity.table.label': {
+    id: 'Tabel peringkat faktor dengan angka yang sama seperti pada plot',
+    en: 'Table of ranked factors carrying the same numbers as the plot',
+  },
+  'sensitivity.column.factor': { id: 'Faktor', en: 'Factor' },
+  'sensitivity.column.low': { id: 'Hasil rendah', en: 'Low result' },
+  'sensitivity.column.high': { id: 'Hasil tinggi', en: 'High result' },
+  'sensitivity.column.swing': { id: 'Ayunan', en: 'Swing' },
+  'sensitivity.column.share': { id: 'Ayunan terhadap dasar', en: 'Swing over base' },
+  'sensitivity.column.note': { id: 'Catatan', en: 'Note' },
+  'sensitivity.share.undefined': {
+    id: 'tidak terdefinisi, hasil dasar nol',
+    en: 'not defined, the base result is zero',
+  },
+  'sensitivity.partial': {
+    id: 'Satu sisi ditolak: rentang ini sepihak.',
+    en: 'One side was refused: this range is one sided.',
+  },
+  'sensitivity.partial.legend': { id: 'Rentang sepihak', en: 'One sided ranges' },
+  'sensitivity.sentence.legend': { id: 'Faktor paling menentukan', en: 'The deciding factor' },
+  'sensitivity.empty': {
+    id: 'Tidak ada faktor yang dapat digeser pada rumus ini.',
+    en: 'No factor on this formula can be moved.',
+  },
+  'sensitivity.sort': { id: 'Urutkan kolom', en: 'Sort the column' },
+  'sensitivity.counter.factors': { id: 'faktor diperingkat', en: 'factors ranked' },
 
   /* The honesty clause. It appears wherever a result could be mistaken for a credential. */
   'honesty.not_verified': {

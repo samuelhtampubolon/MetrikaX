@@ -279,12 +279,22 @@ export interface PlotBar {
   readonly id: string;
   readonly label: string;
   readonly value: number;
+  /**
+   * The text printed at the end of the bar. When the caller also shows this bar in a table, it
+   * passes the same string it puts in the cell, so the two cannot drift apart: design_system
+   * .chart_rules calls a discrepancy between a chart and its table a build blocking bug, and the
+   * only way to be sure there is none is to render one string rather than two.
+   */
+  readonly valueLabel?: string;
 }
 
 export interface PlotCanvasProps {
   readonly label: string;
   readonly bars: readonly PlotBar[];
-  readonly formatValue: (value: number) => string;
+  /** Used for any bar that carries no `valueLabel` of its own. */
+  readonly formatValue?: (value: number) => string;
+  /** The quantity and its unit, printed under the axis. chart_rules requires both. */
+  readonly axisLabel?: string;
   readonly width?: number;
 }
 
@@ -296,12 +306,19 @@ export interface PlotCanvasProps {
  * The caller renders the same numbers in a table beside it. AC-15 requires the two to agree, and
  * they do because both read the same array.
  */
-export function PlotCanvas({ label, bars, formatValue, width = 380 }: PlotCanvasProps): ReactNode {
+export function PlotCanvas({
+  label,
+  bars,
+  formatValue,
+  axisLabel,
+  width = 380,
+}: PlotCanvasProps): ReactNode {
   const rowHeight = 18;
   const marginLeft = 130;
   const marginRight = 60;
   const marginTop = 8;
-  const height = marginTop * 2 + bars.length * rowHeight;
+  const captionHeight = axisLabel === undefined ? 0 : 16;
+  const height = marginTop * 2 + bars.length * rowHeight + captionHeight;
   const plotWidth = Math.max(10, width - marginLeft - marginRight);
   const extent = Math.max(1e-12, ...bars.map((bar) => Math.abs(bar.value)));
   const zeroX = marginLeft + plotWidth / 2;
@@ -333,8 +350,14 @@ export function PlotCanvas({ label, bars, formatValue, width = 380 }: PlotCanvas
         x1={zeroX}
         y1={marginTop}
         x2={zeroX}
-        y2={height - marginTop}
+        y2={height - marginTop - captionHeight}
       />
+
+      {axisLabel === undefined ? null : (
+        <text className="mk-plot__caption" x={zeroX} y={height - 4} textAnchor="middle">
+          {axisLabel}
+        </text>
+      )}
 
       {bars.map((bar, index) => {
         const y = marginTop + index * rowHeight + 3;
@@ -361,7 +384,7 @@ export function PlotCanvas({ label, bars, formatValue, width = 380 }: PlotCanvas
               y2={y + rowHeight - 3}
             />
             <text x={width - marginRight + 6} y={y + 9}>
-              {formatValue(bar.value)}
+              {bar.valueLabel ?? formatValue?.(bar.value) ?? ''}
             </text>
           </g>
         );

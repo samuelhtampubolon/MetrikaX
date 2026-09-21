@@ -94,6 +94,37 @@ test.describe('the web build', () => {
     await context.setOffline(false);
   });
 
+  /**
+   * AC-15, measured where it actually has to hold: in a browser, against the shipped bundle.
+   *
+   * The unit test compares the strings the component produced. This one reads the text the browser
+   * laid out inside the SVG and the text inside the table cells, which is what a reader compares
+   * when they look at the screen.
+   */
+  test('AC-15: the tornado plot and its table print identical numbers', async ({ page }) => {
+    await page.goto('./index.html');
+
+    await page.getByRole('tab', { name: 'Sensitivitas' }).click();
+    await page.getByRole('button', { name: 'Contoh', exact: true }).click();
+    await page.getByRole('button', { name: 'Jalankan', exact: true }).click();
+
+    const plot = page.locator('svg.mk-plot');
+    await expect(plot).toBeVisible();
+
+    const texts = await plot.locator('text').allTextContents();
+    const rows = await page.locator('.mk-sens__table tbody tr').all();
+    expect(rows.length).toBeGreaterThan(0);
+    expect(texts).toHaveLength(1 + rows.length * 2);
+
+    for (const [index, row] of rows.entries()) {
+      const cells = await row.locator('td').allTextContents();
+      expect(texts[1 + index * 2], `bar ${index} label`).toBe(cells[0]);
+      expect(texts[2 + index * 2], `bar ${index} swing`).toBe(cells[3]);
+    }
+
+    await expect(page.getByText(/Faktor dengan ayunan terbesar/)).toBeVisible();
+  });
+
   test('AC-06: issues no request to any origin other than its own', async ({ page }) => {
     const foreign: string[] = [];
     const record = (request: Request): void => {
@@ -112,6 +143,12 @@ test.describe('the web build', () => {
     await page.keyboard.press('Enter');
     await page.keyboard.press('F9');
     await page.getByLabel('Cari rumus').fill('CLV');
+
+    // The sensitivity screen too: it runs the engine two more times per factor, and a screen that
+    // is never opened is a screen whose requests are never counted.
+    await page.getByRole('tab', { name: 'Sensitivitas' }).click();
+    await page.getByRole('button', { name: 'Contoh', exact: true }).click();
+    await page.getByRole('button', { name: 'Jalankan', exact: true }).click();
     await page.waitForTimeout(500);
 
     expect(foreign, `outbound requests: ${foreign.join(', ')}`).toHaveLength(0);

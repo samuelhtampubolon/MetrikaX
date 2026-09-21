@@ -480,6 +480,9 @@
   stroke-width: 1;
   fill: none;
 }
+.mk-plot .mk-plot__caption {
+  font-size: var(--size-small);
+}
 .mk-plot .mk-plot__bar {
   stroke: var(--ink);
   stroke-width: 1;

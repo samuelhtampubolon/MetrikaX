@@ -77,4 +77,14 @@ export {
   type GuardSpec,
 } from './validate/domain.ts';
 
+export {
+  sensitivity,
+  isSensitive,
+  dominantFactorSentence,
+  SENSITIVE_CLASSES,
+  type SensitivityResult,
+  type SensitivityOptions,
+  type FactorSwing,
+} from './sensitivity/oat.ts';
+
 export * from './helpers/index.ts';
