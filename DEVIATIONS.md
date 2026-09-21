@@ -366,6 +366,45 @@ dialog, dan basis data.
 
 ---
 
+## D-21. Bangunan web tidak dapat dibuka langsung dari cakram, sehingga dibuat berkas tunggal
+
+**Temuan.** Membuka `docs/index.html` dengan klik ganda tidak berhasil. Peramban menolak memuat
+skrip modul melalui `file://`, dan menolaknya sebagai pembacaan lintas asal dari asal yang kosong.
+Halaman termuat, lalu kosong. Hal ini ditemukan dengan mencobanya, bukan dengan membacanya.
+
+Kegagalan ini penting pada proyek ini melebihi kebanyakan proyek lain.
+`desktop.portable_build.why_it_matters` menyebut mesin kampus dan kantor yang melarang pemasangan
+perangkat lunak, dan mesin semacam itu boleh jadi juga tidak memiliki cara menjalankan peladen
+lokal.
+
+**Yang dikerjakan.** Sasaran bangunan kedua, `pnpm build:portable`, menghasilkan
+`docs/metrika-offline.html`: satu berkas 648 kB dengan skrip dan gaya disisipkan di dalamnya.
+Modul sebaris dijalankan, bukan diambil, sehingga berjalan dari `file://`. Seluruh impor dinamis
+diratakan ke dalam berkas yang sama dengan alasan serupa.
+
+Kebijakan keamanannya ditulis ulang untuk berkas semacam itu. Kebijakan yang berbicara tentang
+`'self'` akan memblokir skrip sebarisnya sendiri pada halaman tanpa asal, sehingga yang dipakai
+adalah `default-src 'none'` dengan `connect-src 'none'`: tidak ada yang boleh dimuat, dan tidak ada
+yang boleh dikirim.
+
+**Terukur, di dalam Chromium, langsung dari cakram:** 87 simpul pohon rumus tampil, CTR menghasilkan
+0,0125, panel penurunan terbuka, nol permintaan yang meninggalkan sistem berkas, dan nol galat.
+Empat uji pada `packages/app/e2e/portable.spec.ts` menjaga keempat hal itu.
+
+**Dua kekeliruan pada penulisannya, keduanya ditemukan dengan menjalankannya.** Yang pertama,
+penyisipan memakai `String.replace` dengan string pengganti, dan `$&` serta `` $` `` pada string
+pengganti diperlakukan sebagai pola substitusi. Kode JavaScript terminifikasi penuh dengan tanda
+`$`, sehingga kode yang tersisip rusak diam diam menjadi galat sintaks. Penggantinya kini berupa
+fungsi. Yang kedua, tautan favicon masih menunjuk berkas terpisah yang tidak dapat dijangkau
+halaman itu, dan kebijakan keamanannya menolaknya dengan benar.
+
+**Yang perlu diketahui pemakainya.** Penyimpanan pada mode ini bergantung pada izin peramban. Bila
+IndexedDB ditolak, aplikasi beralih ke memori dan bilah status menyatakan bahwa kemajuan tidak akan
+tersimpan. Pengguna yang memerlukan pekerjaannya tersimpan sebaiknya memakai bangunan desktop, yang
+menulis SQLite di samping berkas jalankannya.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

@@ -48,6 +48,18 @@ pnpm --filter @metrika/app exec playwright test   # uji luring dan keamanan
 pnpm audit --audit-level low
 ```
 
+## Tiga cara menjalankan
+
+| Cara           | Berkas                                    | Untuk siapa                                                                          |
+| -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------ |
+| Situs web      | `docs/index.html`, disajikan oleh peladen | Pemakaian biasa. Berfungsi luring setelah satu kunjungan                             |
+| Berkas tunggal | `docs/metrika-offline.html`               | Mesin yang melarang pemasangan dan tidak memiliki peladen. Klik ganda, tanpa peladen |
+| Desktop        | Pemasang NSIS, atau berkas portabel       | Pemakaian yang perlu menyimpan pekerjaan di samping berkas jalankannya               |
+
+Bangunan web biasa tidak dapat dibuka langsung dari cakram: peramban menolak memuat skrip modul
+melalui `file://`. Berkas tunggal dibuat justru untuk keadaan itu, dengan skrip dan gaya disisipkan
+di dalamnya. Lihat `DEVIATIONS.md`, D-21.
+
 ## Luring dan keamanan
 
 Perangkat ini tidak melakukan permintaan jaringan apa pun, dan hal itu diukur, bukan dijanjikan.

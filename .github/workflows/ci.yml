@@ -59,7 +59,8 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Build the web application
+      # Both targets: the served site and the single file that opens straight off a disk.
+      - name: Build the web application and the portable single file
         run: pnpm build
 
       # AC-06, AC-08, AC-09 and AC-10, checked against the production build in a real browser.

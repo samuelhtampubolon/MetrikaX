@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "build:portable": "vite build --config vite.config.portable.ts"
   },
   "dependencies": {
     "@metrika/engine": "workspace:*",
