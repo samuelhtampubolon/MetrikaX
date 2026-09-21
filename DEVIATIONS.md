@@ -405,6 +405,30 @@ menulis SQLite di samping berkas jalankannya.
 
 ---
 
+## D-22. Tiga kegagalan lintas sistem, dan apa yang diubah karenanya
+
+Membangun untuk tiga sistem menemukan tiga hal yang tidak akan pernah muncul pada satu mesin Linux.
+
+**Windows: akhir baris.** Uji pada `tauri-config.test.ts` gagal hanya di Windows. Penyebabnya
+sebuah regex: tanda `.` pada regular expression JavaScript tidak cocok dengan carriage return,
+sehingga pada checkout ber-CRLF pola `#.*$` tidak cocok dengan apa pun dan seluruh komentar lolos
+dari penyaringan. Polanya diperbaiki menjadi `#.*` dengan pemisah `\r?\n`.
+
+Yang lebih penting, kegagalan itu menunjuk masalah yang lebih besar dan belum terjadi. Langkah CI
+membangkitkan ulang seluruh berkas terbangkit lalu menegaskan `git diff` kosong. Pada checkout
+Windows, codegen menulis LF sedangkan berkas di cakram ber-CRLF, sehingga setiap berkas terbangkit
+akan dilaporkan berubah. Berkas `.gitattributes` kini memaksa LF di mana pun.
+
+**macOS: arsitektur.** `tauri build --target universal-apple-darwin` gagal karena binari universal
+ditaut dari dua arsitektur dan hanya satu yang terpasang. Kedua target kini dipasang pada pelaksana
+macOS.
+
+**Ketiganya ditemukan dengan menjalankan pembangunan, bukan dengan membacanya.** Itu sebabnya alur
+kerja rilis dapat dijalankan tanpa menandai versi: memeriksa artefak sebelum sebuah tag dibuat
+lebih murah daripada menarik kembali rilis.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

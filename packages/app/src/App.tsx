@@ -7,12 +7,22 @@
  */
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { MenuBar, ModalDialog, StatusBar, TitleBar, type Menu } from '@metrika/ui';
+import {
+  MenuBar,
+  ModalDialog,
+  StatusBar,
+  TabPanel,
+  TabStrip,
+  TitleBar,
+  type Menu,
+} from '@metrika/ui';
 import { LocaleProvider, useLocale, type Locale } from './locale/index.ts';
 import { useCalculator } from './state/calculator.ts';
 import { useWorkspace } from './state/workspace.ts';
 import { exportWorkspaceFile } from './storage/download.ts';
 import { Calculator } from './screens/Calculator.tsx';
+import { Workbench } from './screens/Workbench.tsx';
+import { useSolver } from './state/solver.ts';
 import { FORMULA_COUNT } from '@metrika/engine';
 
 const SPEC_VERSION = '1.0.1';
@@ -40,7 +50,9 @@ function Shell(): ReactNode {
   const workspace = useWorkspace();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [screen, setScreen] = useState<'calculator' | 'workbench'>('calculator');
   const importRef = useRef<HTMLInputElement>(null);
+  const solver = useSolver();
 
   // Open storage once, on the first render. Nothing blocks on it: the calculator works whether or
   // not anything can be kept, and the status bar reports which of the two it turned out to be.
@@ -91,7 +103,10 @@ function Shell(): ReactNode {
       id: 'window',
       label: t('menu.window'),
       mnemonicIndex: 0,
-      items: [{ id: 'calculator', label: t('menu.window.calculator') }],
+      items: [
+        { id: 'calculator', label: t('menu.window.calculator') },
+        { id: 'workbench', label: t('menu.window.workbench') },
+      ],
     },
     {
       id: 'help',
@@ -142,7 +157,23 @@ function Shell(): ReactNode {
       if (typeof window !== 'undefined' && typeof window.print === 'function') window.print();
       return;
     }
+    if (menuId === 'window') {
+      setScreen(itemId === 'workbench' ? 'workbench' : 'calculator');
+      return;
+    }
     if (menuId === 'help' && itemId === 'about') setAboutOpen(true);
+  };
+
+  const counter = (): string | null => {
+    if (screen !== 'workbench') return null;
+    const entered = Object.keys(solver.entered).length;
+    const derived = solver.result === null ? 0 : solver.result.reachable;
+    const blocked =
+      solver.result === null ? 0 : new Set(solver.result.blocked.map((b) => b.formulaId)).size;
+    return (
+      `${entered} ${t('solver.counter')}, ${derived} ${t('solver.counter.derived')}, ` +
+      `${blocked} ${t('solver.counter.blocked')}`
+    );
   };
 
   const computationState =
@@ -158,7 +189,16 @@ function Shell(): ReactNode {
       <MenuBar label={t('menu.bar.label')} menus={menus} onCommand={onCommand} />
 
       <main className="mk-shell__body">
-        <Calculator />
+        <TabStrip
+          label={t('menu.window')}
+          activeId={screen}
+          onSelect={(id) => setScreen(id as 'calculator' | 'workbench')}
+          tabs={[
+            { id: 'calculator', label: t('menu.window.calculator') },
+            { id: 'workbench', label: t('menu.window.workbench') },
+          ]}
+        />
+        <TabPanel id={screen}>{screen === 'calculator' ? <Calculator /> : <Workbench />}</TabPanel>
       </main>
 
       {/*
@@ -189,7 +229,10 @@ function Shell(): ReactNode {
 
       <StatusBar
         message={
-          message ?? storageMessage(workspace, t) ?? `${t('status.selected')} ${state.selectedId}`
+          counter() ??
+          message ??
+          storageMessage(workspace, t) ??
+          `${t('status.selected')} ${state.selectedId}`
         }
         state={computationState}
         workspace={workspace.current?.name ?? t('status.workspace.unsaved')}

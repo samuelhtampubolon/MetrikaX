@@ -109,6 +109,56 @@
   padding-left: 0;
 }
 
+/* SCR-SOLVER: two panes above, two below, each pair splitting the width evenly. */
+.mk-solver {
+  display: flex;
+  flex-direction: column;
+  gap: var(--control-gap);
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+}
+
+.mk-solver__headerrow,
+.mk-solver__addrow {
+  display: flex;
+  align-items: center;
+  gap: var(--control-gap);
+  margin-bottom: var(--control-gap);
+}
+
+.mk-solver__addrow > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.mk-solver__panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--group-gap);
+  min-height: 0;
+}
+
+.mk-solver__pane {
+  min-width: 0;
+}
+
+.mk-solver__list {
+  max-height: 260px;
+}
+
+/* The tab strip sits above whichever screen is showing. */
+.mk-shell__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.mk-shell__body .mk-tabpanel {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 /*
  * P09 print view. Principle P09: print is a first-class output. Ctrl+P produces a self-contained
  * A4 document, black on white, in the serif face, with no interface chrome at all.

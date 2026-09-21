@@ -50,10 +50,14 @@ const cargoTomlSource = readFileSync(
  * The comments name the plugins that are deliberately absent, in order to say that they are
  * absent. Searching the raw text for those names finds the sentence explaining their absence and
  * reports it as their presence, so what is searched is the dependency list itself.
+ *
+ * The split accepts a carriage return and the comment pattern has no `$`, both because of a
+ * Windows job that failed here: `.` in a JavaScript regular expression does not match `\r`, so on
+ * a CRLF checkout `#.*$` matched nothing and every comment survived the stripping.
  */
 const cargoToml = cargoTomlSource
-  .split('\n')
-  .map((line) => line.replace(/#.*$/, ''))
+  .split(/\r?\n/)
+  .map((line) => line.replace(/#.*/, ''))
   .join('\n');
 const capabilities = readFileSync(
   resolve(ROOT, 'packages/desktop/src-tauri/capabilities/default.json'),

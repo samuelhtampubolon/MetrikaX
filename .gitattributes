@@ -1,0 +1,18 @@
+# Line endings are LF everywhere, including on a Windows checkout.
+#
+# Two things in this repository depend on it. The CI step that regenerates every generated file and
+# then asserts `git diff` is empty would otherwise report every one of them as changed on Windows,
+# because codegen writes LF and the checkout holds CRLF. And the golden tests, the locale
+# catalogues and the specification are compared as text.
+#
+# This was not a precaution. A Windows job failed on a regex that reads a file line by line,
+# because `.` in a JavaScript regular expression does not match a carriage return.
+* text=auto eol=lf
+
+# Binary, never converted and never diffed as text.
+*.png binary
+*.ico binary
+*.icns binary
+*.exe binary
+*.dmg binary
+*.AppImage binary
