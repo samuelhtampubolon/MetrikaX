@@ -114,7 +114,11 @@ jobs:
             `MetriKa-portable-windows-x64.exe` berjalan tanpa pemasangan dan tanpa hak
             administrator. Salin ke flash drive, lalu jalankan. Perangkat ini tidak melakukan
             permintaan jaringan apa pun, dan seluruh data tersimpan pada perangkat Anda.
-          releaseDraft: true
+          # Published rather than drafted. A draft release has no public download link, and a
+          # download link that only the repository owner can see is not a download link. Every
+          # gate has already run above this step on all three platforms, so there is nothing a
+          # draft would be held back for.
+          releaseDraft: false
           prerelease: false
           includeUpdaterJson: false
           args: ${{ matrix.platform == 'macos-latest' && '--target universal-apple-darwin' || '' }}
@@ -142,6 +146,18 @@ jobs:
           name: MetriKa-portable-windows-x64
           path: portable/MetriKa-portable-windows-x64.exe
           if-no-files-found: error
+
+      # tauri-action uploads the bundles it builds, which are the installers. The portable
+      # executable is not one of them, so it is attached here. Without this step the release
+      # carries an installer and no portable file, and the portable file is the one the
+      # specification actually asks for.
+      - name: Attach the portable executable to the release
+        if: matrix.platform == 'windows-latest' && startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: portable/MetriKa-portable-windows-x64.exe
+          fail_on_unmatched_files: true
 
       # AC-18 is a size budget, so the sizes are printed rather than left to be guessed at. They
       # go to the log as well as the job summary: a number only a human can see by opening a
