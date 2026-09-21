@@ -335,6 +335,37 @@ menggagalkan pembangunan alih alih menunggu ditemukan.
 
 ---
 
+## D-20. NSIS: satu opsi pada spesifikasi tidak ada pada Tauri v2
+
+**Temuan.** Spesifikasi meminta `bundle.nsis.allowToChangeInstallationDirectory: true`. Tauri v2
+tidak memiliki medan itu. Pembangunan gagal pada ketiga pelaksana dengan pesan
+`unknown field allowToChangeInstallationDirectory`, setelah sqlx, wry dan webview2 selesai
+dikompilasi. Seluruh bagian lain berhasil: yang keliru hanya satu nama medan.
+
+**Yang dikerjakan.** Medan itu dihapus. `installMode: "currentUser"` dipertahankan, dan itulah yang
+sesungguhnya penting bagi pengguna sasaran: pemasangan tanpa hak administrator. Pemilihan direktori
+pada pemasang memang hilang, namun kebutuhan yang mendasarinya sudah dijawab oleh berkas portabel,
+yang dapat dijalankan dari mana saja tanpa dipasang sama sekali.
+
+**Yang juga dikerjakan, dan ini bagian yang lebih penting.** Kegagalan itu menghabiskan pembangunan
+tiga pelaksana untuk sebuah nama medan. Berkas `scripts/check-tauri-config.mjs` kini memeriksa
+`tauri.conf.json` terhadap skema yang disertakan CLI Tauri yang terpasang, dan berjalan sebelum
+satu baris Rust pun dikompilasi, baik pada CI maupun pada alur kerja rilis.
+
+Percobaan pertama pemeriksa itu tidak menangkap apa pun: skema Tauri membungkus hampir setiap
+simpul sebagai `{ description, default, allOf: [{ $ref }] }`, dan pembungkus semacam itu terbaca
+sebagai "tidak memiliki properti, jadi apa pun boleh", sehingga seluruh pemeriksaan lolos tanpa
+memeriksa apa pun. Hal itu ditemukan dengan cara mengembalikan medan yang merusak lalu menjalankan
+pemeriksanya: pemeriksa yang selalu lulus lebih buruk daripada tidak ada pemeriksa, karena
+memberikan rasa aman yang keliru. Setelah diperbaiki, pemeriksa itu menolak medan tersebut dan
+menyebutkan medan apa saja yang sebenarnya diizinkan.
+
+Uji `packages/app/test/tauri-config.test.ts` menegaskan hal yang sama pada tingkat proyek, termasuk
+`connect-src 'none'`, ketiadaan plugin http, dan daftar izin yang tidak melampaui jendela, dua
+dialog, dan basis data.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

@@ -16,7 +16,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "content-lint": "node scripts/content-lint.mjs",
-    "build": "pnpm --filter @metrika/app run build"
+    "build": "pnpm --filter @metrika/app run build",
+    "check:tauri": "node scripts/check-tauri-config.mjs"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

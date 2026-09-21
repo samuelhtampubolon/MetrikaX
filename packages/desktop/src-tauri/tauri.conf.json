@@ -43,8 +43,8 @@
     "windows": {
       "nsis": {
         "installMode": "currentUser",
-        "allowToChangeInstallationDirectory": true,
-        "languages": ["English", "Indonesian"]
+        "languages": ["English", "Indonesian"],
+        "displayLanguageSelector": true
       }
     },
     "linux": {

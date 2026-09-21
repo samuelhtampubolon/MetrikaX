@@ -68,6 +68,10 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # Before any Rust compiles: a bad configuration field should not cost three runners.
+      - name: Check tauri.conf.json against the CLI schema
+        run: node scripts/check-tauri-config.mjs
+
       - name: Codegen and verify
         run: |
           pnpm codegen
