@@ -94,9 +94,9 @@ dinyatakan sebagai belum diukur, bukan dikosongkan.
 | Kunci katalog teks              | dua bahasa penuh   | 1199, 801 tanpa nilai Inggris     |
 | Permintaan ke asal lain         | nol                | nol, diukur di Chromium           |
 | Nasihat keamanan kebergantungan | nol                | nol                               |
-| Bundel web JavaScript           | belum ditetapkan   | 659 KB, 147 KB setelah gzip       |
+| Bundel web JavaScript           | belum ditetapkan   | 670 KB, 150 KB setelah gzip       |
 | Bundel web CSS                  | belum ditetapkan   | 13 KB                             |
-| Berkas tunggal luring           | belum ditetapkan   | 680 KB                            |
+| Berkas tunggal luring           | belum ditetapkan   | 692 KB                            |
 | Berkas portabel Windows         | di bawah 30 MB     | 4,48 MB                           |
 | Bangunan desktop tiga sistem    | berhasil           | berhasil, ketiganya               |
 | Waktu mulai dingin              | di bawah 2 detik   | belum diukur, perlu mesin Windows |

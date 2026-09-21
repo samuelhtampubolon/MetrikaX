@@ -465,6 +465,53 @@
   padding: 0 var(--group-gap) var(--group-gap);
 }
 
+/* ---- Chart: the shared vocabulary. Black on white, told apart by dash and marker ---- */
+.mk-chart {
+  background: var(--field);
+  display: block;
+}
+.mk-chart text {
+  font-family: var(--font-ui);
+  font-size: var(--size-small);
+  fill: var(--ink);
+}
+.mk-chart .mk-chart__axis,
+.mk-chart .mk-chart__tick {
+  stroke: var(--ink);
+  stroke-width: 1;
+  fill: none;
+}
+/* chart_rules: gridlines are 1px dotted at 25 percent opacity, or absent. */
+.mk-chart .mk-chart__grid {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 1 3;
+  stroke-opacity: 0.25;
+}
+.mk-chart .mk-chart__line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  fill: none;
+}
+.mk-chart .mk-chart__line--projected {
+  stroke-width: 1;
+}
+.mk-chart .mk-chart__marker {
+  stroke: var(--ink);
+  stroke-width: 1;
+  fill: none;
+}
+.mk-chart .mk-chart__bar {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.mk-chart .mk-chart__extrapolated {
+  opacity: 0.35;
+}
+.mk-chart .mk-chart__axislabel {
+  font-size: var(--size-small);
+}
+
 /* ---- PlotCanvas: black strokes on white, hatch patterns instead of fills ---- */
 .mk-plot {
   background: var(--field);

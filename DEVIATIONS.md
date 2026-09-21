@@ -459,6 +459,28 @@ tampilannya sudah dipakai bersama, dan akan dikerjakan bila pemilik proyek mengh
 
 ---
 
+## D-24. Regresi visual dijalankan atas geometri, bukan atas piksel
+
+**Temuan.** Definisi selesai fase P14 menyatakan kedua plot khusus harus tergambar dengan benar dan
+lulus regresi visual. Perbandingan piksel tidak dapat diandalkan di sini. Aplikasi ini dibangun
+untuk tiga sistem, dan markup yang sama menghasilkan piksel yang berbeda pada masing masing sistem
+karena perbedaan penggambaran huruf. Sebuah garis dasar piksel akan gagal karena alasan yang tidak
+ada hubungannya dengan grafiknya.
+
+**Yang dikerjakan.** Yang dibandingkan adalah geometrinya: seluruh perintah jalur, koordinat dan
+bentuk penanda yang dihasilkan komponen, dibulatkan ke tiga desimal sehingga stabil di mana pun.
+Berkas garis dasarnya adalah `packages/app/test/__snapshots__/charts.test.tsx.snap`. Kurva yang
+tergambar keliru mengubah untaian itu, dan uji tersebut gagal. Pembulatan tiga desimal dipilih
+karena presisi di bawah itu tidak terlihat mata, sedangkan tanpa pembulatan setiap perubahan kecil
+pada aritmetika titik mengambang akan mengubah garis dasar.
+
+**Yang perlu diputuskan.** Apakah pemilik proyek menghendaki perbandingan piksel yang sesungguhnya
+pada satu sistem saja, misalnya Linux pada CI, sebagai tambahan. Itu dapat dikerjakan dengan
+Playwright, dan biayanya adalah satu berkas gambar per plot yang harus diperbarui setiap kali
+tampilannya berubah.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

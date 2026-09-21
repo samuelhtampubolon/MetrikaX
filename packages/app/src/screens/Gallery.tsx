@@ -9,6 +9,7 @@
 
 import { useState, type ReactNode } from 'react';
 import {
+  Chart,
   ComboBox,
   DerivationPane,
   GroupBox,
@@ -26,7 +27,17 @@ import {
   TabStrip,
   TitleBar,
   TreeView,
+  cumulative,
 } from '@metrika/ui';
+
+const SAMPLE = [
+  { x: 0, y: 4 },
+  { x: 1, y: 9 },
+  { x: 2, y: 6 },
+  { x: 3, y: 12 },
+  { x: 4, y: 8 },
+  { x: 5, y: 14 },
+];
 
 export function Gallery(): ReactNode {
   const [value, setValue] = useState('1.250');
@@ -170,6 +181,55 @@ export function Gallery(): ReactNode {
           />
         </TabPanel>
       </div>
+
+      {/* P14: the chart vocabulary, every shape at the size it is used at. */}
+      <GroupBox legend="Grafik">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--group-gap)' }}>
+          <Chart
+            label="Contoh garis dan langkah"
+            xAxisLabel="Periode"
+            yAxisLabel="Jumlah (unit)"
+            formatX={(value) => String(value)}
+            formatY={(value) => String(value)}
+            series={[
+              { id: 'line', label: 'Garis', points: SAMPLE },
+              {
+                id: 'step',
+                label: 'Langkah',
+                points: SAMPLE.map((p) => ({ ...p, y: p.y * 0.6 })),
+                shape: 'step',
+              },
+            ]}
+          />
+          <Chart
+            label="Contoh sebar dan batang"
+            xAxisLabel="Periode"
+            yAxisLabel="Jumlah (unit)"
+            formatX={(value) => String(value)}
+            formatY={(value) => String(value)}
+            series={[{ id: 'bar', label: 'Batang', points: SAMPLE, shape: 'bar' }]}
+          />
+          <Chart
+            label="Contoh kurva kumulatif dengan bagian proyeksi"
+            xAxisLabel="Periode"
+            yAxisLabel="Kumulatif (unit)"
+            formatX={(value) => String(value)}
+            formatY={(value) => String(value)}
+            series={[
+              { id: 'cum', label: 'Kumulatif', points: cumulative(SAMPLE), extrapolatedFrom: 4 },
+            ]}
+            marks={[{ id: 'target', x: 4, y: 22, label: '22' }]}
+          />
+          <Chart
+            label="Contoh sebar"
+            xAxisLabel="Harga (Rp)"
+            yAxisLabel="Kuantitas (unit)"
+            formatX={(value) => String(value)}
+            formatY={(value) => String(value)}
+            series={[{ id: 'scatter', label: 'Sebar', points: SAMPLE, shape: 'scatter' }]}
+          />
+        </div>
+      </GroupBox>
 
       <StatusBar
         message="Siap."

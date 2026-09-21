@@ -283,6 +283,57 @@ export const uiCatalogue = {
   'sensitivity.sort': { id: 'Urutkan kolom', en: 'Sort the column' },
   'sensitivity.counter.factors': { id: 'faktor diperingkat', en: 'factors ranked' },
 
+  /* Charts, P14. The two plots whose answer is a shape rather than a number. */
+  'chart.legend': { id: 'Grafik', en: 'Chart' },
+  'chart.table.legend': { id: 'Angka pada grafik', en: 'The numbers in the chart' },
+  'chart.table.label': {
+    id: 'Tabel dengan angka yang sama seperti pada grafik',
+    en: 'Table carrying the same numbers as the chart',
+  },
+  'chart.column.status': { id: 'Keterangan', en: 'Status' },
+  'chart.observed': { id: 'Sampai periode yang dimasukkan', en: 'Up to the period entered' },
+  'chart.projected': { id: 'Proyeksi', en: 'Projection' },
+  'chart.sort': { id: 'Urutkan kolom', en: 'Sort the column' },
+
+  'bass.plot.label': {
+    id: 'Kurva difusi Bass, pangsa pengadopsi kumulatif menurut periode',
+    en: 'Bass diffusion curve, cumulative adopter share by period',
+  },
+  'bass.series.adoption': { id: 'Pangsa pengadopsi', en: 'Adopter share' },
+  'bass.axis.time': { id: 'Waktu (periode)', en: 'Time (periods)' },
+  'bass.axis.share': { id: 'Pangsa pengadopsi (persen)', en: 'Adopter share (percent)' },
+  'bass.column.time': { id: 'Periode', en: 'Period' },
+  'bass.column.share': { id: 'Pangsa pengadopsi', en: 'Adopter share' },
+  'bass.projection': {
+    id: 'Bagian yang diarsir terletak setelah periode yang dimasukkan. Bagian itu adalah proyeksi model, bukan pembacaan.',
+    en: 'The hatched region lies past the period entered. That region is a projection of the model, not a reading.',
+  },
+
+  'vw.plot.label': {
+    id: 'Empat kurva Van Westendorp beserta empat titik potongnya',
+    en: 'The four Van Westendorp curves with their four crossings',
+  },
+  'vw.curve.too_cheap': { id: 'Terlalu murah', en: 'Too cheap' },
+  'vw.curve.cheap': { id: 'Murah', en: 'Cheap' },
+  'vw.curve.expensive': { id: 'Mahal', en: 'Expensive' },
+  'vw.curve.too_expensive': { id: 'Terlalu mahal', en: 'Too expensive' },
+  'vw.point.opp': { id: 'Titik harga optimal', en: 'Optimal price point' },
+  'vw.point.ipp': { id: 'Titik harga indiferen', en: 'Indifference price point' },
+  'vw.point.pmc': { id: 'Batas bawah kemurahan', en: 'Point of marginal cheapness' },
+  'vw.point.pme': { id: 'Batas atas kemahalan', en: 'Point of marginal expensiveness' },
+  'vw.point.opp.short': { id: 'OPP', en: 'OPP' },
+  'vw.point.ipp.short': { id: 'IPP', en: 'IPP' },
+  'vw.point.pmc.short': { id: 'PMC', en: 'PMC' },
+  'vw.point.pme.short': { id: 'PME', en: 'PME' },
+  'vw.axis.price': { id: 'Harga (Rp)', en: 'Price (Rp)' },
+  'vw.axis.share': { id: 'Bagian responden (persen)', en: 'Share of respondents (percent)' },
+  'vw.column.point': { id: 'Titik', en: 'Point' },
+  'vw.column.price': { id: 'Harga', en: 'Price' },
+  'vw.note': {
+    id: 'Titik potong dibaca dari kurva di atasnya. Dengan satu jawaban per kurva, kurva itu berbentuk tangga dan titik potongnya terletak pada harga yang dimasukkan.',
+    en: 'Each crossing is read from the curves above it. With one response per curve the curves are steps, and the crossings sit on the prices entered.',
+  },
+
   /* The honesty clause. It appears wherever a result could be mistaken for a credential. */
   'honesty.not_verified': {
     id: 'Hasil ini dihasilkan secara lokal oleh perangkat ini dan tidak diverifikasi oleh lembaga mana pun.',

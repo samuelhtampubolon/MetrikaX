@@ -11,9 +11,11 @@
 
 import { useEffect, useMemo, useRef, type ReactNode } from 'react';
 import {
+  Chart,
   ComboBox,
   DerivationPane,
   GroupBox,
+  ListView,
   NumericField,
   PushButton,
   ResultField,
@@ -25,6 +27,7 @@ import { useLocale } from '../locale/index.ts';
 import { useCalculator, type Grouping } from '../state/calculator.ts';
 import { buildTree } from './grouping.ts';
 import { bandFor, derivationLines, viewResult } from './result.ts';
+import { figureFor, type FigureRow } from './plots.ts';
 
 const GROUPINGS: readonly Grouping[] = ['stratum', 'phase', 'class', 'domain', 'alphabetical'];
 
@@ -43,6 +46,13 @@ export function Calculator(): ReactNode {
   const view = viewResult(relation, state.outcome, locale, t);
   const band = bandFor(relation, state.outcome);
   const lines = derivationLines(relation, state.outcome, locale, t);
+
+  // P14: two relations answer with a shape rather than a number. Where one of them has been
+  // computed, the chart and its table appear below the result, reading the same rows.
+  const figure = useMemo(
+    () => figureFor(relation, state.outcome, locale, t),
+    [relation, state.outcome, locale, t],
+  );
 
   /* screens.SCR-CALC.keyboard */
   useEffect(() => {
@@ -186,6 +196,39 @@ export function Calculator(): ReactNode {
             ))}
           </ul>
         </GroupBox>
+
+        {figure === null ? null : (
+          <>
+            <GroupBox legend={t('chart.legend')}>
+              <Chart
+                label={figure.label}
+                series={figure.series}
+                marks={figure.marks}
+                xAxisLabel={figure.xAxisLabel}
+                yAxisLabel={figure.yAxisLabel}
+                formatX={figure.formatX}
+                formatY={figure.formatY}
+              />
+            </GroupBox>
+
+            <GroupBox legend={t('chart.table.legend')}>
+              <ListView<FigureRow>
+                className="mk-calc__figure"
+                label={t('chart.table.label')}
+                sortLabel={t('chart.sort')}
+                rowKey={(row) => row.key}
+                rows={figure.rows}
+                columns={figure.columns.map((column, index) => ({
+                  id: String(index),
+                  label: column,
+                  numeric: index > 0,
+                  render: (row: FigureRow) => row.cells[index] ?? '',
+                }))}
+              />
+              <p className="mk-calc__note">{figure.note}</p>
+            </GroupBox>
+          </>
+        )}
 
         {state.derivationOpen ? (
           <GroupBox legend={t('calc.derivation.legend')}>

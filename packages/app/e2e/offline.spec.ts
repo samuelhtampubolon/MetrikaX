@@ -125,6 +125,63 @@ test.describe('the web build', () => {
     await expect(page.getByText(/Faktor dengan ayunan terbesar/)).toBeVisible();
   });
 
+  /**
+   * P14 in a real browser: the two plots whose answer is a shape rather than a number.
+   *
+   * What is checked is the same thing the unit tests check, in the place it has to hold: the
+   * numbers printed on the chart are the strings the table beside it prints.
+   */
+  test('the Van Westendorp plot marks the four crossings with the table prices', async ({
+    page,
+  }) => {
+    await page.goto('./index.html');
+
+    await page.getByLabel('Cari rumus').fill('Van Westendorp');
+    await page
+      .getByRole('button', { name: /Van Westendorp/ })
+      .first()
+      .click();
+    await page.getByRole('button', { name: 'Contoh', exact: true }).click();
+    await page.getByRole('button', { name: 'Hitung', exact: true }).click();
+
+    const chart = page.locator('svg.mk-chart');
+    await expect(chart).toBeVisible();
+    await expect(chart.locator('g.mk-chart__series')).toHaveCount(4);
+
+    const marks = await chart.locator('g.mk-chart__mark text').allTextContents();
+    const rows = await page.locator('.mk-calc__figure tbody tr').all();
+    expect(rows).toHaveLength(4);
+
+    for (const [index, row] of rows.entries()) {
+      const cells = await row.locator('td').allTextContents();
+      expect(marks[index], `${cells[0]} mark`).toContain(cells[1] as string);
+    }
+  });
+
+  test('the Bass curve hatches the projection and marks the period entered', async ({ page }) => {
+    await page.goto('./index.html');
+
+    await page.getByLabel('Cari rumus').fill('Bass');
+    await page
+      .getByRole('button', { name: /^Bass_F\(t\)/ })
+      .first()
+      .click();
+    await page.getByRole('button', { name: 'Contoh', exact: true }).click();
+    await page.getByRole('button', { name: 'Hitung', exact: true }).click();
+
+    const chart = page.locator('svg.mk-chart');
+    await expect(chart).toBeVisible();
+
+    const hatch = chart.locator('rect.mk-chart__extrapolated');
+    await expect(hatch).toHaveAttribute('fill', 'url(#mk-chart-hatch)');
+    await expect(chart.locator('path.mk-chart__line--projected')).toHaveCount(1);
+
+    const mark = await chart.locator('g.mk-chart__mark text').first().textContent();
+    const sixth = page.locator('.mk-calc__figure tbody tr', { hasText: /^6/ }).first();
+    const cells = await sixth.locator('td').allTextContents();
+    expect(mark).toBe(cells[1]);
+  });
+
   test('AC-06: issues no request to any origin other than its own', async ({ page }) => {
     const foreign: string[] = [];
     const record = (request: Request): void => {

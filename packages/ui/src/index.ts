@@ -49,6 +49,25 @@ export {
   type DerivationPaneProps,
 } from './components/views.tsx';
 
+export { Chart, type ChartProps, type ChartSeries, type ChartMark } from './components/charts.tsx';
+
+export {
+  cumulative,
+  extentOf,
+  makeScale,
+  markerPath,
+  niceTicks,
+  pathFor,
+  seriesPattern,
+  unionExtent,
+  DASH_PATTERNS,
+  MARKER_SHAPES,
+  type Extent,
+  type MarkerShape,
+  type Point,
+  type SeriesShape,
+} from './charts/geometry.ts';
+
 export {
   MenuBar,
   TabStrip,
