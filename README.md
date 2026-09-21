@@ -87,7 +87,7 @@ Tiga sifat menentukan rancangannya:
 | Grafik                | Garis, langkah, batang, tornado, kurva kumulatif, sebar, hitam putih       |
 | Bahasa antarmuka      | Indonesia dan Inggris, 1199 kunci teks                                     |
 | Penyimpanan           | IndexedDB pada web, SQLite pada desktop, memori bila keduanya ditolak      |
-| Uji                   | 650 uji satuan dan 14 uji ujung ke ujung pada peramban sungguhan           |
+| Uji                   | 664 uji satuan dan 16 uji ujung ke ujung pada peramban sungguhan           |
 
 Rancangan tampilannya mengacu pada G\*Power 3.1: bevel Win32, kerapatan tinggi, tanpa animasi,
 tanpa warna aksen. Yang dicari adalah tampilan sebuah instrumen, bukan sebuah produk.
@@ -120,9 +120,9 @@ dinyatakan sebagai belum diukur, bukan dikosongkan.
 | Kunci katalog teks              | dua bahasa penuh   | 1199, 801 tanpa nilai Inggris     |
 | Permintaan ke asal lain         | nol                | nol, diukur di Chromium           |
 | Nasihat keamanan kebergantungan | nol                | nol                               |
-| Bundel web JavaScript           | belum ditetapkan   | 670 KB, 150 KB setelah gzip       |
-| Bundel web CSS                  | belum ditetapkan   | 13 KB                             |
-| Berkas tunggal luring           | belum ditetapkan   | 692 KB                            |
+| Bundel web JavaScript           | belum ditetapkan   | 679 KB, 153 KB setelah gzip       |
+| Bundel web CSS                  | belum ditetapkan   | 15 KB                             |
+| Berkas tunggal luring           | belum ditetapkan   | 703 KB                            |
 | Berkas portabel Windows         | di bawah 30 MB     | 4,48 MB                           |
 | Bangunan desktop tiga sistem    | berhasil           | berhasil, ketiganya               |
 | Waktu mulai dingin              | di bawah 2 detik   | belum diukur, perlu mesin Windows |
@@ -197,7 +197,7 @@ sendiri. Rinciannya ada pada [`DEVIATIONS.md`](DEVIATIONS.md).
 | AC-16, dua bahasa penuh    | 801 dari 1199 kunci masih memuat teks Indonesia pada katalog Inggris. D-13                                   |
 | Berkas jalankan Windows    | Terbangun dan terukur 4,48 MB, tetapi belum pernah dijalankan seorang pun pada mesin Windows sungguhan. D-18 |
 | Waktu mulai dingin         | Belum diukur, perlu mesin Windows                                                                            |
-| Fase yang belum dikerjakan | P16 sampai P22: Pelajari, Latihan, Kemajuan, Misi, dan Laporan                                               |
+| Fase yang belum dikerjakan | P16 sampai P21: Pelajari, Latihan, Kemajuan, dan Misi                                                        |
 
 ## 9. Lisensi
 

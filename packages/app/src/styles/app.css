@@ -192,23 +192,159 @@
 }
 
 /*
- * P09 print view. Principle P09: print is a first-class output. Ctrl+P produces a self-contained
- * A4 document, black on white, in the serif face, with no interface chrome at all.
+ * SCR-REPORT, P22. The preview is the document: one sheet of A4 at its true width, in the printing
+ * face and at the printing size, inside a frame that the print stylesheet below removes. Nothing
+ * on this screen is rebuilt for the printer.
+ */
+.mk-report {
+  display: flex;
+  flex-direction: column;
+  gap: var(--control-gap);
+  height: 100%;
+  min-height: 0;
+}
+
+.mk-report__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--control-gap);
+}
+
+.mk-report__hint {
+  margin: 0;
+  font-size: var(--size-small);
+  max-width: 96ch;
+}
+
+.mk-report__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  padding: var(--group-gap);
+}
+
+.mk-report__markdown {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--size-small);
+}
+
+/* typography on SCR-REPORT: Times New Roman 12pt, A4, justified body, 2.5cm margins. */
+.mk-paper {
+  box-sizing: border-box;
+  width: 21cm;
+  min-height: 29.7cm;
+  padding: 2.5cm;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid var(--bevel-shadow);
+  font-family: var(--font-print);
+  font-size: 12pt;
+  line-height: 1.45;
+}
+
+.mk-paper__title {
+  margin: 0 0 6pt;
+  font-size: 18pt;
+  font-weight: 700;
+}
+
+.mk-paper__meta {
+  margin: 0 0 18pt;
+  font-size: 11pt;
+}
+
+.mk-paper__heading {
+  margin: 18pt 0 6pt;
+  font-size: 14pt;
+  border-bottom: 1px solid #000000;
+}
+
+.mk-paper__subheading {
+  margin: 12pt 0 4pt;
+  font-size: 12pt;
+}
+
+.mk-paper__body,
+.mk-paper__list li {
+  margin: 0 0 6pt;
+  text-align: justify;
+}
+
+.mk-paper__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mk-paper__table td {
+  border-bottom: 1px solid #cccccc;
+  padding: 2pt 0;
+}
+
+.mk-paper__numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-paper__derivation {
+  margin: 0 0 6pt;
+  font-family: var(--font-mono);
+  font-size: 10pt;
+  white-space: pre-wrap;
+}
+
+.mk-paper__footer {
+  margin-top: 24pt;
+  border-top: 1px solid #000000;
+  padding-top: 6pt;
+  font-size: 10pt;
+}
+
+/*
+ * P09 and P22 print view. Principle P09: print is a first-class output. Ctrl+P from any screen
+ * produces a self-contained A4 document, black on white, in the serif face, with no interface
+ * chrome at all.
  */
 @media print {
   @page {
     size: A4;
-    margin: 20mm;
+    margin: 2.5cm;
   }
 
   .mk-titlebar,
   .mk-menubar,
   .mk-statusbar,
+  .mk-tabstrip,
   .mk-calc__left,
   .mk-calc__buttons,
   .mk-sens__left,
+  .mk-report__actions,
+  .mk-report__hint,
+  .mk-report__markdown,
   .mk-modal__scrim {
     display: none !important;
+  }
+
+  /* The sheet is already A4: the printer supplies the margins, so the frame goes away. */
+  .mk-report__scroll {
+    display: block;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .mk-paper {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .mk-shell__body,
+  .mk-shell__body .mk-tabpanel {
+    overflow: visible;
+    padding: 0;
   }
 
   body,

@@ -46,6 +46,7 @@ export const uiCatalogue = {
   'menu.window': { id: 'Jendela', en: 'Window' },
   'menu.window.calculator': { id: 'Kalkulator', en: 'Calculator' },
   'menu.window.sensitivity': { id: 'Sensitivitas', en: 'Sensitivity' },
+  'menu.window.report': { id: 'Laporan', en: 'Report' },
   'menu.help': { id: 'Bantuan', en: 'Help' },
   'menu.help.formula': { id: 'Bantuan rumus terpilih', en: 'Help for the selected formula' },
   'menu.help.about': { id: 'Tentang', en: 'About' },
@@ -332,6 +333,57 @@ export const uiCatalogue = {
   'vw.note': {
     id: 'Titik potong dibaca dari kurva di atasnya. Dengan satu jawaban per kurva, kurva itu berbentuk tangga dan titik potongnya terletak pada harga yang dimasukkan.',
     en: 'Each crossing is read from the curves above it. With one response per curve the curves are steps, and the crossings sit on the prices entered.',
+  },
+
+  /* Report screen, SCR-REPORT, P22. */
+  'report.title': { id: 'Laporan Perhitungan', en: 'Computation Report' },
+  'report.preview.label': {
+    id: 'Pratinjau cetak, keluaran A4',
+    en: 'Print preview, the A4 output',
+  },
+  'report.header.workspace': { id: 'Ruang kerja', en: 'Workspace' },
+  'report.header.date': { id: 'Tanggal', en: 'Date' },
+  'report.header.version': { id: 'Versi', en: 'Version' },
+  'report.entered.legend': { id: 'Nilai yang dimasukkan', en: 'Values entered' },
+  'report.entered.none': {
+    id: 'Belum ada nilai yang dimasukkan pada ruang kerja.',
+    en: 'No value has been entered in the workspace yet.',
+  },
+  'report.sections.legend': { id: 'Nilai yang diturunkan', en: 'Values derived' },
+  'report.sections.none': {
+    id: 'Belum ada nilai yang diturunkan. Masukkan nilai pada ruang kerja lalu tekan Turunkan.',
+    en: 'Nothing has been derived yet. Enter values in the workbench, then press Derive.',
+  },
+  'report.section.generation': { id: 'Generasi', en: 'Generation' },
+  'report.assumptions.legend': { id: 'Asumsi', en: 'Assumptions' },
+  'report.assumptions.none': {
+    id: 'Tidak ada asumsi yang diterapkan. Seluruh angka berasal dari masukan atau dari turunannya.',
+    en: 'No assumption was applied. Every number comes from an input or from a derivation of one.',
+  },
+  'report.empty': {
+    id: 'Belum ada yang dapat dilaporkan. Isi ruang kerja terlebih dahulu, lalu kembali ke halaman ini.',
+    en: 'There is nothing to report yet. Fill the workbench first, then return to this page.',
+  },
+  'report.print': { id: 'Cetak', en: 'Print' },
+  'report.pdf': { id: 'Simpan sebagai PDF', en: 'Save as PDF' },
+  'report.pdf.note': {
+    id: 'Simpan sebagai PDF membuka kotak cetak peramban. Pilih tujuan Simpan sebagai PDF pada kotak itu.',
+    en: 'Save as PDF opens the browser print dialog. Choose the Save as PDF destination there.',
+  },
+  'report.json': { id: 'Simpan ruang kerja (JSON)', en: 'Save workspace (JSON)' },
+  'report.markdown': { id: 'Salin sebagai Markdown', en: 'Copy as Markdown' },
+  'report.copied': {
+    id: 'Laporan disalin sebagai Markdown.',
+    en: 'The report was copied as Markdown.',
+  },
+  'report.copy.failed': {
+    id: 'Penyalinan ditolak peramban. Teks Markdown ditampilkan di bawah agar dapat disalin sendiri.',
+    en: 'The browser refused the copy. The Markdown text is shown below so it can be copied by hand.',
+  },
+  'report.markdown.label': { id: 'Teks Markdown laporan', en: 'The report as Markdown text' },
+  'report.pagenumber.note': {
+    id: 'Nomor halaman dicetak oleh peramban. Nyalakan pilihan tajuk dan kaki halaman pada kotak cetak bila nomor halaman diperlukan.',
+    en: 'Page numbers are printed by the browser. Switch on headers and footers in the print dialog when page numbers are required.',
   },
 
   /* The honesty clause. It appears wherever a result could be mistaken for a credential. */

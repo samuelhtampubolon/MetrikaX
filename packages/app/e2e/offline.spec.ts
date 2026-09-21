@@ -299,4 +299,61 @@ test.describe('keyboard and print', () => {
     const font = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
     expect(font).toContain('Times New Roman');
   });
+
+  /**
+   * P22, the definition of done: Ctrl+P from any screen produces a clean A4 document with no
+   * interface chrome. Every screen is visited, rather than the calculator standing in for the rest.
+   */
+  test('the print view is clean from every screen, not only from the calculator', async ({
+    page,
+  }) => {
+    await page.goto('./index.html');
+
+    for (const tab of ['Kalkulator', 'Ruang kerja', 'Sensitivitas', 'Laporan']) {
+      await page.emulateMedia({ media: 'screen' });
+      await page.getByRole('tab', { name: tab }).click();
+      await page.emulateMedia({ media: 'print' });
+
+      await expect(page.locator('.mk-titlebar'), tab).toBeHidden();
+      await expect(page.locator('.mk-menubar'), tab).toBeHidden();
+      await expect(page.locator('.mk-statusbar'), tab).toBeHidden();
+      await expect(page.locator('.mk-tabstrip'), tab).toBeHidden();
+
+      const font = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
+      expect(font, tab).toContain('Times New Roman');
+    }
+
+    await page.emulateMedia({ media: 'screen' });
+  });
+
+  test('the report prints as the sheet itself, without the frame around the preview', async ({
+    page,
+  }) => {
+    await page.goto('./index.html');
+    await page.getByRole('tab', { name: 'Laporan' }).click();
+
+    const paper = page.locator('.mk-paper');
+    await expect(paper).toBeVisible();
+
+    // On screen the preview is a sheet of A4 with a border around it.
+    const onScreen = await paper.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return { padding: style.paddingLeft, border: style.borderLeftWidth, font: style.fontFamily };
+    });
+    expect(onScreen.font).toContain('Times New Roman');
+    expect(Number.parseFloat(onScreen.padding)).toBeGreaterThan(80); // 2.5cm is about 94px
+    expect(Number.parseFloat(onScreen.border)).toBeGreaterThan(0);
+
+    // In print the printer supplies the margins, so the frame and the padding go away.
+    await page.emulateMedia({ media: 'print' });
+    const printed = await paper.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return { padding: style.paddingLeft, border: style.borderLeftWidth };
+    });
+    expect(Number.parseFloat(printed.padding)).toBe(0);
+    expect(Number.parseFloat(printed.border)).toBe(0);
+    await expect(page.locator('.mk-report__actions')).toBeHidden();
+
+    await page.emulateMedia({ media: 'screen' });
+  });
 });

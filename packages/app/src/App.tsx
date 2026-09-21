@@ -23,13 +23,14 @@ import { exportWorkspaceFile } from './storage/download.ts';
 import { Calculator } from './screens/Calculator.tsx';
 import { Workbench } from './screens/Workbench.tsx';
 import { Sensitivity } from './screens/Sensitivity.tsx';
+import { Report } from './screens/Report.tsx';
 import { useSolver } from './state/solver.ts';
 import { useSensitivity } from './state/sensitivity.ts';
 import { FORMULA_COUNT } from '@metrika/engine';
 
-type Screen = 'calculator' | 'workbench' | 'sensitivity';
+type Screen = 'calculator' | 'workbench' | 'sensitivity' | 'report';
 
-const SCREENS: readonly Screen[] = ['calculator', 'workbench', 'sensitivity'];
+const SCREENS: readonly Screen[] = ['calculator', 'workbench', 'sensitivity', 'report'];
 
 function isScreen(id: string): id is Screen {
   return (SCREENS as readonly string[]).includes(id);
@@ -80,6 +81,7 @@ function Shell(): ReactNode {
         { id: 'new', label: t('menu.file.new') },
         { id: 'export', label: t('file.export') },
         { id: 'import', label: t('file.import') },
+        { id: 'report', label: t('menu.window.report') },
         { id: 'print', label: t('menu.file.print'), shortcut: 'Ctrl+P' },
       ],
     },
@@ -119,6 +121,7 @@ function Shell(): ReactNode {
         { id: 'calculator', label: t('menu.window.calculator') },
         { id: 'workbench', label: t('menu.window.workbench') },
         { id: 'sensitivity', label: t('menu.window.sensitivity') },
+        { id: 'report', label: t('menu.window.report') },
       ],
     },
     {
@@ -177,6 +180,10 @@ function Shell(): ReactNode {
       if (typeof window !== 'undefined' && typeof window.print === 'function') window.print();
       return;
     }
+    if (menuId === 'file' && itemId === 'report') {
+      setScreen('report');
+      return;
+    }
     if (menuId === 'window') {
       setScreen(isScreen(itemId) ? itemId : 'calculator');
       return;
@@ -224,6 +231,7 @@ function Shell(): ReactNode {
             { id: 'calculator', label: t('menu.window.calculator') },
             { id: 'workbench', label: t('menu.window.workbench') },
             { id: 'sensitivity', label: t('menu.window.sensitivity') },
+            { id: 'report', label: t('menu.window.report') },
           ]}
         />
         <TabPanel id={screen}>
@@ -231,8 +239,10 @@ function Shell(): ReactNode {
             <Calculator />
           ) : screen === 'workbench' ? (
             <Workbench />
-          ) : (
+          ) : screen === 'sensitivity' ? (
             <Sensitivity />
+          ) : (
+            <Report />
           )}
         </TabPanel>
       </main>

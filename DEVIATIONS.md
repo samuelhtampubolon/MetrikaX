@@ -481,6 +481,31 @@ tampilannya berubah.
 
 ---
 
+## D-25. Nomor halaman dan sertifikat pada fase laporan
+
+**Temuan.** Dua butir pada fase P22 tidak dapat dikerjakan sebagaimana tertulis.
+
+Yang pertama, tipografi SCR-REPORT meminta nomor halaman pada bagian bawah tengah. Nomor halaman
+pada dokumen cetak ditulis melalui kotak marjin `@page`, misalnya `@bottom-center`, dan Chromium
+tidak melaksanakannya. Aplikasi ini berjalan di atas Chromium pada web maupun pada cangkang
+desktopnya, sehingga aturan tersebut akan diam diam diabaikan.
+
+Yang kedua, fase ini meminta cetak sertifikat untuk peringkat T3 ke atas. Peringkat dihasilkan oleh
+lapisan kemajuan dan misi, yaitu fase P19 sampai P21, yang belum dikerjakan. Tidak ada peringkat
+yang dapat disertifikasi.
+
+**Yang dikerjakan.** Nomor halaman diserahkan kepada peramban, dan halaman laporan menyatakan hal
+itu dengan kalimat: pilihan tajuk dan kaki halaman pada kotak cetak menghasilkan nomor halaman.
+Sebuah kalimat yang menjelaskan lebih berguna daripada sebuah aturan gaya yang tidak berlaku.
+Sertifikat ditunda sampai lapisan peringkat ada, dan tidak dibuatkan tempat kosong pada menu.
+
+**Yang perlu diputuskan.** Bila nomor halaman pada bagian bawah tengah benar benar diperlukan,
+jalannya adalah menghasilkan PDF sendiri, bukan mencetak lewat peramban. Itu berarti satu
+kebergantungan baru yang cukup besar pada bundel yang harus tetap dapat dibuka dari sebuah flash
+drive, dan keputusan itu ada pada pemilik proyek.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada
