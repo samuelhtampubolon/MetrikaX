@@ -39,8 +39,8 @@ importers:
         specifier: workspace:*
         version: link:../ui
       '@tauri-apps/api':
-        specifier: 2.9.0
-        version: 2.9.0
+        specifier: 2.12.0
+        version: 2.12.0
       '@tauri-apps/plugin-sql':
         specifier: 2.4.0
         version: 2.4.0
@@ -381,11 +381,8 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@tauri-apps/api@2.11.1':
-    resolution: {integrity: sha512-M2FPuYND2m+wh5hfW9ZpSdxMPdEJovPBWwoHJmwUpysTYNHaOkVFN419m/K0LIgjb/7KU2vBgsUepJWugQCvAA==}
-
-  '@tauri-apps/api@2.9.0':
-    resolution: {integrity: sha512-qD5tMjh7utwBk9/5PrTA/aGr3i5QaJ/Mlt7p8NilQ45WgbifUNPyKWsA63iQ8YfQq6R8ajMapU+/Q8nMcPRLNw==}
+  '@tauri-apps/api@2.12.0':
+    resolution: {integrity: sha512-fUSxFX8VABYe9W9K5ROdEaKVkNUFRcMSRofjruvaxztXA+I0XnQHcYHF8m/a6iExRUxsUf0HsFWhPBuH9IgzJw==}
 
   '@tauri-apps/cli-darwin-arm64@2.9.2':
     resolution: {integrity: sha512-g1OtCXydOZFYRUEAyGYdJ2lLaE3l5jk8o+Bro8y2WOLwBLtbWjBoJIVobOKFanfjG/Xr8H/UA+umEVILPhMc2A==}
@@ -1617,9 +1614,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@tauri-apps/api@2.11.1': {}
-
-  '@tauri-apps/api@2.9.0': {}
+  '@tauri-apps/api@2.12.0': {}
 
   '@tauri-apps/cli-darwin-arm64@2.9.2':
     optional: true
@@ -1670,7 +1665,7 @@ snapshots:
 
   '@tauri-apps/plugin-sql@2.4.0':
     dependencies:
-      '@tauri-apps/api': 2.11.1
+      '@tauri-apps/api': 2.12.0
 
   '@testing-library/dom@10.4.2':
     dependencies:
