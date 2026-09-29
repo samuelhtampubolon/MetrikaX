@@ -2,7 +2,7 @@
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "MetriKa",
   "version": "0.1.0",
-  "identifier": "id.ac.local.metrika",
+  "identifier": "io.github.samuelhtampubolon.metrika",
   "build": {
     "frontendDist": "../../../docs",
     "beforeBuildCommand": "pnpm --filter @metrika/app run build",
@@ -32,13 +32,14 @@
     }
   },
   "bundle": {
+    "copyright": "Copyright © 2026 Samuel Hasudungan Tampubolon",
     "active": true,
     "targets": ["nsis", "appimage", "dmg"],
     "icon": ["icons/icon.png", "icons/icon.ico", "icons/icon.icns"],
     "category": "Education",
     "shortDescription": "Quantitative marketing analysis workbench",
     "longDescription": "MetriKa computes 76 quantitative marketing formulas from the numbers a user enters. It runs with the network disabled and keeps all data on the user's own device.",
-    "copyright": "MIT",
+    "license": "MIT",
     "createUpdaterArtifacts": false,
     "windows": {
       "nsis": {

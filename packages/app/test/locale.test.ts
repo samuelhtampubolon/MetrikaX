@@ -102,12 +102,26 @@ describe('register and content rules', () => {
   });
 
   it('no interface string carries an exclamation mark or an emoji', () => {
+    // The copyright, registered and trade mark signs are legal marks that Unicode also classes as
+    // pictographic. They are the only exception, and they are removed before the check rather than
+    // the check being loosened, so any other symbol still fails it.
+    const withoutLegalMarks = (text: string): string => text.replace(/[\u00A9\u00AE\u2122]/gu, '');
+
     for (const [key, value] of Object.entries(uiCatalogue)) {
       expect(value.id, `${key} id`).not.toContain('!');
       expect(value.en, `${key} en`).not.toContain('!');
-      expect(value.id, `${key} id`).not.toMatch(/\p{Extended_Pictographic}/u);
-      expect(value.en, `${key} en`).not.toMatch(/\p{Extended_Pictographic}/u);
+      expect(withoutLegalMarks(value.id), `${key} id`).not.toMatch(/\p{Extended_Pictographic}/u);
+      expect(withoutLegalMarks(value.en), `${key} en`).not.toMatch(/\p{Extended_Pictographic}/u);
     }
+  });
+
+  it('carries the copyright line in both locales, naming the holder in full', () => {
+    expect(translate('id', 'dialog.about.copyright')).toBe(
+      'Hak Cipta © 2026 Samuel Hasudungan Tampubolon.',
+    );
+    expect(translate('en', 'dialog.about.copyright')).toBe(
+      'Copyright © 2026 Samuel Hasudungan Tampubolon.',
+    );
   });
 
   it('AC-20: the honesty clause states that nothing is institutionally verified', () => {

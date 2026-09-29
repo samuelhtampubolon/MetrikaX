@@ -67,7 +67,7 @@ const capabilities = readFileSync(
 describe('the desktop configuration matches the specification', () => {
   it('carries the stated product name, identifier and window metrics', () => {
     expect(config.productName).toBe('MetriKa');
-    expect(config.identifier).toBe('id.ac.local.metrika');
+    expect(config.identifier).toBe('io.github.samuelhtampubolon.metrika');
 
     const window = config.app.windows[0]!;
     expect(window.title).toBe('MetriKa');

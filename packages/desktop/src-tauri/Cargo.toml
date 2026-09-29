@@ -2,7 +2,7 @@
 name = "metrika"
 version = "0.1.0"
 description = "MetriKa: a quantitative marketing analysis workbench"
-authors = ["Samuel H. Tampubolon"]
+authors = ["Samuel Hasudungan Tampubolon"]
 edition = "2021"
 rust-version = "1.77"
 license = "MIT"

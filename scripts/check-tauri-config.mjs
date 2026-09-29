@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 /**
  * Validate tauri.conf.json against the schema shipped with the installed Tauri CLI.
  *

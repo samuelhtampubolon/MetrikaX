@@ -133,6 +133,8 @@ export function loadSpec(): Spec {
 export const GENERATED_HEADER = [
   '// GENERATED FILE. DO NOT EDIT.',
   '//',
+  '// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.',
+  '//',
   '// Emitted by packages/codegen from spec/metrika.spec.json.',
   '// To change anything here, change the specification and run `pnpm codegen`.',
   '// CI fails when a file under a generated directory differs from a fresh generation (AC-17).',

@@ -159,13 +159,15 @@ jobs:
       # executable is not one of them, so it is attached here. Without this step the release
       # carries an installer and no portable file, and the portable file is the one the
       # specification actually asks for.
+      # The GitHub CLI already on the runner does this, so no third party action is given a token
+      # that can write to the release. Every action added to this workflow is code somebody else
+      # can change, running with this repository's credentials.
       - name: Attach the portable executable to the release
         if: matrix.platform == 'windows-latest' && env.RELEASE_TAG != ''
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          files: portable/MetriKa-portable-windows-x64.exe
-          fail_on_unmatched_files: true
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$RELEASE_TAG" portable/MetriKa-portable-windows-x64.exe --clobber --repo "$GITHUB_REPOSITORY"
 
       # AC-18 is a size budget, so the sizes are printed rather than left to be guessed at. They
       # go to the log as well as the job summary: a number only a human can see by opening a

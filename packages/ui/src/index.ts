@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 /**
  * @metrika/ui
  *

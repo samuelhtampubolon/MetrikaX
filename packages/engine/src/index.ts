@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 /**
  * @metrika/engine
  *
@@ -110,6 +111,22 @@ export {
 } from './practice/items.ts';
 
 export { makeRng, type Rng } from './practice/rng.ts';
+
+export {
+  RATINGS,
+  FORMULA_BADGES,
+  NOT_EVALUABLE,
+  NO_COUNTERS,
+  CERTIFICATE_FROM_LEVEL,
+  ratingFor,
+  xpToNext,
+  modulesUnlockedAt,
+  certificateEarned,
+  newBadges,
+  type Rating,
+  type Counters,
+  type BadgeDefinition,
+} from './practice/ratings.ts';
 
 export {
   applyAttempt,

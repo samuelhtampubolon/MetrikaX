@@ -26,7 +26,7 @@
   <a href="https://github.com/samuelhtampubolon/MetrikaX/releases">
     <img alt="Rilis" src="https://img.shields.io/github/v/release/samuelhtampubolon/MetrikaX?style=flat-square&label=Rilis" />
   </a>
-  <a href="#9-lisensi">
+  <a href="#9-lisensi-dan-hak-cipta">
     <img alt="Lisensi" src="https://img.shields.io/badge/Lisensi-MIT-1a1a1a?style=flat-square" />
   </a>
   <a href="spec/metrika.spec.json">
@@ -54,7 +54,7 @@
 6. [Arsitektur](#6-arsitektur)
 7. [Luring dan keamanan](#7-luring-dan-keamanan)
 8. [Yang belum terpenuhi](#8-yang-belum-terpenuhi)
-9. [Lisensi](#9-lisensi)
+9. [Lisensi dan hak cipta](#9-lisensi-dan-hak-cipta)
 10. [Rujukan](#10-rujukan)
 
 ## 1. Pengantar
@@ -89,7 +89,7 @@ Tiga sifat menentukan rancangannya:
 | Penjadwal ulangan     | Empat selang tetap: 1, 4, 12, dan 35 hari                                  |
 | Bahasa antarmuka      | Indonesia dan Inggris, 1199 kunci teks                                     |
 | Penyimpanan           | IndexedDB pada web, SQLite pada desktop, memori bila keduanya ditolak      |
-| Uji                   | 716 uji satuan dan 16 uji ujung ke ujung pada peramban sungguhan           |
+| Uji                   | 734 uji satuan dan 16 uji ujung ke ujung pada peramban sungguhan           |
 
 Rancangan tampilannya mengacu pada G\*Power 3.1: bevel Win32, kerapatan tinggi, tanpa animasi,
 tanpa warna aksen. Yang dicari adalah tampilan sebuah instrumen, bukan sebuah produk.
@@ -199,14 +199,20 @@ sendiri. Rinciannya ada pada [`DEVIATIONS.md`](DEVIATIONS.md).
 | AC-16, dua bahasa penuh    | 801 dari 1199 kunci masih memuat teks Indonesia pada katalog Inggris. D-13                                   |
 | Berkas jalankan Windows    | Terbangun dan terukur 4,48 MB, tetapi belum pernah dijalankan seorang pun pada mesin Windows sungguhan. D-18 |
 | Waktu mulai dingin         | Belum diukur, perlu mesin Windows                                                                            |
-| Fase yang belum dikerjakan | P16 sampai P21: Pelajari, Latihan, Kemajuan, dan Misi                                                        |
+| Fase yang belum dikerjakan | P16 Pelajari, layar Latihan (P18), layar Kemajuan (P19), P20 Misi, P21 Latihan pasangan                      |
 
-## 9. Lisensi
+## 9. Lisensi dan hak cipta
 
-MIT. Lihat [`LICENSE`](LICENSE).
+**Hak Cipta © 2026 Samuel Hasudungan Tampubolon.**
+
+Perangkat lunak ini dilisensikan di bawah Lisensi MIT: siapa pun boleh memakai, menyalin, dan
+mengubahnya dengan syarat pemberitahuan hak cipta ini disertakan. Lihat [`LICENSE`](LICENSE) dan
+[`NOTICE`](NOTICE), yang juga mendaftar perangkat lunak pihak ketiga yang ikut terkirim.
 
 Hasil yang dihasilkan perangkat ini diproduksi secara lokal oleh perangkat itu sendiri dan tidak
 diverifikasi oleh lembaga mana pun.
+
+Kerentanan keamanan dilaporkan sesuai [`SECURITY.md`](SECURITY.md).
 
 ## 10. Rujukan
 

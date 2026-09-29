@@ -2,6 +2,8 @@
   "name": "@metrika/codegen",
   "version": "0.1.0",
   "private": true,
+  "author": "Samuel Hasudungan Tampubolon",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "generate": "node --experimental-strip-types src/cli.ts generate",

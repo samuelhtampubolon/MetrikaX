@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 //! The portable storage probe.
 //!
 //! `desktop.portable_build.storage_probe_order` states three places to try, in order:

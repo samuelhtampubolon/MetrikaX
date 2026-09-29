@@ -6,6 +6,11 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Read only. Nothing in CI writes to the repository, so the token it runs with should not be able
+# to, whatever the repository's default happens to be.
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true

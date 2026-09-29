@@ -15,3 +15,7 @@ packages/desktop/src-tauri/gen/
 # Playwright
 packages/app/test-results/
 packages/app/playwright-report/
+
+# Portable build staging and logs
+packages/app/dist-portable/
+*.log

@@ -156,6 +156,10 @@ export const uiCatalogue = {
     en: 'No data leaves this machine. The application makes no network request.',
   },
   'dialog.about.licence': { id: 'Lisensi: MIT.', en: 'Licence: MIT.' },
+  'dialog.about.copyright': {
+    id: 'Hak Cipta © 2026 Samuel Hasudungan Tampubolon.',
+    en: 'Copyright © 2026 Samuel Hasudungan Tampubolon.',
+  },
 
   /* Storage. The status bar states where the work went, and says so plainly when it went nowhere. */
   'storage.indexeddb': { id: 'Tersimpan di peramban', en: 'Saved in the browser' },

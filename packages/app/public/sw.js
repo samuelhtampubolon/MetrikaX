@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 /**
  * P23: the service worker.
  *

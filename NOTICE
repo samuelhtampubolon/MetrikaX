@@ -1,0 +1,33 @@
+MetriKa: Perangkat Analisis Kuantitatif Pemasaran
+MetriKa: Quantitative Marketing Analysis Workbench
+
+Hak Cipta © 2026 Samuel Hasudungan Tampubolon
+Copyright © 2026 Samuel Hasudungan Tampubolon
+
+Perangkat lunak ini dilisensikan di bawah Lisensi MIT. Teks lengkapnya ada pada berkas LICENSE.
+This software is licensed under the MIT License. The full text is in the file LICENSE.
+
+Nama "MetriKa" dan seluruh kode sumber, spesifikasi, dan dokumentasi pada repositori ini adalah
+ciptaan yang disebut di atas. Lisensi MIT memberi orang lain izin memakai, menyalin, dan
+mengubahnya dengan syarat pemberitahuan hak cipta ini disertakan.
+
+----------------------------------------------------------------------------------------------
+
+Perangkat lunak pihak ketiga yang ikut terkirim pada bangunan web dan berkas tunggal
+Third party software shipped in the web build and in the single file
+
+Seluruhnya berlisensi permisif. Fully permissive licences, listed from `pnpm licenses list --prod`.
+
+  react 18.3.1, react-dom 18.3.1, scheduler 0.23.2         MIT   Meta Platforms, Inc. and affiliates
+  zustand 5.0.8                                            MIT   Poimandres
+  loose-envify 1.4.0, js-tokens 4.0.0                      MIT
+  csstype 3.2.3, @types/react, @types/prop-types           MIT   (jenis tipe, tidak terkirim sebagai kode)
+  @tauri-apps/api 2.x, @tauri-apps/plugin-sql 2.4.0        Apache-2.0 OR MIT   Tauri Programme
+
+Bangunan desktop juga memuat Tauri dan pustaka Rust pendukungnya. Lisensi pustaka Rust itu
+belum diperiksa satu per satu pada repositori ini. Tauri sendiri berlisensi Apache-2.0 atau MIT.
+The desktop build also ships Tauri and its Rust dependencies. Their licences have not been checked
+one by one in this repository. Tauri itself is licensed Apache-2.0 or MIT.
+
+Tidak ada font, ikon, atau gambar milik pihak ketiga. Ikon aplikasi digambar untuk proyek ini.
+No third party font, icon or image is used. The application icon was drawn for this project.

@@ -2,6 +2,8 @@
   "name": "metrika",
   "version": "0.1.0",
   "private": true,
+  "author": "Samuel Hasudungan Tampubolon",
+  "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "engines": {

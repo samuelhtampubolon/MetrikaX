@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 /**
  * AC-14 and philosophy.design_doctrine.the_humility_paradox.test.
  *

@@ -543,6 +543,58 @@ enam puluh rumus tersebut, dan apakah pembagian nilai di atas sudah sesuai.
 
 ---
 
+## D-27. Peringkat dan lencana ada pada mesin, tetapi layar Kemajuan dan beberapa lencana belum
+
+**Temuan.** Definisi selesai fase P19 menyatakan peringkat membuka modul dengan benar dan setiap
+syarat lencana menyala tepat sekali. Keduanya terpenuhi pada tingkat mesin dan diuji: sembilan
+peringkat dibandingkan angka demi angka dengan berkas spesifikasi, dan `newBadges` hanya
+mengembalikan selisih dari yang sudah dipegang, sehingga panggilan kedua tidak mengembalikan apa
+pun. Tiga hal tidak dapat dikerjakan sebagaimana tertulis.
+
+**Layar Kemajuan tidak dibangun.** Daftar 76 baris itu membaca catatan kemajuan, dan tidak ada
+layar yang menghasilkan catatan itu: layar Latihan (bagian antarmuka P18) menunggu ragam bahasa
+umpan balik, yang merupakan pertanyaan terbuka pada D-10. Layar Kemajuan yang isinya 76 baris
+berstatus belum dilihat adalah layar yang tidak melakukan apa pun, dan spesifikasi sendiri
+menyebut sebuah menu yang tidak berfungsi sebagai klaim yang tidak dapat dipenuhi perangkat ini.
+
+**Tiga lencana struktural tidak dapat dinilai**, dan diberi nama pada `NOT_EVALUABLE` beserta
+sebabnya, bukan dibiarkan hilang: `badge_axis_c1` memerlukan setiap jawaban salah digolongkan
+menurut sebabnya, `badge_no_confusion` memerlukan latihan pasangan yang membingungkan (P21), dan
+`badge_offline` memerlukan isi modul (P16). Sebuah uji menegaskan bahwa setiap lencana yang dinyatakan
+spesifikasi dinilai atau disebut tidak dapat dinilai.
+
+**Satu lencana dinilai tetapi tidak akan menyala.** `badge_full_chain` meminta rantai turunan
+berkedalaman lima. Kedalaman terdalam yang didukung korpus ini adalah tiga (D-26), sehingga lencana
+itu benar dinilai dan benar tidak tercapai. Sebabnya sama dengan AC-04 (D-11).
+
+**Yang perlu diputuskan.** Ragam bahasa umpan balik latihan (D-10) membuka layar Latihan dan,
+melalui itu, layar Kemajuan, sertifikat T3, dan latihan pasangan.
+
+---
+
+## D-28. Identifier aplikasi dan penguncian alur kerja
+
+**Identifier.** Identifier aplikasi desktop semula `id.ac.local.metrika`. Awalan `id.ac` adalah
+ranah akademik Indonesia, yang tidak dimiliki proyek ini, dan sebuah identifier yang tampak
+berasal dari lembaga yang tidak terkait dengannya menyesatkan. Kini
+`io.github.samuelhtampubolon.metrika`, yang bersumber dari nama yang memang dimiliki. Identifier ini
+menentukan folder data aplikasi pada Windows, sehingga mengubahnya setelah ada pengguna berarti
+kehilangan data mereka. Belum ada pengguna.
+
+**Alur kerja.** CI kini berjalan dengan izin baca saja. Langkah yang melampirkan berkas portabel
+pada rilis memakai GitHub CLI yang sudah ada pada pelaksana, bukan aksi pihak ketiga, sehingga tidak
+ada kode orang lain yang memegang token tulis rilis. Aksi yang masih dipakai adalah `actions/*`,
+`pnpm/action-setup`, `dtolnay/rust-toolchain`, `swatinem/rust-cache`, dan `tauri-apps/tauri-action`,
+semuanya ditandai dengan versi dan belum dikunci pada SHA komit. Mengunci pada SHA memerlukan
+pencarian SHA yang tidak dapat dilakukan dari lingkungan kerja ini, dan Dependabot kini memantau
+versinya.
+
+**Berkas jalankan tidak ditandatangani.** Berkas portabel Windows tidak memakai sertifikat penerbit,
+sehingga Windows SmartScreen dapat memperingatkan pada pemakaian pertama. Sertifikat penandatanganan
+adalah biaya dan identitas milik pemilik proyek.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

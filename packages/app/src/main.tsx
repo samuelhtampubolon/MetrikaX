@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App.tsx';

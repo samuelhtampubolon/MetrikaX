@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 /**
  * The application shell: title bar, menu bar, the active screen and the status bar.
  *
@@ -304,6 +305,7 @@ function Shell(): ReactNode {
           </p>
           <p>{t('dialog.about.offline')}</p>
           <p>{t('dialog.about.licence')}</p>
+          <p>{t('dialog.about.copyright')}</p>
           <p>{t('honesty.not_verified')}</p>
         </ModalDialog>
       ) : null}

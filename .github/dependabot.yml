@@ -1,0 +1,23 @@
+# Hak Cipta © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
+#
+# Three ecosystems, weekly. The audit step in CI catches a known advisory the day it is published;
+# this catches the update before there is one, and keeps the action versions moving too.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: cargo
+    directory: /packages/desktop/src-tauri
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5

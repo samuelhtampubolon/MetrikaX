@@ -1,3 +1,4 @@
+// Copyright © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
 //! The MetriKa desktop shell.
 //!
 //! It does three things and nothing else: it opens one window on the built web application, it
