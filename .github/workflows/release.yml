@@ -44,6 +44,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The tag comes from a text box on the dispatch form. Only people who can write to the
+      # repository can fill it in, but a value that is not a version has no business reaching a
+      # release command, so it is refused here and not trusted downstream.
+      - name: Refuse a tag that is not a version
+        if: env.RELEASE_TAG != ''
+        shell: bash
+        run: |
+          if ! [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "The tag must look like v1.2.3, and was: $RELEASE_TAG"
+            exit 1
+          fi
+
       - name: Install the Linux webview dependencies
         if: matrix.platform == 'ubuntu-22.04'
         run: |

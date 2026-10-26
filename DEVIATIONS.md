@@ -595,6 +595,46 @@ adalah biaya dan identitas milik pemilik proyek.
 
 ---
 
+## D-29. Penyebaran ke platform lain, dan integrasi penyimpanan peladen yang tidak dikerjakan
+
+**Permintaan.** Repositori diminta mudah diintegrasikan dengan Supabase, Firebase Spark, Glitch,
+Vercel, Netlify, Cloudflare (Pages, D1, R2, KV), dan Hugging Face Spaces.
+
+**Yang dikerjakan.** Aplikasi ini statis, sehingga lima dari tujuh sasaran terpenuhi cukup dengan
+menyajikan folder `docs/`: Vercel (`vercel.json`), Netlify (`netlify.toml`), Cloudflare Pages
+(`wrangler.toml`), Firebase Hosting (`firebase.json`), dan Hugging Face Spaces bertipe statis.
+Cloudflare Pages dan Netlify membaca header dari satu berkas, `packages/app/public/_headers`.
+Kebijakan keamanan isi ditulis di empat tempat dan satu peladen uji; sebuah uji
+(`packages/app/test/deploy.test.ts`, 30 pernyataan) menjamin kelimanya sama persis, dan dibuktikan
+gagal bila satu salinan dilonggarkan. Efek sampingnya baik: pada empat platform itu header
+`frame-ancestors` benar-benar terkirim, sehingga batas yang dicatat pada SECURITY.md tidak berlaku
+di sana.
+
+**Yang tidak dikerjakan, dan sebabnya.**
+
+- **Supabase, Firestore, D1, R2, KV.** Semuanya penyimpanan di peladen. Menyambungkannya
+  mengharuskan `connect-src` dilonggarkan, memindahkan data pengguna dari perangkatnya, dan menambah
+  akun, kunci, serta aturan akses. Itu membalik tiga janji yang diuji (nol permintaan keluar, data
+  tinggal di perangkat, tanpa akun), dan tidak dapat dibuktikan benar dari lingkungan pembangunan
+  karena memerlukan akun milik pemilik. Antarmuka `Storage` sudah memungkinkan penyesuai keempat
+  kelak. Keputusannya ada pada pemilik; lihat `deploy/README.md`.
+- **Glitch.** Menurut yang saya ketahui layanan hostingnya dihentikan pada 2025. Tidak dapat
+  diperiksa dari sini, sehingga disebut sebagai dugaan yang perlu diperiksa pemilik.
+- **Supabase sebagai hosting statis.** Supabase bukan layanan hosting situs; tidak ada yang
+  dikonfigurasi untuknya.
+
+**Dua pengerasan yang ditemukan sepanjang pemeriksaan.** Peladen uji melempar galat tak tertangani
+pada URL berisi escape persen yang rusak (`/%E0%A4%A`), yang mengakhiri prosesnya; kini dijawab 400.
+Nama tag pada formulir rilis divalidasi dengan pola `vN.N.N` sebelum mencapai perintah rilis.
+
+**Keadaan exe.** Berkas `.exe` pada rilis v0.2.0 diperiksa secara statis: hash SHA-256 sama dengan
+yang dicatat GitHub, formatnya PE x64 bersubsistem GUI dengan ASLR dan DEP, tidak merujuk DLL
+jaringan, dan memuat kebijakan `connect-src 'none'`. Ia **belum dijalankan** pada Windows; analisis
+statis tidak menggantikan itu (D-18). Berkas ini memerlukan WebView2, yang sudah ada pada Windows 11
+dan Windows 10 yang diperbarui.
+
+---
+
 ## D-10. Butir pada spesifikasi yang belum dijawab
 
 Spesifikasi sendiri mencantumkan lima pertanyaan terbuka pada

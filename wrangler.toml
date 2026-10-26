@@ -1,0 +1,16 @@
+# Hak Cipta © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
+#
+# Cloudflare Pages. Header keamanan dibaca dari packages/app/public/_headers.
+#
+# Pengaturan pembangunan pada dasbor Cloudflare:
+#   Build command          : pnpm install --frozen-lockfile && pnpm --filter @metrika/app run build
+#   Build output directory : docs
+#   Variabel lingkungan    : NODE_VERSION = 22
+#
+# SENGAJA tidak ada ikatan D1, R2, atau KV di sini. Aplikasi ini tidak mengirim data apa pun ke
+# peladen mana pun, dan kebijakan keamanan isinya (connect-src 'self') akan menolak sambungan ke
+# layanan tersebut. Lihat deploy/README.md, bagian "Yang tidak disambungkan, dan mengapa".
+
+name = "metrika"
+pages_build_output_dir = "docs"
+compatibility_date = "2026-01-01"

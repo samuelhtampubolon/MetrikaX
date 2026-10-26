@@ -27,7 +27,14 @@ const TYPES = {
 
 const server = createServer((request, response) => {
   const url = new URL(request.url ?? '/', `http://${request.headers.host ?? 'localhost'}`);
-  const requested = decodeURIComponent(url.pathname);
+  let requested;
+  try {
+    requested = decodeURIComponent(url.pathname);
+  } catch {
+    // A malformed percent escape such as /%E0%A4%A throws. Unhandled, that would end the process.
+    response.writeHead(400).end('Bad request');
+    return;
+  }
 
   // Resolve inside the root and refuse anything that climbs out of it.
   const candidate = resolve(join(root, normalize(requested)));

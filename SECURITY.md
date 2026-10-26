@@ -25,10 +25,11 @@ kerentanan dan layak dilaporkan.
 
 ## Batas yang perlu diketahui
 
-- Bangunan web disajikan oleh GitHub Pages, yang tidak memungkinkan header HTTP. Kebijakan keamanan
-  isi diberikan melalui tag meta, dan arahan `frame-ancestors` tidak berlaku pada tag meta. Halaman
-  ini dapat dibenamkan pada situs lain. Ia tidak memuat sesi, kredensial, atau data yang dapat
-  dicuri, tetapi batas ini ada.
+- Pada GitHub Pages dan Hugging Face Spaces tidak ada header HTTP buatan sendiri. Kebijakan keamanan
+  isi diberikan melalui tag meta, dan arahan `frame-ancestors` tidak berlaku pada tag meta, sehingga
+  halaman dapat dibenamkan pada situs lain. Ia tidak memuat sesi, kredensial, atau data yang dapat
+  dicuri, tetapi batas ini ada. Pada Vercel, Netlify, Cloudflare Pages, dan Firebase Hosting header
+  sungguhan dikirim dan pembenaman ditolak (lihat `deploy/README.md`).
 - Hasil perhitungan dihasilkan secara lokal dan tidak diverifikasi oleh lembaga mana pun.
 - Berkas jalankan Windows tidak ditandatangani dengan sertifikat penerbit. Windows SmartScreen dapat
   memperingatkan pada pemakaian pertama. Periksa checksum pada halaman rilis sebelum menjalankannya.

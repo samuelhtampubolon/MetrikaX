@@ -1,0 +1,14 @@
+# Hak Cipta © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
+#
+# Pengaturan pembangunan untuk Netlify. Header keamanan tidak ditulis di sini: Netlify membaca
+# berkas _headers pada folder terbitan (packages/app/public/_headers), sehingga kebijakan itu
+# hanya ada di satu tempat untuk Netlify dan Cloudflare Pages.
+
+[build]
+  command = "pnpm install --frozen-lockfile && pnpm --filter @metrika/app run build"
+  publish = "docs"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Netlify memasang pnpm dari kolom packageManager pada package.json melalui corepack.
+  NETLIFY_USE_PNPM = "true"

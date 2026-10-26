@@ -216,6 +216,7 @@ Kerentanan keamanan dilaporkan sesuai [`SECURITY.md`](SECURITY.md).
 
 ## 10. Rujukan
 
+- [Panduan penyebaran](deploy/README.md): Vercel, Netlify, Cloudflare Pages, Firebase Hosting, Hugging Face Spaces, dan mengapa penyimpanan peladen tidak disambungkan
 - [Panduan manual pemilik (Word)](dokumen/Panduan-Manual-MetriKa.docx): pemakaian, tindakan yang hanya dapat dikerjakan pemilik, keamanan, dan pencatatan hak cipta
 - [Spesifikasi](spec/metrika.spec.json) dan [riwayat perubahannya](spec/CHANGELOG-spec.md)
 - [Catatan penyimpangan dan keputusan yang perlu ditinjau](DEVIATIONS.md)

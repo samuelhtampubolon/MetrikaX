@@ -1,0 +1,22 @@
+# Hak Cipta © 2026 Samuel Hasudungan Tampubolon. MIT License, see LICENSE.
+#
+# Berkas ini dibaca oleh Cloudflare Pages dan Netlify. Isinya kebijakan yang sama dengan peladen uji
+# (packages/app/e2e/serve.mjs), vercel.json, dan firebase.json. Sebuah uji menegaskan bahwa
+# keempat tempat itu tidak berselisih. Pada GitHub Pages dan Hugging Face Spaces berkas ini tidak
+# berlaku, karena keduanya tidak memungkinkan header HTTP buatan sendiri.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/sw.js
+  Cache-Control: no-cache
+  Service-Worker-Allowed: /
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
